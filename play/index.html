@@ -67,6 +67,21 @@
       #androidAppBanner .cta{ order:2; }
       #androidAppBanner .close{ order:3; }
     }
+
+    /* Link "Stampa schemi" (12/09/2026, richiesta esplicita dell'utente:
+       far linkare a vicenda la demo giocabile e la pagina di stampa) —
+       scheda fissa in un angolo, non sovrapposta al banner Android
+       (quello sta in top, questo in basso) e non invasiva sul gioco. */
+    #printSudokuLink{
+      position:fixed; right:12px; bottom:12px; z-index:100000;
+      display:inline-flex; align-items:center; gap:6px;
+      background:#F0EAD9; color:#14181F;
+      font-family:"Noto Sans", system-ui, -apple-system, sans-serif;
+      font-weight:700; font-size:.78rem;
+      padding:8px 14px; border-radius:20px;
+      text-decoration:none;
+      box-shadow:0 6px 18px rgba(0,0,0,.35);
+    }
   </style>
 </head>
 <body>
@@ -75,6 +90,7 @@
     <a class="cta play-store-link" href="https://play.google.com/store/apps/details?id=com.grafitesoft.grafitesudoku" target="_blank" rel="noopener">Installa</a>
     <button type="button" class="close" onclick="dismissAndroidBanner()" aria-label="Chiudi">✕</button>
   </div>
+  <a id="printSudokuLink" href="../sudoku-da-stampare.html">🖨️ Sudoku da stampare gratis</a>
   <script src="../assets/play-links.js" defer></script>
   <script src="flutter_bootstrap.js" async></script>
 </body>

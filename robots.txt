@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sitemap.xml
