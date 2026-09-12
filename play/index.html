@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <!--
+    Path servito da GitHub Pages sotto una sottocartella (/grafite-sudoku/play/),
+    non alla radice: --base-href viene passato a `flutter build web` e
+    sostituisce questo placeholder in automatico.
+  -->
+  <base href="/grafite-sudoku/play/">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="description" content="Gioca a Grafite Sudoku nel browser: sudoku con temi carta, livelli e Time Attack. Nessuna pubblicità, nessun tracciamento.">
+  <meta name="theme-color" content="#14181F">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Grafite Sudoku">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>Grafite Sudoku — gioca nel browser</title>
+  <link rel="manifest" href="manifest.json">
+
+  <!--
+    Banner "vieni da Android?" (03/09/2026, richiesta esplicita
+    dell'utente): sovrapposto sopra il gioco, non dentro — il gioco è
+    Flutter compilato, non si tocca da qui. Mostrato solo se
+    play-links.js (nella cartella `assets/` del sito, un livello sopra
+    `play/`, vedi PUBBLICAZIONE.md) rileva Android da User-Agent. In
+    sviluppo locale (`flutter run -d chrome`) quel file non esiste ancora
+    accanto a questo — lo script fallisce silenziosamente, il banner
+    resta nascosto, nessun errore bloccante: è normale, conta solo il
+    comportamento dopo la pubblicazione sul sito vero.
+  -->
+  <style>
+    #androidAppBanner{
+      display:none;
+      flex-wrap:wrap;
+      position:fixed; top:0; left:0; right:0; z-index:100000;
+      align-items:center; gap:8px 10px;
+      background:#0d1016;
+      border-bottom:1px solid #C99A3E;
+      padding:8px 14px;
+      font-family:"Noto Sans", system-ui, -apple-system, sans-serif;
+      font-size:.82rem;
+      color:#F0EAD9;
+    }
+    #androidAppBanner .msg{ flex:1 1 auto; }
+    #androidAppBanner .cta{
+      background:#C99A3E; color:#1a1408; font-weight:700;
+      padding:6px 12px; border-radius:8px; text-decoration:none;
+      white-space:nowrap; font-size:.8rem;
+    }
+    #androidAppBanner .close{
+      background:none; border:none; color:#9aa0ad; font-size:1rem;
+      cursor:pointer; padding:2px 4px; line-height:1;
+      margin-left:auto;
+    }
+    @media (max-width:380px){
+      #androidAppBanner .msg{ flex-basis:100%; order:1; }
+      #androidAppBanner .cta{ order:2; }
+      #androidAppBanner .close{ order:3; }
+    }
+  </style>
+</head>
+<body>
+  <div id="androidAppBanner">
+    <span class="msg">Sei su Android? L'app vera ha salvataggio permanente, trofei e avatar.</span>
+    <a class="cta play-store-link" href="https://play.google.com/store/apps/details?id=com.grafitesoft.grafitesudoku" target="_blank" rel="noopener">Installa</a>
+    <button type="button" class="close" onclick="dismissAndroidBanner()" aria-label="Chiudi">✕</button>
+  </div>
+  <script src="../assets/play-links.js" defer></script>
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>
