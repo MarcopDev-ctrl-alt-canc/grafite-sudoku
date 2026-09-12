@@ -154,6 +154,39 @@
   }
   .avatar-card small{ color:var(--ink-soft); font-size:.76rem; }
 
+  /* CTA con QR (09/09/2026): riprende lo stesso QR verso il Play Store
+     già usato nella pagina "Sudoku da stampare", qui accanto al testo
+     introduttivo della sezione avatar — per chi legge da desktop e vuole
+     scaricare l'app subito, senza dover cercare il pulsante più in basso. */
+  .qr-cta{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:16px;
+    max-width:420px;
+    margin:26px auto 0;
+    padding:16px 20px;
+    background:var(--paper);
+    border-radius:16px;
+  }
+  .qr-cta .qr-copy{ text-align:left; }
+  .qr-cta .qr-copy .headline{
+    color:var(--ink);
+    font-weight:700;
+    font-size:.95rem;
+    margin-bottom:2px;
+  }
+  .qr-cta .qr-copy .caption{
+    color:var(--ink-soft);
+    font-size:.78rem;
+  }
+  .qr-cta #qrcode-home{ flex:none; width:84px; height:84px; }
+  .qr-cta #qrcode-home img{ width:84px !important; height:84px !important; display:block; }
+  @media (max-width:480px){
+    .qr-cta{ flex-direction:column; text-align:center; }
+    .qr-cta .qr-copy{ text-align:center; }
+  }
+
   .demo-note{
     background:#1c212c;
     border:1px solid #2a3040;
@@ -301,6 +334,13 @@
     <div class="section-head">
       <h2>Nell'app completa ti aspettano</h2>
       <p>Nell'app per Android, ogni traguardo sblocca un compagno di viaggio — sei linee, ognuna con più stadi di crescita.</p>
+      <div class="qr-cta">
+        <div id="qrcode-home"></div>
+        <div class="qr-copy">
+          <div class="headline">Gioca su smartphone e tablet</div>
+          <div class="caption">Inquadra per scaricare l'app gratis su Google Play</div>
+        </div>
+      </div>
     </div>
     <div class="showcase-grid">
       <div class="avatar-card">
@@ -389,6 +429,22 @@
   </div>
 </footer>
 
-<script src="assets/play-links.js" defer></script>
+<script src="assets/play-links.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+  // QR verso il Play Store nella sezione avatar (09/09/2026) — stesso
+  // pattern già in uso in sudoku-da-stampare.html: se il CDN non è
+  // raggiungibile, niente QR ma il resto della pagina resta utilizzabile.
+  if (typeof QRCode !== "undefined") {
+    new QRCode(document.getElementById("qrcode-home"), {
+      text: PLAY_STORE_URL,
+      width: 168,
+      height: 168,
+      colorDark: "#14181F",
+      colorLight: "#F0EAD9",
+      correctLevel: QRCode.CorrectLevel.M,
+    });
+  }
+</script>
 </body>
 </html>
