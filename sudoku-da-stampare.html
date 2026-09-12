@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sudoku da stampare gratis — 9 schemi in PDF, con soluzioni | Grafite Sudoku</title>
+<meta name="description" content="Genera e stampa gratis un foglio A4 con 9 sudoku, tutti della stessa difficoltà o in progressione crescente, con le soluzioni incluse. Nessuna registrazione, nessun dato raccolto.">
+<meta name="theme-color" content="#14181F">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Sudoku da stampare gratis — Grafite Sudoku">
+<meta property="og:description" content="9 schemi su un foglio A4, con soluzioni, generati al volo nel browser. Nessuna pubblicità, nessun tracciamento.">
+<meta property="og:image" content="assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" type="image/png" href="assets/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Noto+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #14181F;
+    --ink-soft: #2a3040;
+    --gold: #C99A3E;
+    --gold-soft: #e3c583;
+    --paper: #F0EAD9;
+    --paper-line: #dcd3ba;
+    --cream: #f7f3e8;
+    --muted: #756c53;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ink);
+    color: #EFE9DC;
+    font-family: 'Noto Sans', Arial, sans-serif;
+    padding: 32px 16px 64px;
+  }
+
+  h1, h2, .brand {
+    font-family: 'Shippori Mincho', serif;
+  }
+
+  a { color: var(--gold); }
+
+  /* ---------- Intestazione e pannello controlli (solo a schermo) ---------- */
+
+  .page-head {
+    max-width: 760px;
+    margin: 0 auto 24px;
+    text-align: center;
+  }
+
+  .brand {
+    font-size: 1.1rem;
+    letter-spacing: 0.04em;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+
+  .page-head h1 {
+    font-size: clamp(1.5rem, 4vw, 2.1rem);
+    margin: 0 0 12px;
+    text-wrap: balance;
+  }
+
+  .page-head p {
+    color: #cfc8b8;
+    line-height: 1.6;
+    max-width: 60ch;
+    margin: 0 auto;
+  }
+
+  .controls {
+    max-width: 760px;
+    margin: 24px auto;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,154,62,0.35);
+    border-radius: 12px;
+    padding: 18px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    align-items: end;
+    justify-content: center;
+  }
+
+  .field { display: flex; flex-direction: column; gap: 6px; }
+
+  .field label {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #b9b09c;
+  }
+
+  select, .btn {
+    font-family: 'Noto Sans', Arial, sans-serif;
+    font-size: 0.95rem;
+    border-radius: 8px;
+    border: 1px solid rgba(201,154,62,0.5);
+    padding: 9px 12px;
+    background: #1c212b;
+    color: #EFE9DC;
+  }
+
+  .btn {
+    background: var(--gold);
+    color: #201705;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    padding: 10px 20px;
+  }
+  .btn:hover { filter: brightness(1.08); }
+  .btn.secondary {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-weight: 600;
+  }
+  .btn:disabled { opacity: 0.55; cursor: default; }
+
+  .status {
+    max-width: 760px;
+    margin: 0 auto 24px;
+    text-align: center;
+    min-height: 1.4em;
+    color: var(--gold);
+    font-size: 0.9rem;
+  }
+
+  /* ---------- Il foglio stampabile: sembra un vero A4 anche a schermo ---------- */
+
+  .sheet-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .sheet {
+    background: var(--paper);
+    color: #2a2418;
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto 18px;
+    padding: 12mm;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+    border-radius: 2px;
+  }
+
+  .sheet-band {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 4mm;
+    margin-bottom: 6mm;
+  }
+
+  .sheet-band .title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 15pt;
+    font-weight: 700;
+  }
+  .sheet-band .subtitle {
+    font-size: 8.5pt;
+    color: var(--muted);
+    margin-top: 1mm;
+  }
+
+  .sheet-band .qr-block {
+    display: flex;
+    align-items: center;
+    gap: 3mm;
+    text-align: right;
+  }
+  .sheet-band .qr-block .qr-text {
+    font-size: 7.5pt;
+    color: var(--muted);
+    line-height: 1.35;
+    max-width: 32mm;
+  }
+  #qrcode-puzzles, #qrcode-solutions { width: 20mm; height: 20mm; }
+  #qrcode-puzzles img, #qrcode-solutions img { width: 20mm !important; height: 20mm !important; }
+
+  .puzzles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5mm;
+  }
+
+  .puzzle-card { text-align: center; }
+
+  .puzzle-card .label {
+    font-size: 8pt;
+    font-weight: 700;
+    margin-bottom: 1.2mm;
+    color: var(--ink);
+  }
+  .puzzle-card .label .diff {
+    font-weight: 400;
+    color: var(--muted);
+  }
+
+  table.grid {
+    border-collapse: collapse;
+    margin: 0 auto;
+    table-layout: fixed;
+  }
+  .puzzles-grid table.grid { width: 58mm; height: 58mm; }
+  table.grid td {
+    border: 0.3pt solid #9b917a;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 8.5pt;
+    font-family: 'Noto Sans', Arial, sans-serif;
+    color: #1c1c1c;
+    padding: 0;
+  }
+  table.grid tr:nth-child(3n) td { border-bottom: 1.1pt solid var(--ink); }
+  table.grid tr:first-child td { border-top: 1.1pt solid var(--ink); }
+  table.grid td:nth-child(3n) { border-right: 1.1pt solid var(--ink); }
+  table.grid td:first-child { border-left: 1.1pt solid var(--ink); }
+
+  .sheet-footer-note {
+    margin-top: 6mm;
+    font-size: 7.5pt;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  /* Pagina soluzioni: griglie più piccole, 3x3 comunque */
+  .solutions-sheet .puzzles-grid table.grid { width: 55mm; height: 55mm; }
+  .solutions-sheet table.grid td { font-size: 8pt; color: #4a4436; }
+
+  .hidden { display: none !important; }
+
+  /* ---------- Stampa ---------- */
+  @media print {
+    @page { size: A4; margin: 0; }
+    body { background: #fff; padding: 0; }
+    .no-print { display: none !important; }
+    .sheet-wrap { max-width: none; margin: 0; }
+    .sheet {
+      box-shadow: none;
+      margin: 0;
+      width: 210mm;
+      min-height: 297mm;
+      page-break-after: always;
+    }
+    .sheet:last-child { page-break-after: auto; }
+  }
+
+  @media (max-width: 700px) {
+    .sheet { width: 100%; min-height: auto; padding: 6mm; }
+    .puzzles-grid table.grid { width: 100% !important; height: auto !important; aspect-ratio: 1 / 1; }
+    .sheet-band .qr-block .qr-text { display: none; }
+  }
+
+  /* ---------- Chrome del sito, identico a index.html ---------- */
+
+  #androidAppBanner{
+    display:none;
+    position:sticky; top:0; z-index:100;
+    align-items:center; gap:12px;
+    background:#0d1016;
+    border-bottom:1px solid var(--gold);
+    padding:10px 20px;
+    font-size:.88rem;
+  }
+  #androidAppBanner .msg{ flex:1; color:var(--cream); }
+  #androidAppBanner .cta{
+    background:var(--gold); color:#1a1408; font-weight:700;
+    padding:8px 16px; border-radius:8px; text-decoration:none;
+    white-space:nowrap; font-size:.86rem;
+  }
+  #androidAppBanner .close{
+    background:none; border:none; color:#9aa0ad; font-size:1.1rem;
+    cursor:pointer; padding:4px; line-height:1;
+  }
+  @media (max-width:520px){
+    #androidAppBanner{ flex-wrap:wrap; }
+    #androidAppBanner .msg{ flex-basis:100%; order:1; font-size:.82rem; }
+    #androidAppBanner .cta{ order:2; }
+    #androidAppBanner .close{ order:3; margin-left:auto; }
+  }
+
+  .site-nav{
+    max-width: 900px;
+    margin: 0 auto 8px;
+    padding: 4px 4px 0;
+  }
+  .site-nav a{
+    display:flex; align-items:center; gap:10px;
+    font-family:"Shippori Mincho", serif;
+    font-weight:700;
+    font-size:1rem;
+    color: var(--cream);
+    text-decoration:none;
+    width: fit-content;
+  }
+  .site-nav a:hover{ color: var(--gold-soft); }
+  .site-nav img{ width:28px; height:28px; border-radius:7px; }
+
+  .site-footer{
+    max-width: 900px;
+    margin: 32px auto 0;
+    padding: 24px 4px 0;
+    border-top: 1px solid rgba(201,154,62,0.25);
+    text-align: center;
+    color: #7d8390;
+    font-size: .85rem;
+  }
+  .site-footer a{ color: var(--gold-soft); text-decoration:none; }
+  .site-footer .links{ margin-bottom: 10px; }
+  .site-footer .links a{ margin: 0 10px; }
+</style>
+</head>
+<body>
+
+<div id="androidAppBanner" class="no-print">
+  <span class="msg">Sei su Android? L'app vera salva tutto per sempre, con trofei e avatar da sbloccare.</span>
+  <a class="cta play-store-link" href="https://play.google.com/store/apps/details?id=com.grafitesoft.grafitesudoku" target="_blank" rel="noopener">Installa</a>
+  <button type="button" class="close" onclick="dismissAndroidBanner()" aria-label="Chiudi">✕</button>
+</div>
+
+<nav class="site-nav no-print">
+  <a href="./">
+    <img src="assets/icon.png" alt="">
+    Grafite Sudoku
+  </a>
+</nav>
+
+  <header class="page-head no-print">
+    <h1>Sudoku da stampare gratis, carta e matita</h1>
+    <p>
+      Nove schemi su un unico foglio A4, pronti per la stampa, con le
+      soluzioni nella pagina successiva. Scegli se vuoi tutti gli schemi
+      della stessa difficoltà oppure una progressione che sale gradualmente
+      fino all'Esperto. Tutto si genera nel tuo browser: nessun dato viene
+      inviato altrove.
+    </p>
+  </header>
+
+  <section class="controls no-print">
+    <div class="field">
+      <label for="mode-select">Modalità</label>
+      <select id="mode-select">
+        <option value="fixed">Stessa difficoltà per tutti</option>
+        <option value="gradual">Difficoltà crescente (1→9)</option>
+      </select>
+    </div>
+    <div class="field" id="fixed-difficulty-field">
+      <label for="difficulty-select">Difficoltà</label>
+      <select id="difficulty-select">
+        <option value="easy">Facile</option>
+        <option value="medium" selected>Medio</option>
+        <option value="hard">Difficile</option>
+        <option value="expert">Esperto</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>&nbsp;</label>
+      <button class="btn" id="generate-btn">Genera 9 nuovi schemi</button>
+    </div>
+    <div class="field">
+      <label>&nbsp;</label>
+      <button class="btn secondary" id="print-btn">Stampa / salva PDF</button>
+    </div>
+  </section>
+
+  <p class="status no-print" id="status" role="status"></p>
+
+  <div class="sheet-wrap">
+    <div class="sheet" id="sheet-puzzles">
+      <div class="sheet-band">
+        <div>
+          <div class="title">Grafite Sudoku</div>
+          <div class="subtitle">grafitesoft.github.io/grafite-sudoku &nbsp;·&nbsp; nessuna pubblicità, nessun dato raccolto</div>
+        </div>
+        <div class="qr-block">
+          <div class="qr-text">Inquadra per scaricare l'app gratis su Google Play</div>
+          <div id="qrcode-puzzles"></div>
+        </div>
+      </div>
+      <div class="puzzles-grid" id="puzzles-grid"></div>
+      <div class="sheet-footer-note">Le soluzioni sono nella pagina seguente.</div>
+    </div>
+
+    <div class="sheet solutions-sheet" id="sheet-solutions">
+      <div class="sheet-band">
+        <div>
+          <div class="title">Grafite Sudoku — Soluzioni</div>
+          <div class="subtitle">stessa numerazione degli schemi nella pagina precedente</div>
+        </div>
+        <div class="qr-block">
+          <div class="qr-text">Inquadra per scaricare l'app gratis su Google Play</div>
+          <div id="qrcode-solutions"></div>
+        </div>
+      </div>
+      <div class="puzzles-grid" id="solutions-grid"></div>
+    </div>
+  </div>
+
+  <footer class="site-footer no-print">
+    <div class="links">
+      <a href="./">Torna al sito</a>
+      <a href="https://marcopdev-ctrl-alt-canc.github.io/-grafite-sudoku-privacy/">Informativa privacy</a>
+      <a href="mailto:grafitesoft@gmail.com">Scrivici</a>
+      <a href="https://paypal.me/grafitesoft">Offrici un caffè</a>
+    </div>
+    Grafite Sudoku — un progetto Grafite Soft. Nessuna pubblicità, nessun tracciamento.
+  </footer>
+
+<script src="assets/play-links.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+/* ====================================================================
+ * Motore sudoku (identico a sudoku-engine.js): generazione con
+ * simmetria 180° + verifica di unicità, indizi target allineati
+ * all'app Android (38/32/28/24).
+ * ==================================================================== */
+/*
+ * Motore sudoku minimale per la generazione di schemi stampabili.
+ * Stessa filosofia del motore Flutter di Grafite Sudoku (v2):
+ *   - griglia piena generata a caso, poi indizi tolti a COPPIE SIMMETRICHE
+ *     (rotazione 180°), con verifica di soluzione UNICA ad ogni rimozione.
+ *   - target di indizi per difficoltà allineati all'app: 38/32/28/24.
+ * Nessuna dipendenza esterna: funziona sia in Node (self-test) sia inline
+ * nella pagina HTML.
+ */
+
+const DIFFICULTY_CLUES = {
+  easy: 38,
+  medium: 32,
+  hard: 28,
+  expert: 24,
+};
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function boxIndex(r, c) {
+  return Math.floor(r / 3) * 3 + Math.floor(c / 3);
+}
+
+// Costruisce le "unità" (righe, colonne, riquadri) come liste di celle,
+// utile sia per isValid che per il solver con euristica MRV.
+function buildUnits() {
+  const rows = Array.from({ length: 9 }, (_, r) =>
+    Array.from({ length: 9 }, (_, c) => r * 9 + c)
+  );
+  const cols = Array.from({ length: 9 }, (_, c) =>
+    Array.from({ length: 9 }, (_, r) => r * 9 + c)
+  );
+  const boxes = Array.from({ length: 9 }, () => []);
+  for (let r = 0; r < 9; r++) {
+    for (let c = 0; c < 9; c++) {
+      boxes[boxIndex(r, c)].push(r * 9 + c);
+    }
+  }
+  return [...rows, ...cols, ...boxes];
+}
+const UNITS = buildUnits();
+// Per ogni cella, le unità a cui appartiene (per calcolare i candidati).
+const CELL_UNITS = Array.from({ length: 81 }, () => []);
+UNITS.forEach((unit) => unit.forEach((cell) => CELL_UNITS[cell].push(unit)));
+
+function isValidPlacement(grid, r, c, num) {
+  for (let i = 0; i < 9; i++) {
+    if (grid[r * 9 + i] === num) return false;
+    if (grid[i * 9 + c] === num) return false;
+  }
+  const br = Math.floor(r / 3) * 3;
+  const bc = Math.floor(c / 3) * 3;
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 3; j++) {
+      if (grid[(br + i) * 9 + (bc + j)] === num) return false;
+    }
+  }
+  return true;
+}
+
+// Genera una griglia piena valida, ordine di riempimento riga per riga con
+// candidati mescolati a caso: veloce e sufficiente per una griglia 9x9.
+function generateFullGrid() {
+  const grid = new Array(81).fill(0);
+
+  function fill(pos) {
+    if (pos === 81) return true;
+    const r = Math.floor(pos / 9);
+    const c = pos % 9;
+    const candidates = shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+    for (const num of candidates) {
+      if (isValidPlacement(grid, r, c, num)) {
+        grid[pos] = num;
+        if (fill(pos + 1)) return true;
+        grid[pos] = 0;
+      }
+    }
+    return false;
+  }
+
+  fill(0);
+  return grid;
+}
+
+// Conta le soluzioni di una griglia (si ferma appena raggiunge `limit`,
+// ci basta sapere se è 1 o "più di 1"). Euristica MRV (minimum remaining
+// values): sceglie sempre la cella vuota con meno candidati possibili,
+// molto più veloce della semplice scansione riga per riga quando la
+// griglia è quasi vuota (Esperto, 24 indizi).
+function countSolutions(grid, limit = 2) {
+  const work = grid.slice();
+  let count = 0;
+
+  function candidatesFor(pos) {
+    const r = Math.floor(pos / 9);
+    const c = pos % 9;
+    const cands = [];
+    for (let n = 1; n <= 9; n++) {
+      if (isValidPlacement(work, r, c, n)) cands.push(n);
+    }
+    return cands;
+  }
+
+  function solve() {
+    if (count >= limit) return;
+    let bestPos = -1;
+    let bestCands = null;
+    for (let pos = 0; pos < 81; pos++) {
+      if (work[pos] !== 0) continue;
+      const cands = candidatesFor(pos);
+      if (cands.length === 0) return; // vicolo cieco
+      if (bestCands === null || cands.length < bestCands.length) {
+        bestPos = pos;
+        bestCands = cands;
+        if (cands.length === 1) break; // non si può fare meglio di 1
+      }
+    }
+    if (bestPos === -1) {
+      // nessuna cella vuota: soluzione trovata
+      count++;
+      return;
+    }
+    for (const num of bestCands) {
+      work[bestPos] = num;
+      solve();
+      work[bestPos] = 0;
+      if (count >= limit) return;
+    }
+  }
+
+  solve();
+  return count;
+}
+
+// Coppie di celle simmetriche per rotazione di 180° attorno al centro.
+function symmetricPairs() {
+  const pairs = [];
+  const seen = new Set();
+  for (let pos = 0; pos < 81; pos++) {
+    if (seen.has(pos)) continue;
+    const mirror = 80 - pos; // (8-r)*9+(8-c) == 80 - (r*9+c)
+    seen.add(pos);
+    seen.add(mirror);
+    pairs.push(pos === mirror ? [pos] : [pos, mirror]);
+  }
+  return pairs;
+}
+
+// Toglie indizi a coppie simmetriche finché non si raggiunge targetClues
+// (o finché la simmetria non permette di andare oltre senza rompere
+// l'unicità — in quel caso ci si ferma al valore più vicino raggiunto).
+function removeCluesSymmetric(solution, targetClues) {
+  const puzzle = solution.slice();
+  let currentClues = 81;
+  const pairs = shuffle(symmetricPairs());
+
+  for (const pair of pairs) {
+    if (currentClues <= targetClues) break;
+    const removedCount = pair.length;
+    if (currentClues - removedCount < targetClues - 1) {
+      // rimuoverebbe troppo rispetto al target: la saltiamo, un'altra
+      // coppia più piccola (il centro, un solo elemento) potrà avvicinarsi
+      // di più più avanti nel ciclo.
+      if (removedCount === 1) {
+        // il centro da solo non sfora comunque di molto: procedi.
+      } else {
+        continue;
+      }
+    }
+    const backup = pair.map((pos) => puzzle[pos]);
+    pair.forEach((pos) => (puzzle[pos] = 0));
+    if (countSolutions(puzzle, 2) === 1) {
+      currentClues -= removedCount;
+    } else {
+      pair.forEach((pos, i) => (puzzle[pos] = backup[i]));
+    }
+  }
+
+  // Passaggio di completamento ASIMMETRICO (stessa idea del motore Flutter):
+  // la simmetria da sola spesso si ferma qualche indizio sopra al target,
+  // perché con poche coppie rimaste ogni tentativo rompe l'unicità. Qui si
+  // toglie una cella alla volta, non più a coppie, per avvicinarsi al
+  // target con granularità fine.
+  if (currentClues > targetClues) {
+    const remaining = shuffle(
+      puzzle.map((v, i) => i).filter((i) => puzzle[i] !== 0)
+    );
+    for (const pos of remaining) {
+      if (currentClues <= targetClues) break;
+      const backup = puzzle[pos];
+      puzzle[pos] = 0;
+      if (countSolutions(puzzle, 2) === 1) {
+        currentClues -= 1;
+      } else {
+        puzzle[pos] = backup;
+      }
+    }
+  }
+
+  return { puzzle, clues: currentClues };
+}
+
+function generatePuzzle(difficulty) {
+  const target = DIFFICULTY_CLUES[difficulty];
+  if (!target) throw new Error(`Difficoltà sconosciuta: ${difficulty}`);
+  const solution = generateFullGrid();
+  const { puzzle, clues } = removeCluesSymmetric(solution, target);
+  return { puzzle, solution, difficulty, clues };
+}
+
+// Nove difficoltà per la modalità "crescente": 2 Facile, 2 Medio,
+// 2 Difficile, 3 Esperto — un vero foglio di allenamento che sale di
+// livello e chiude in forza.
+const GRADUAL_SEQUENCE = [
+  "easy",
+  "easy",
+  "medium",
+  "medium",
+  "hard",
+  "hard",
+  "expert",
+  "expert",
+  "expert",
+];
+
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = {
+    DIFFICULTY_CLUES,
+    GRADUAL_SEQUENCE,
+    generateFullGrid,
+    countSolutions,
+    generatePuzzle,
+    isValidPlacement,
+  };
+}
+
+/* ====================================================================
+ * Interfaccia: generazione dei 9 schemi, rendering delle griglie,
+ * QR code verso la scheda Play Store.
+ * ==================================================================== */
+
+// PLAY_STORE_URL arriva da assets/play-links.js (caricato sopra, prima di
+// questo script): un solo posto da aggiornare col link tracciato di Play
+// Console, valido anche qui.
+
+const DIFFICULTY_LABELS = {
+  easy: "Facile",
+  medium: "Medio",
+  hard: "Difficile",
+  expert: "Esperto",
+};
+
+function renderGridTable(cells, isSolution) {
+  const table = document.createElement("table");
+  table.className = "grid";
+  for (let r = 0; r < 9; r++) {
+    const tr = document.createElement("tr");
+    for (let c = 0; c < 9; c++) {
+      const td = document.createElement("td");
+      const v = cells[r * 9 + c];
+      td.textContent = v === 0 ? "" : String(v);
+      if (!isSolution && v !== 0) td.style.fontWeight = "700";
+      tr.appendChild(td);
+    }
+    table.appendChild(tr);
+  }
+  return table;
+}
+
+function renderCard(index, difficulty, cells, isSolution) {
+  const card = document.createElement("div");
+  card.className = "puzzle-card";
+  const label = document.createElement("div");
+  label.className = "label";
+  label.innerHTML =
+    (index + 1) + ' <span class="diff">· ' + DIFFICULTY_LABELS[difficulty] + "</span>";
+  card.appendChild(label);
+  card.appendChild(renderGridTable(cells, isSolution));
+  return card;
+}
+
+function sequenceForMode() {
+  const mode = document.getElementById("mode-select").value;
+  if (mode === "gradual") return GRADUAL_SEQUENCE.slice();
+  const fixed = document.getElementById("difficulty-select").value;
+  return new Array(9).fill(fixed);
+}
+
+function generateAndRender() {
+  const btn = document.getElementById("generate-btn");
+  const status = document.getElementById("status");
+  btn.disabled = true;
+  status.textContent = "Generazione in corso — qualche istante per gli schemi Esperto…";
+
+  // Un piccolo rinvio lascia al browser il tempo di disegnare il
+  // messaggio di stato prima del lavoro sincrono (che può durare fino a
+  // circa un secondo per 9 schemi, di solito molto meno).
+  setTimeout(() => {
+    const t0 = performance.now();
+    const sequence = sequenceForMode();
+    const puzzlesGrid = document.getElementById("puzzles-grid");
+    const solutionsGrid = document.getElementById("solutions-grid");
+    puzzlesGrid.innerHTML = "";
+    solutionsGrid.innerHTML = "";
+
+    sequence.forEach((difficulty, i) => {
+      const { puzzle, solution } = generatePuzzle(difficulty);
+      puzzlesGrid.appendChild(renderCard(i, difficulty, puzzle, false));
+      solutionsGrid.appendChild(renderCard(i, difficulty, solution, true));
+    });
+
+    const ms = Math.round(performance.now() - t0);
+    status.textContent = "Fatto — 9 schemi pronti (" + ms + " ms). Buona stampa!";
+    btn.disabled = false;
+  }, 30);
+}
+
+function initQrCodes() {
+  if (typeof QRCode === "undefined") return; // CDN non raggiungibile: niente QR, il resto della pagina resta utilizzabile
+  ["qrcode-puzzles", "qrcode-solutions"].forEach((id) => {
+    new QRCode(document.getElementById(id), {
+      text: PLAY_STORE_URL,
+      width: 200,
+      height: 200,
+      colorDark: "#14181F",
+      colorLight: "#ffffff",
+      correctLevel: QRCode.CorrectLevel.M,
+    });
+  });
+}
+
+document.getElementById("mode-select").addEventListener("change", (e) => {
+  document.getElementById("fixed-difficulty-field").classList.toggle(
+    "hidden",
+    e.target.value === "gradual"
+  );
+});
+document.getElementById("generate-btn").addEventListener("click", generateAndRender);
+document.getElementById("print-btn").addEventListener("click", () => window.print());
+
+initQrCodes();
+generateAndRender();
+</script>
+</body>
+</html>
+
