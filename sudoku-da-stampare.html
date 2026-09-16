@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sudoku da stampare gratis — 9 schemi in PDF, con soluzioni | Grafite Sudoku</title>
-<meta name="description" content="Genera e stampa gratis un foglio A4 con 9 sudoku, tutti della stessa difficoltà o in progressione crescente, con le soluzioni incluse. Nessuna registrazione, nessun dato raccolto.">
+<title>Sudoku da stampare gratis — Classico, X-Sudoku, Jigsaw | Grafite Sudoku</title>
+<meta name="description" content="Genera e stampa gratis un foglio A4 con 9 sudoku Classico, X-Sudoku o Jigsaw, con le regole del gioco e le soluzioni incluse. Nessuna registrazione, nessun dato raccolto.">
 <meta name="theme-color" content="#14181F">
 <link rel="canonical" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare.html">
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="Sudoku da stampare gratis — Grafite Sudoku">
-<meta property="og:description" content="9 schemi su un foglio A4, con soluzioni, generati al volo nel browser. Nessuna pubblicità, nessun tracciamento.">
+<meta property="og:title" content="Sudoku da stampare gratis — Classico, X-Sudoku, Jigsaw | Grafite Sudoku">
+<meta property="og:description" content="9 schemi su un foglio A4, con regole e soluzioni, generati al volo nel browser. Nessuna pubblicità, nessun tracciamento.">
 <meta property="og:url" content="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare.html">
 <meta property="og:image" content="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/assets/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -23,7 +23,7 @@
   "@type": "WebApplication",
   "name": "Sudoku da stampare gratis — Grafite Sudoku",
   "url": "https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare.html",
-  "description": "Genera e stampa gratis un foglio A4 con 9 sudoku, tutti della stessa difficoltà o in progressione crescente, con le soluzioni incluse.",
+  "description": "Genera e stampa gratis un foglio A4 con 9 sudoku Classico, X-Sudoku o Jigsaw, tutti della stessa difficoltà o in progressione crescente, con regole e soluzioni incluse.",
   "applicationCategory": "GameApplication",
   "operatingSystem": "Any (browser)",
   "offers": {
@@ -243,16 +243,52 @@
     color: #1c1c1c;
     padding: 0;
   }
-  table.grid tr:nth-child(3n) td { border-bottom: 1.1pt solid var(--ink); }
-  table.grid tr:first-child td { border-top: 1.1pt solid var(--ink); }
-  table.grid td:nth-child(3n) { border-right: 1.1pt solid var(--ink); }
-  table.grid td:first-child { border-left: 1.1pt solid var(--ink); }
+  /* :not(.jigsaw) — per il Jigsaw i confini di regione sono irregolari e
+     vengono disegnati cella per cella via JS (vedi applyJigsawBorders):
+     queste regole a riquadri 3x3 fissi andrebbero solo a disegnare linee
+     spesse nel posto sbagliato. */
+  table.grid:not(.jigsaw) tr:nth-child(3n) td { border-bottom: 1.1pt solid var(--ink); }
+  table.grid:not(.jigsaw) tr:first-child td { border-top: 1.1pt solid var(--ink); }
+  table.grid:not(.jigsaw) td:nth-child(3n) { border-right: 1.1pt solid var(--ink); }
+  table.grid:not(.jigsaw) td:first-child { border-left: 1.1pt solid var(--ink); }
+
+  /* X-Sudoku: le due diagonali principali sono anche loro un vincolo "come
+     un riquadro" — una leggera ombreggiatura le rende riconoscibili anche
+     in stampa bianco e nero (resta visibile pure fotocopiata). */
+  table.grid td.diag { background: rgba(201,154,62,0.18); }
+  .solutions-sheet table.grid td.diag { background: rgba(201,154,62,0.24); }
 
   .sheet-footer-note {
     margin-top: 6mm;
     font-size: 7.5pt;
     color: var(--muted);
     text-align: center;
+  }
+
+  /* Regole del gioco, stampate in cima alla PRIMA pagina soltanto (11/09/2026,
+     richiesta esplicita dell'utente: chi trova questo foglio come un
+     volantino in biblioteca, negozio o fermata non conosce per forza il
+     sudoku). Testo breve apposta: deve restare leggibile in pochi secondi,
+     non un manuale. */
+  .rules-box {
+    margin: 0 0 5mm;
+    padding: 3mm 4mm;
+    border: 0.75pt solid var(--muted);
+    border-radius: 2px;
+    background: rgba(20,24,31,0.035);
+  }
+  .rules-box .rules-title {
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 700;
+    font-size: 9pt;
+    color: var(--ink);
+    margin-bottom: 1.2mm;
+  }
+  .rules-box p {
+    margin: 0;
+    font-size: 7.6pt;
+    line-height: 1.5;
+    color: var(--muted);
   }
 
   /* Pagina soluzioni: griglie più piccole, 3x3 comunque */
@@ -360,15 +396,24 @@
   <header class="page-head no-print">
     <h1>Sudoku da stampare gratis, carta e matita</h1>
     <p>
-      Nove schemi su un unico foglio A4, pronti per la stampa, con le
-      soluzioni nella pagina successiva. Scegli se vuoi tutti gli schemi
-      della stessa difficoltà oppure una progressione che sale gradualmente
-      fino all'Esperto. Tutto si genera nel tuo browser: nessun dato viene
-      inviato altrove.
+      Nove schemi su un unico foglio A4, pronti per la stampa, con le regole
+      del gioco e le soluzioni nella pagina successiva. Scegli il tipo di
+      schema — Classico, X-Sudoku (con le diagonali) o Jigsaw (regioni
+      irregolari) — e se vuoi tutti della stessa difficoltà oppure una
+      progressione che sale gradualmente fino all'Esperto. Tutto si genera
+      nel tuo browser: nessun dato viene inviato altrove.
     </p>
   </header>
 
   <section class="controls no-print">
+    <div class="field">
+      <label for="type-select">Tipo di schema</label>
+      <select id="type-select">
+        <option value="classic" selected>Classico</option>
+        <option value="x">X-Sudoku (diagonali)</option>
+        <option value="jigsaw">Jigsaw (regioni irregolari)</option>
+      </select>
+    </div>
     <div class="field">
       <label for="mode-select">Modalità</label>
       <select id="mode-select">
@@ -408,6 +453,10 @@
           <div class="qr-text">Inquadra per scaricare l'app gratis su Google Play</div>
           <div id="qrcode-puzzles"></div>
         </div>
+      </div>
+      <div class="rules-box" id="rules-box">
+        <div class="rules-title">Come si gioca</div>
+        <p id="rules-text">Riempi la griglia 9×9 in modo che ogni riga, ogni colonna e ogni riquadro 3×3 (delimitato da un bordo più spesso) contengano tutti i numeri da 1 a 9, senza mai ripeterli. I numeri già scritti in grassetto sono gli indizi di partenza: non si cancellano né si spostano.</p>
       </div>
       <div class="puzzles-grid" id="puzzles-grid"></div>
       <div class="sheet-footer-note">Le soluzioni sono nella pagina seguente.</div>
@@ -513,9 +562,29 @@ function isValidPlacement(grid, r, c, num) {
   return true;
 }
 
+// X-Sudoku (11/09/2026, stessa variante già nell'app Android): tutto come
+// il sudoku classico, con in più il vincolo che le due diagonali principali
+// (r === c, oppure r + c === 8) contengano anch'esse 1-9 senza ripetizioni.
+function isValidPlacementX(grid, r, c, num) {
+  if (!isValidPlacement(grid, r, c, num)) return false;
+  if (r === c) {
+    for (let i = 0; i < 9; i++) {
+      if (grid[i * 9 + i] === num) return false;
+    }
+  }
+  if (r + c === 8) {
+    for (let i = 0; i < 9; i++) {
+      if (grid[i * 9 + (8 - i)] === num) return false;
+    }
+  }
+  return true;
+}
+
 // Genera una griglia piena valida, ordine di riempimento riga per riga con
 // candidati mescolati a caso: veloce e sufficiente per una griglia 9x9.
-function generateFullGrid() {
+// `validator` permette di riusare la stessa funzione per varianti diverse
+// (Classico di default, oppure isValidPlacementX per l'X-Sudoku).
+function generateFullGrid(validator = isValidPlacement) {
   const grid = new Array(81).fill(0);
 
   function fill(pos) {
@@ -524,7 +593,7 @@ function generateFullGrid() {
     const c = pos % 9;
     const candidates = shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9]);
     for (const num of candidates) {
-      if (isValidPlacement(grid, r, c, num)) {
+      if (validator(grid, r, c, num)) {
         grid[pos] = num;
         if (fill(pos + 1)) return true;
         grid[pos] = 0;
@@ -537,12 +606,115 @@ function generateFullGrid() {
   return grid;
 }
 
+// Genera le 9 regioni irregolari del Jigsaw a partire da una griglia
+// CLASSICA già risolta (quindi con i 9 riquadri 3x3 già validi): invece di
+// costruire le regioni "da zero" e poi provare a piazzarci i numeri dentro
+// (approccio scartato: il backtracking necessario per farlo può bloccarsi
+// per minuti, vedi note di sviluppo), si parte dai riquadri — già corretti
+// per costruzione — e si "scambiano" ripetutamente coppie di celle con LA
+// STESSA CIFRA tra riquadri adiacenti.
+//
+// Perché proprio la stessa cifra: due celle adiacenti in griglia non hanno
+// mai la stessa cifra (vincolo di riga/colonna), quindi le due celle
+// scambiate non sono mai vicine tra loro, ma bensì ciascuna è di solito
+// vicina AL RIQUADRO ALTRUI. Scambiarle non crea mai un doppione: la
+// cifra in questione resta comunque presente esattamente una volta in
+// ciascuna regione, cambia solo la cella che la ospita. L'unico controllo
+// da fare a ogni tentativo è che le due regioni restino connesse dopo lo
+// scambio (altrimenti si scarta il tentativo e se ne prova un altro).
+// Ripetuto per qualche migliaio di tentativi (frazioni di secondo), questo
+// trasforma gradualmente i 9 riquadri fissi in 9 regioni irregolari, ma
+// SEMPRE valide: a differenza dell'approccio scartato, qui la validità è
+// garantita passo per passo, quindi il risultato è certo al primo colpo.
+function growJigsawRegions(solution, attempts = 3000) {
+  const regionOf = Array.from({ length: 81 }, (_, i) => boxIndex(Math.floor(i / 9), i % 9));
+  const regionCells = Array.from({ length: 9 }, () => []);
+  regionOf.forEach((region, idx) => regionCells[region].push(idx));
+  // Per ogni regione, la cella che ospita ciascuna cifra 1-9 (un riquadro
+  // sudoku valido ne ha sempre esattamente una).
+  const cellOfDigit = Array.from({ length: 9 }, () => new Array(10).fill(-1));
+  regionCells.forEach((cells, region) => {
+    cells.forEach((pos) => (cellOfDigit[region][solution[pos]] = pos));
+  });
+
+  function neighbors(pos) {
+    const r = Math.floor(pos / 9);
+    const c = pos % 9;
+    const res = [];
+    if (r > 0) res.push(pos - 9);
+    if (r < 8) res.push(pos + 9);
+    if (c > 0) res.push(pos - 1);
+    if (c < 8) res.push(pos + 1);
+    return res;
+  }
+
+  function isConnected(cells) {
+    const set = new Set(cells);
+    const seen = new Set([cells[0]]);
+    const stack = [cells[0]];
+    while (stack.length) {
+      const cur = stack.pop();
+      for (const n of neighbors(cur)) {
+        if (set.has(n) && !seen.has(n)) {
+          seen.add(n);
+          stack.push(n);
+        }
+      }
+    }
+    return seen.size === cells.length;
+  }
+
+  for (let attempt = 0; attempt < attempts; attempt++) {
+    const a = Math.floor(Math.random() * 81);
+    const r1 = regionOf[a];
+    const others = [0, 1, 2, 3, 4, 5, 6, 7, 8].filter((r) => r !== r1);
+    const r2 = others[Math.floor(Math.random() * others.length)];
+    const digit = solution[a];
+    const b = cellOfDigit[r2][digit];
+    if (b === -1) continue;
+
+    const newR1 = regionCells[r1].filter((p) => p !== a).concat([b]);
+    const newR2 = regionCells[r2].filter((p) => p !== b).concat([a]);
+    if (!isConnected(newR1) || !isConnected(newR2)) continue;
+
+    regionCells[r1] = newR1;
+    regionCells[r2] = newR2;
+    regionOf[a] = r2;
+    regionOf[b] = r1;
+    cellOfDigit[r1][digit] = b;
+    cellOfDigit[r2][digit] = a;
+  }
+
+  return regionOf;
+}
+
+// Costruisce il validatore per una specifica partizione in regioni Jigsaw:
+// stesso vincolo riga/colonna del sudoku classico, ma il "riquadro" è la
+// regione irregolare a cui appartiene la cella (precalcolata per stare
+// veloce quanto il classico invece di scandire tutte le 81 celle a ogni
+// controllo).
+function makeJigsawValidator(regionOf) {
+  const regionCells = Array.from({ length: 9 }, () => []);
+  regionOf.forEach((region, idx) => regionCells[region].push(idx));
+  return function (grid, r, c, num) {
+    for (let i = 0; i < 9; i++) {
+      if (grid[r * 9 + i] === num) return false;
+      if (grid[i * 9 + c] === num) return false;
+    }
+    const cells = regionCells[regionOf[r * 9 + c]];
+    for (let i = 0; i < cells.length; i++) {
+      if (grid[cells[i]] === num) return false;
+    }
+    return true;
+  };
+}
+
 // Conta le soluzioni di una griglia (si ferma appena raggiunge `limit`,
 // ci basta sapere se è 1 o "più di 1"). Euristica MRV (minimum remaining
 // values): sceglie sempre la cella vuota con meno candidati possibili,
 // molto più veloce della semplice scansione riga per riga quando la
 // griglia è quasi vuota (Esperto, 24 indizi).
-function countSolutions(grid, limit = 2) {
+function countSolutions(grid, limit = 2, validator = isValidPlacement) {
   const work = grid.slice();
   let count = 0;
 
@@ -551,7 +723,7 @@ function countSolutions(grid, limit = 2) {
     const c = pos % 9;
     const cands = [];
     for (let n = 1; n <= 9; n++) {
-      if (isValidPlacement(work, r, c, n)) cands.push(n);
+      if (validator(work, r, c, n)) cands.push(n);
     }
     return cands;
   }
@@ -604,7 +776,7 @@ function symmetricPairs() {
 // Toglie indizi a coppie simmetriche finché non si raggiunge targetClues
 // (o finché la simmetria non permette di andare oltre senza rompere
 // l'unicità — in quel caso ci si ferma al valore più vicino raggiunto).
-function removeCluesSymmetric(solution, targetClues) {
+function removeCluesSymmetric(solution, targetClues, validator = isValidPlacement) {
   const puzzle = solution.slice();
   let currentClues = 81;
   const pairs = shuffle(symmetricPairs());
@@ -624,7 +796,7 @@ function removeCluesSymmetric(solution, targetClues) {
     }
     const backup = pair.map((pos) => puzzle[pos]);
     pair.forEach((pos) => (puzzle[pos] = 0));
-    if (countSolutions(puzzle, 2) === 1) {
+    if (countSolutions(puzzle, 2, validator) === 1) {
       currentClues -= removedCount;
     } else {
       pair.forEach((pos, i) => (puzzle[pos] = backup[i]));
@@ -644,7 +816,7 @@ function removeCluesSymmetric(solution, targetClues) {
       if (currentClues <= targetClues) break;
       const backup = puzzle[pos];
       puzzle[pos] = 0;
-      if (countSolutions(puzzle, 2) === 1) {
+      if (countSolutions(puzzle, 2, validator) === 1) {
         currentClues -= 1;
       } else {
         puzzle[pos] = backup;
@@ -661,6 +833,30 @@ function generatePuzzle(difficulty) {
   const solution = generateFullGrid();
   const { puzzle, clues } = removeCluesSymmetric(solution, target);
   return { puzzle, solution, difficulty, clues };
+}
+
+// X-Sudoku (11/09/2026): stesso motore del Classico, con il validatore che
+// aggiunge il vincolo delle due diagonali principali.
+function generateXPuzzle(difficulty) {
+  const target = DIFFICULTY_CLUES[difficulty];
+  if (!target) throw new Error(`Difficoltà sconosciuta: ${difficulty}`);
+  const solution = generateFullGrid(isValidPlacementX);
+  const { puzzle, clues } = removeCluesSymmetric(solution, target, isValidPlacementX);
+  return { puzzle, solution, difficulty, clues };
+}
+
+// Jigsaw (11/09/2026): genera prima una griglia classica (riquadri già
+// validi), poi rimescola i confini con growJigsawRegions — sempre valido
+// per costruzione, nessun tentativo da ripetere.
+function generateJigsawPuzzle(difficulty) {
+  const target = DIFFICULTY_CLUES[difficulty];
+  if (!target) throw new Error(`Difficoltà sconosciuta: ${difficulty}`);
+
+  const solution = generateFullGrid();
+  const regionOf = growJigsawRegions(solution);
+  const validator = makeJigsawValidator(regionOf);
+  const { puzzle, clues } = removeCluesSymmetric(solution, target, validator);
+  return { puzzle, solution, difficulty, clues, regionOf };
 }
 
 // Nove difficoltà per la modalità "crescente": 2 Facile, 2 Medio,
@@ -686,6 +882,11 @@ if (typeof module !== "undefined" && module.exports) {
     countSolutions,
     generatePuzzle,
     isValidPlacement,
+    isValidPlacementX,
+    generateXPuzzle,
+    growJigsawRegions,
+    makeJigsawValidator,
+    generateJigsawPuzzle,
   };
 }
 
@@ -705,9 +906,30 @@ const DIFFICULTY_LABELS = {
   expert: "Esperto",
 };
 
-function renderGridTable(cells, isSolution) {
+// Disegna i confini di regione del Jigsaw cella per cella: dove il vicino
+// (sopra/sotto/sinistra/destra) appartiene a una regione diversa — o è
+// fuori griglia — il lato prende il bordo spesso, esattamente come i
+// riquadri 3x3 del sudoku classico ma con una forma irregolare. Le regole
+// CSS a nth-child per i riquadri fissi sono disattivate per le tabelle
+// `.jigsaw` (vedi :not(.jigsaw) nello style), quindi qui è l'unica fonte
+// dei bordi spessi.
+function applyJigsawBorders(table, regionOf) {
+  for (let r = 0; r < 9; r++) {
+    for (let c = 0; c < 9; c++) {
+      const td = table.rows[r].cells[c];
+      const region = regionOf[r * 9 + c];
+      const thick = "1.1pt solid var(--ink)";
+      if (r === 0 || regionOf[(r - 1) * 9 + c] !== region) td.style.borderTop = thick;
+      if (r === 8 || regionOf[(r + 1) * 9 + c] !== region) td.style.borderBottom = thick;
+      if (c === 0 || regionOf[r * 9 + (c - 1)] !== region) td.style.borderLeft = thick;
+      if (c === 8 || regionOf[r * 9 + (c + 1)] !== region) td.style.borderRight = thick;
+    }
+  }
+}
+
+function renderGridTable(cells, isSolution, type, regionOf) {
   const table = document.createElement("table");
-  table.className = "grid";
+  table.className = "grid" + (type === "jigsaw" ? " jigsaw" : "");
   for (let r = 0; r < 9; r++) {
     const tr = document.createElement("tr");
     for (let c = 0; c < 9; c++) {
@@ -715,14 +937,16 @@ function renderGridTable(cells, isSolution) {
       const v = cells[r * 9 + c];
       td.textContent = v === 0 ? "" : String(v);
       if (!isSolution && v !== 0) td.style.fontWeight = "700";
+      if (type === "x" && (r === c || r + c === 8)) td.classList.add("diag");
       tr.appendChild(td);
     }
     table.appendChild(tr);
   }
+  if (type === "jigsaw" && regionOf) applyJigsawBorders(table, regionOf);
   return table;
 }
 
-function renderCard(index, difficulty, cells, isSolution) {
+function renderCard(index, difficulty, cells, isSolution, type, regionOf) {
   const card = document.createElement("div");
   card.className = "puzzle-card";
   const label = document.createElement("div");
@@ -730,7 +954,7 @@ function renderCard(index, difficulty, cells, isSolution) {
   label.innerHTML =
     (index + 1) + ' <span class="diff">· ' + DIFFICULTY_LABELS[difficulty] + "</span>";
   card.appendChild(label);
-  card.appendChild(renderGridTable(cells, isSolution));
+  card.appendChild(renderGridTable(cells, isSolution, type, regionOf));
   return card;
 }
 
@@ -741,15 +965,45 @@ function sequenceForMode() {
   return new Array(9).fill(fixed);
 }
 
+// Testo delle regole stampato in cima alla prima pagina, uno per tipo di
+// schema — cambia solo il vincolo aggiuntivo/sostitutivo del riquadro 3x3.
+const RULES_TEXT = {
+  classic:
+    "Riempi la griglia 9×9 in modo che ogni riga, ogni colonna e ogni riquadro 3×3 (delimitato da un bordo più spesso) contengano tutti i numeri da 1 a 9, senza mai ripeterli. I numeri già scritti in grassetto sono gli indizi di partenza: non si cancellano né si spostano.",
+  x:
+    'Riempi la griglia 9×9 in modo che ogni riga, ogni colonna e ogni riquadro 3×3 (bordo più spesso) contengano tutti i numeri da 1 a 9, senza ripeterli. In più, anche le due diagonali principali evidenziate devono contenere tutti i numeri da 1 a 9 senza ripetizioni: è la variante "X-Sudoku". I numeri in grassetto sono gli indizi di partenza.',
+  jigsaw:
+    'Riempi la griglia 9×9 in modo che ogni riga, ogni colonna e ogni regione irregolare (delimitata da un bordo più spesso, al posto dei soliti riquadri 3×3) contengano tutti i numeri da 1 a 9, senza mai ripeterli: è la variante "Jigsaw". I numeri in grassetto sono gli indizi di partenza.',
+};
+
+function updateRulesText(type) {
+  const el = document.getElementById("rules-text");
+  if (el) el.textContent = RULES_TEXT[type] || RULES_TEXT.classic;
+}
+
+function typeFromSelect() {
+  return document.getElementById("type-select").value;
+}
+
+function generateForDifficulty(type, difficulty) {
+  if (type === "x") return generateXPuzzle(difficulty);
+  if (type === "jigsaw") return generateJigsawPuzzle(difficulty);
+  return generatePuzzle(difficulty);
+}
+
 function generateAndRender() {
   const btn = document.getElementById("generate-btn");
   const status = document.getElementById("status");
+  const type = typeFromSelect();
   btn.disabled = true;
-  status.textContent = "Generazione in corso — qualche istante per gli schemi Esperto…";
+  status.textContent =
+    type === "jigsaw"
+      ? "Generazione in corso — le regioni Jigsaw richiedono qualche istante in più…"
+      : "Generazione in corso — qualche istante per gli schemi Esperto…";
 
   // Un piccolo rinvio lascia al browser il tempo di disegnare il
   // messaggio di stato prima del lavoro sincrono (che può durare fino a
-  // circa un secondo per 9 schemi, di solito molto meno).
+  // circa un secondo o due per 9 schemi, di solito molto meno).
   setTimeout(() => {
     const t0 = performance.now();
     const sequence = sequenceForMode();
@@ -759,11 +1013,12 @@ function generateAndRender() {
     solutionsGrid.innerHTML = "";
 
     sequence.forEach((difficulty, i) => {
-      const { puzzle, solution } = generatePuzzle(difficulty);
-      puzzlesGrid.appendChild(renderCard(i, difficulty, puzzle, false));
-      solutionsGrid.appendChild(renderCard(i, difficulty, solution, true));
+      const { puzzle, solution, regionOf } = generateForDifficulty(type, difficulty);
+      puzzlesGrid.appendChild(renderCard(i, difficulty, puzzle, false, type, regionOf));
+      solutionsGrid.appendChild(renderCard(i, difficulty, solution, true, type, regionOf));
     });
 
+    updateRulesText(type);
     const ms = Math.round(performance.now() - t0);
     status.textContent = "Fatto — 9 schemi pronti (" + ms + " ms). Buona stampa!";
     btn.disabled = false;
@@ -789,6 +1044,12 @@ document.getElementById("mode-select").addEventListener("change", (e) => {
     "hidden",
     e.target.value === "gradual"
   );
+});
+// Il cambio tipo aggiorna subito il testo delle regole (così chi legge sa
+// già cosa aspettarsi), ma i 9 schemi si rigenerano solo premendo il
+// pulsante "Genera" — stessa logica già in uso per modalità e difficoltà.
+document.getElementById("type-select").addEventListener("change", (e) => {
+  updateRulesText(e.target.value);
 });
 document.getElementById("generate-btn").addEventListener("click", generateAndRender);
 document.getElementById("print-btn").addEventListener("click", () => window.print());
