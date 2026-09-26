@@ -71,11 +71,34 @@
     /* Link "Stampa schemi" (12/09/2026, richiesta esplicita dell'utente:
        far linkare a vicenda la demo giocabile e la pagina di stampa) —
        scheda fissa in un angolo, non sovrapposta al banner Android
-       (quello sta in top, questo in basso) e non invasiva sul gioco. */
+       (quello sta in top, questo in basso) e non invasiva sul gioco.
+       Spostata più in alto (16/09/2026) per lasciare il posto, sotto di
+       lei, al pulsante "Scarica su Android" — vedi subito sotto. */
     #printSudokuLink{
-      position:fixed; right:12px; bottom:12px; z-index:100000;
+      position:fixed; right:12px; bottom:58px; z-index:100000;
       display:inline-flex; align-items:center; gap:6px;
       background:#F0EAD9; color:#14181F;
+      font-family:"Noto Sans", system-ui, -apple-system, sans-serif;
+      font-weight:700; font-size:.78rem;
+      padding:8px 14px; border-radius:20px;
+      text-decoration:none;
+      box-shadow:0 6px 18px rgba(0,0,0,.35);
+    }
+
+    /* Pulsante fisso "Scarica su Android" (16/09/2026, richiesta esplicita
+       dell'utente: "un tasto fisso da qualche parte che dica scarica su
+       android... decidi tu come e dove"). Impilato SOTTO la scheda "Stampa
+       schemi", stesso angolo in basso a destra: è l'azione più importante
+       (l'intero scopo della demo è portare all'app vera), quindi occupa il
+       posto più raggiungibile col pollice su telefono. Stile "primario"
+       (oro pieno) per distinguerlo dalla scheda secondaria sopra di lui.
+       Classe `play-store-link`: l'href viene risolto da play-links.js
+       insieme a tutti gli altri pulsanti Play Store del sito — un solo
+       posto da aggiornare (assets/play-links.js) copre anche questo. */
+    #downloadAndroidLink{
+      position:fixed; right:12px; bottom:12px; z-index:100000;
+      display:inline-flex; align-items:center; gap:6px;
+      background:#C99A3E; color:#1a1408;
       font-family:"Noto Sans", system-ui, -apple-system, sans-serif;
       font-weight:700; font-size:.78rem;
       padding:8px 14px; border-radius:20px;
@@ -91,6 +114,7 @@
     <button type="button" class="close" onclick="dismissAndroidBanner()" aria-label="Chiudi">✕</button>
   </div>
   <a id="printSudokuLink" href="../sudoku-da-stampare.html">🖨️ Sudoku da stampare gratis</a>
+  <a id="downloadAndroidLink" class="play-store-link" href="https://play.google.com/store/apps/details?id=com.grafitesoft.grafitesudoku" target="_blank" rel="noopener">📲 Scarica su Android</a>
   <script src="../assets/play-links.js" defer></script>
   <script src="flutter_bootstrap.js" async></script>
 </body>

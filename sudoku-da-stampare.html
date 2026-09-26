@@ -398,10 +398,11 @@
     <p>
       Nove schemi su un unico foglio A4, pronti per la stampa, con le regole
       del gioco e le soluzioni nella pagina successiva. Scegli il tipo di
-      schema — Classico, X-Sudoku (con le diagonali) o Jigsaw (regioni
-      irregolari) — e se vuoi tutti della stessa difficoltà oppure una
-      progressione che sale gradualmente fino all'Esperto. Tutto si genera
-      nel tuo browser: nessun dato viene inviato altrove.
+      schema — Classico, X-Sudoku (con le diagonali), Jigsaw (regioni
+      irregolari) o un foglio Misto con tutti e tre — e se vuoi tutti della
+      stessa difficoltà oppure una progressione che sale gradualmente fino
+      all'Esperto. Tutto si genera nel tuo browser: nessun dato viene
+      inviato altrove.
     </p>
   </header>
 
@@ -412,6 +413,7 @@
         <option value="classic" selected>Classico</option>
         <option value="x">X-Sudoku (diagonali)</option>
         <option value="jigsaw">Jigsaw (regioni irregolari)</option>
+        <option value="mixed">Misto (3 Classico + 3 X-Sudoku + 3 Jigsaw)</option>
       </select>
     </div>
     <div class="field">
@@ -918,7 +920,12 @@ function applyJigsawBorders(table, regionOf) {
     for (let c = 0; c < 9; c++) {
       const td = table.rows[r].cells[c];
       const region = regionOf[r * 9 + c];
-      const thick = "1.1pt solid var(--ink)";
+      // Più spesso del bordo dei riquadri 3x3 classici (1.1pt): richiesta
+      // esplicita di Marco il 16/09/2026, "rendi un po' più evidenti i
+      // bordi del jigsaw" — su forme irregolari un bordo sottile si perde
+      // più facilmente tra le linee della griglia rispetto a un riquadro
+      // regolare, specie fotocopiato o stampato in bianco e nero.
+      const thick = "1.7pt solid var(--ink)";
       if (r === 0 || regionOf[(r - 1) * 9 + c] !== region) td.style.borderTop = thick;
       if (r === 8 || regionOf[(r + 1) * 9 + c] !== region) td.style.borderBottom = thick;
       if (c === 0 || regionOf[r * 9 + (c - 1)] !== region) td.style.borderLeft = thick;
@@ -946,13 +953,26 @@ function renderGridTable(cells, isSolution, type, regionOf) {
   return table;
 }
 
-function renderCard(index, difficulty, cells, isSolution, type, regionOf) {
+// Nel foglio "Misto" ogni terzina di schemi è di un tipo diverso: senza
+// un'etichetta esplicita non sarebbe ovvio a chi stampa (o a chi trova il
+// foglio già stampato) quale regola vale per quale schema — le sole
+// differenze grafiche (ombreggiatura diagonali, bordi irregolari) bastano
+// per chi conosce già le varianti, ma non per un volantino lasciato in
+// giro. `typeLabel` è passato solo quando serve (foglio Misto); altrimenti
+// resta implicito nel titolo/selettore, come già prima.
+const TYPE_LABELS = { classic: "Classico", x: "X-Sudoku", jigsaw: "Jigsaw" };
+
+function renderCard(index, difficulty, cells, isSolution, type, regionOf, typeLabel) {
   const card = document.createElement("div");
   card.className = "puzzle-card";
   const label = document.createElement("div");
   label.className = "label";
   label.innerHTML =
-    (index + 1) + ' <span class="diff">· ' + DIFFICULTY_LABELS[difficulty] + "</span>";
+    (index + 1) +
+    ' <span class="diff">· ' +
+    DIFFICULTY_LABELS[difficulty] +
+    (typeLabel ? " · " + typeLabel : "") +
+    "</span>";
   card.appendChild(label);
   card.appendChild(renderGridTable(cells, isSolution, type, regionOf));
   return card;
@@ -974,6 +994,8 @@ const RULES_TEXT = {
     'Riempi la griglia 9×9 in modo che ogni riga, ogni colonna e ogni riquadro 3×3 (bordo più spesso) contengano tutti i numeri da 1 a 9, senza ripeterli. In più, anche le due diagonali principali evidenziate devono contenere tutti i numeri da 1 a 9 senza ripetizioni: è la variante "X-Sudoku". I numeri in grassetto sono gli indizi di partenza.',
   jigsaw:
     'Riempi la griglia 9×9 in modo che ogni riga, ogni colonna e ogni regione irregolare (delimitata da un bordo più spesso, al posto dei soliti riquadri 3×3) contengano tutti i numeri da 1 a 9, senza mai ripeterli: è la variante "Jigsaw". I numeri in grassetto sono gli indizi di partenza.',
+  mixed:
+    'Foglio misto: i primi 3 schemi sono Classici (riga, colonna e riquadro 3×3), i successivi 3 sono X-Sudoku (in più le due diagonali evidenziate) e gli ultimi 3 sono Jigsaw (regioni irregolari al posto dei riquadri, bordo più spesso) — il tipo di ciascuno è indicato sotto il suo numero. La regola di base resta identica per tutti: un numero da 1 a 9 una sola volta in ogni riga, colonna e regione. I numeri in grassetto sono gli indizi di partenza.',
 };
 
 function updateRulesText(type) {
@@ -991,14 +1013,28 @@ function generateForDifficulty(type, difficulty) {
   return generatePuzzle(difficulty);
 }
 
+// Foglio "Misto" (16/09/2026, richiesta esplicita: "crea una variante
+// mista di generazione, 3 sudoku, 3 x-sudoku, 3 jigsaw sudoku"): i primi 3
+// posti del foglio sono Classico, i 3 di mezzo X-Sudoku, gli ultimi 3
+// Jigsaw — indipendentemente dalla modalità difficoltà scelta (fissa o
+// crescente), che continua a valere sulla sequenza dei 9 come sempre.
+function typeForIndexMixed(i) {
+  if (i < 3) return "classic";
+  if (i < 6) return "x";
+  return "jigsaw";
+}
+
 function generateAndRender() {
   const btn = document.getElementById("generate-btn");
   const status = document.getElementById("status");
   const type = typeFromSelect();
+  const isMixed = type === "mixed";
   btn.disabled = true;
   status.textContent =
     type === "jigsaw"
       ? "Generazione in corso — le regioni Jigsaw richiedono qualche istante in più…"
+      : isMixed
+      ? "Generazione in corso — foglio misto, richiede qualche istante in più…"
       : "Generazione in corso — qualche istante per gli schemi Esperto…";
 
   // Un piccolo rinvio lascia al browser il tempo di disegnare il
@@ -1013,9 +1049,11 @@ function generateAndRender() {
     solutionsGrid.innerHTML = "";
 
     sequence.forEach((difficulty, i) => {
-      const { puzzle, solution, regionOf } = generateForDifficulty(type, difficulty);
-      puzzlesGrid.appendChild(renderCard(i, difficulty, puzzle, false, type, regionOf));
-      solutionsGrid.appendChild(renderCard(i, difficulty, solution, true, type, regionOf));
+      const puzzleType = isMixed ? typeForIndexMixed(i) : type;
+      const { puzzle, solution, regionOf } = generateForDifficulty(puzzleType, difficulty);
+      const typeLabel = isMixed ? TYPE_LABELS[puzzleType] : null;
+      puzzlesGrid.appendChild(renderCard(i, difficulty, puzzle, false, puzzleType, regionOf, typeLabel));
+      solutionsGrid.appendChild(renderCard(i, difficulty, solution, true, puzzleType, regionOf, typeLabel));
     });
 
     updateRulesText(type);
