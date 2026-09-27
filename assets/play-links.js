@@ -2,16 +2,35 @@
 // per i pulsanti "Scarica su Google Play" di questa pagina, sia per il
 // banner mostrato a chi arriva da telefono Android (qui e nella demo
 // giocabile in play/, che importa questo stesso file con un percorso
-// relativo). Quando avrai un link con tracciamento vero — generato da
-// Play Console, Crescita → Acquisizione utenti → URL per campagna
-// personalizzata, vedi PUBBLICAZIONE.md — sostituiscilo qui sotto:
-// aggiornare questa singola riga basta ovunque, non serve più toccare
-// index.html a mano.
-const PLAY_STORE_URL = "https://play.google.com/store/apps/details?id=com.grafitesoft.grafitesudoku";
+// relativo).
+//
+// Tracciamento per sorgente (26-27/09/2026, richiesta del progetto
+// Marketing): ogni punto del sito da cui si può arrivare alla scheda Play
+// aggiunge il proprio utm_source/utm_campaign, così Play Console (Crescita
+// → Acquisizione utenti) dice davvero da dove arrivano gli installi, non
+// solo "dal sito" in generale. Un elemento `.play-store-link` dichiara la
+// sua sorgente con `data-utm-source`/`data-utm-campaign` nell'HTML — se non
+// li dichiara, prende il default sotto (sorgente "sito", campagna "home").
+// Un solo posto da aggiornare quando arriverà un link Play Console vero
+// (vedi PUBBLICAZIONE.md): la costante `PLAY_STORE_BASE_URL` qui sotto.
+const PLAY_STORE_BASE_URL = "https://play.google.com/store/apps/details?id=com.grafitesoft.grafitesudoku";
+
+function buildPlayStoreUrl(source, campaign) {
+  if (!source) return PLAY_STORE_BASE_URL;
+  var params = new URLSearchParams({ utm_source: source, utm_campaign: campaign || 'link' });
+  return PLAY_STORE_BASE_URL + '&' + params.toString();
+}
+
+// Retro-compatibilità: qualunque punto del sito non ancora aggiornato con
+// i data-attribute (o che importa questo file aspettandosi la vecchia
+// costante) continua a funzionare, con sorgente "sito"/campagna "home".
+const PLAY_STORE_URL = buildPlayStoreUrl('sito', 'home');
 
 (function () {
   document.querySelectorAll('.play-store-link').forEach(function (el) {
-    el.href = PLAY_STORE_URL;
+    var source = el.getAttribute('data-utm-source');
+    var campaign = el.getAttribute('data-utm-campaign');
+    el.href = source ? buildPlayStoreUrl(source, campaign) : PLAY_STORE_URL;
   });
 
   // Banner "vieni da Android?" (03/09/2026, richiesta esplicita
@@ -38,8 +57,9 @@ const PLAY_STORE_URL = "https://play.google.com/store/apps/details?id=com.grafit
 
   var banner = document.getElementById('androidAppBanner');
   if (banner) {
-    var link = banner.querySelector('.play-store-link');
-    if (link) link.href = PLAY_STORE_URL;
+    // L'href del link dentro il banner è già stato impostato dal forEach
+    // sopra, in base ai suoi data-utm-source/data-utm-campaign — qui si
+    // decide solo se il banner va mostrato.
     if (isAndroid && !dismissed) {
       banner.style.display = 'flex';
     }

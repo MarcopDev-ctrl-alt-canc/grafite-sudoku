@@ -382,7 +382,7 @@
 
 <div id="androidAppBanner" class="no-print">
   <span class="msg">Sei su Android? L'app vera salva tutto per sempre, con trofei e avatar da sbloccare.</span>
-  <a class="cta play-store-link" href="https://play.google.com/store/apps/details?id=com.grafitesoft.grafitesudoku" target="_blank" rel="noopener">Installa</a>
+  <a class="cta play-store-link" data-utm-source="sito_stampa" data-utm-campaign="banner" href="https://play.google.com/store/apps/details?id=com.grafitesoft.grafitesudoku" target="_blank" rel="noopener">Installa</a>
   <button type="button" class="close" onclick="dismissAndroidBanner()" aria-label="Chiudi">✕</button>
 </div>
 
@@ -449,7 +449,7 @@
       <div class="sheet-band">
         <div>
           <div class="title">Grafite Sudoku</div>
-          <div class="subtitle">grafitesoft.github.io/grafite-sudoku &nbsp;·&nbsp; nessuna pubblicità, nessun dato raccolto</div>
+          <div class="subtitle">marcopdev-ctrl-alt-canc.github.io/grafite-sudoku &nbsp;·&nbsp; nessuna pubblicità, nessun dato raccolto</div>
         </div>
         <div class="qr-block">
           <div class="qr-text">Inquadra per scaricare l'app gratis su Google Play</div>
@@ -1067,7 +1067,7 @@ function initQrCodes() {
   if (typeof QRCode === "undefined") return; // CDN non raggiungibile: niente QR, il resto della pagina resta utilizzabile
   ["qrcode-puzzles", "qrcode-solutions"].forEach((id) => {
     new QRCode(document.getElementById(id), {
-      text: PLAY_STORE_URL,
+      text: buildPlayStoreUrl('foglio_stampato', 'qr'),
       width: 200,
       height: 200,
       colorDark: "#14181F",

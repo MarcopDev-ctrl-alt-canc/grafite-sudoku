@@ -11,7 +11,13 @@
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <meta name="description" content="Gioca a Grafite Sudoku nel browser: sudoku con temi carta, livelli e Time Attack. Nessuna pubblicità, nessun tracciamento.">
+  <meta name="description" content="Gioca a Grafite Sudoku nel browser: Classico, X-Sudoku, Jigsaw e 12x12, con lezioni. Nessuna pubblicità, nessun tracciamento.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/play/">
+  <meta property="og:title" content="Grafite Sudoku — gioca nel browser">
+  <meta property="og:description" content="Classico, X-Sudoku, Jigsaw e 12x12. Nessuna pubblicità, nessun account, nessun dato raccolto.">
+  <meta property="og:image" content="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/assets/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#14181F">
 
   <!-- iOS meta tags & icons -->
@@ -110,11 +116,11 @@
 <body>
   <div id="androidAppBanner">
     <span class="msg">Sei su Android? L'app vera ha salvataggio permanente, trofei e avatar.</span>
-    <a class="cta play-store-link" href="https://play.google.com/store/apps/details?id=com.grafitesoft.grafitesudoku" target="_blank" rel="noopener">Installa</a>
+    <a class="cta play-store-link" data-utm-source="demo_web" data-utm-campaign="banner" href="https://play.google.com/store/apps/details?id=com.grafitesoft.grafitesudoku" target="_blank" rel="noopener">Installa</a>
     <button type="button" class="close" onclick="dismissAndroidBanner()" aria-label="Chiudi">✕</button>
   </div>
   <a id="printSudokuLink" href="../sudoku-da-stampare.html">🖨️ Sudoku da stampare gratis</a>
-  <a id="downloadAndroidLink" class="play-store-link" href="https://play.google.com/store/apps/details?id=com.grafitesoft.grafitesudoku" target="_blank" rel="noopener">📲 Scarica su Android</a>
+  <a id="downloadAndroidLink" class="play-store-link" data-utm-source="demo_web" data-utm-campaign="pulsante" href="https://play.google.com/store/apps/details?id=com.grafitesoft.grafitesudoku" target="_blank" rel="noopener">📲 Scarica su Android</a>
   <script src="../assets/play-links.js" defer></script>
   <script src="flutter_bootstrap.js" async></script>
 </body>
