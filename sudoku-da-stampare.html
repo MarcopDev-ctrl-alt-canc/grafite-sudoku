@@ -3,27 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sudoku da stampare gratis — Classico, X-Sudoku, Jigsaw | Grafite Sudoku</title>
-<meta name="description" content="Genera e stampa gratis un foglio A4 con 9 sudoku Classico, X-Sudoku o Jigsaw, con le regole del gioco e le soluzioni incluse. Nessuna registrazione, nessun dato raccolto.">
+<title>Sudoku da stampare gratis — Classico, X-Sudoku, Jigsaw, Sudoku 12 | Grafite Sudoku</title>
+<meta name="description" content="Genera e stampa gratis un foglio A4 con sudoku Classico, X-Sudoku, Jigsaw o Sudoku 12 (griglia 12×12), con le regole del gioco e le soluzioni incluse. Nessuna registrazione, nessun dato raccolto.">
 <meta name="theme-color" content="#14181F">
 <link rel="canonical" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare.html">
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="Sudoku da stampare gratis — Classico, X-Sudoku, Jigsaw | Grafite Sudoku">
-<meta property="og:description" content="9 schemi su un foglio A4, con regole e soluzioni, generati al volo nel browser. Nessuna pubblicità, nessun tracciamento.">
+<meta property="og:title" content="Sudoku da stampare gratis — Classico, X-Sudoku, Jigsaw, Sudoku 12 | Grafite Sudoku">
+<meta property="og:description" content="Schemi su un foglio A4, con regole e soluzioni, generati al volo nel browser. Anche la variante 12×12. Nessuna pubblicità, nessun tracciamento.">
 <meta property="og:url" content="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare.html">
 <meta property="og:image" content="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/assets/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 
 <link rel="icon" type="image/png" href="assets/icon.png">
 
-<script type="application/ld+json">
+<script type="application/ld+json" id="jsonld-schema">
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "Sudoku da stampare gratis — Grafite Sudoku",
   "url": "https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare.html",
-  "description": "Genera e stampa gratis un foglio A4 con 9 sudoku Classico, X-Sudoku o Jigsaw, tutti della stessa difficoltà o in progressione crescente, con regole e soluzioni incluse.",
+  "description": "Genera e stampa gratis un foglio A4 con sudoku Classico, X-Sudoku, Jigsaw o Sudoku 12 (griglia 12×12), tutti della stessa difficoltà o in progressione crescente, con regole e soluzioni incluse.",
   "applicationCategory": "GameApplication",
   "operatingSystem": "Any (browser)",
   "offers": {
@@ -243,14 +243,30 @@
     color: #1c1c1c;
     padding: 0;
   }
-  /* :not(.jigsaw) — per il Jigsaw i confini di regione sono irregolari e
-     vengono disegnati cella per cella via JS (vedi applyJigsawBorders):
-     queste regole a riquadri 3x3 fissi andrebbero solo a disegnare linee
-     spesse nel posto sbagliato. */
-  table.grid:not(.jigsaw) tr:nth-child(3n) td { border-bottom: 1.1pt solid var(--ink); }
-  table.grid:not(.jigsaw) tr:first-child td { border-top: 1.1pt solid var(--ink); }
-  table.grid:not(.jigsaw) td:nth-child(3n) { border-right: 1.1pt solid var(--ink); }
-  table.grid:not(.jigsaw) td:first-child { border-left: 1.1pt solid var(--ink); }
+  /* :not(.jigsaw):not(.twelve) — il Jigsaw disegna i confini di regione
+     cella per cella via JS (vedi applyJigsawBorders, riquadri irregolari);
+     il Sudoku 12 ha riquadri 4x3 (non 3x3) e usa le sue regole dedicate
+     poco più sotto: per entrambi queste regole a passo 3 andrebbero a
+     disegnare linee spesse nel posto sbagliato. */
+  table.grid:not(.jigsaw):not(.twelve) tr:nth-child(3n) td { border-bottom: 1.1pt solid var(--ink); }
+  table.grid:not(.jigsaw):not(.twelve) tr:first-child td { border-top: 1.1pt solid var(--ink); }
+  table.grid:not(.jigsaw):not(.twelve) td:nth-child(3n) { border-right: 1.1pt solid var(--ink); }
+  table.grid:not(.jigsaw):not(.twelve) td:first-child { border-left: 1.1pt solid var(--ink); }
+
+  /* Sudoku 12: griglia 12×12 a riquadri rettangolari 4 colonne × 3 righe
+     (stessa forma decisa per l'app e per la demo, orientamento fisso).
+     Il vincolo di riga resta ogni 3 righe come il classico, ma quello di
+     colonna cambia a ogni 4 (non più ogni 3). Meno schemi per foglio
+     (4 invece di 9, vedi .puzzles-grid.twelve) per lasciare alle celle lo
+     spazio di ospitare anche i numeri a due cifre 10/11/12. */
+  table.grid.twelve tr:nth-child(3n) td { border-bottom: 1.1pt solid var(--ink); }
+  table.grid.twelve tr:first-child td { border-top: 1.1pt solid var(--ink); }
+  table.grid.twelve td:nth-child(4n) { border-right: 1.1pt solid var(--ink); }
+  table.grid.twelve td:first-child { border-left: 1.1pt solid var(--ink); }
+  table.grid.twelve td { font-size: 7.6pt; }
+
+  .puzzles-grid.twelve { grid-template-columns: repeat(2, 1fr); gap: 8mm; }
+  .puzzles-grid.twelve table.grid { width: 90mm; height: 90mm; }
 
   /* X-Sudoku: le due diagonali principali sono anche loro un vincolo "come
      un riquadro" — una leggera ombreggiatura le rende riconoscibili anche
@@ -294,6 +310,8 @@
   /* Pagina soluzioni: griglie più piccole, 3x3 comunque */
   .solutions-sheet .puzzles-grid table.grid { width: 55mm; height: 55mm; }
   .solutions-sheet table.grid td { font-size: 8pt; color: #4a4436; }
+  .solutions-sheet .puzzles-grid.twelve table.grid { width: 85mm; height: 85mm; }
+  .solutions-sheet table.grid.twelve td { font-size: 7.2pt; }
 
   .hidden { display: none !important; }
 
@@ -351,6 +369,10 @@
     max-width: 900px;
     margin: 0 auto 8px;
     padding: 4px 4px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
   }
   .site-nav a{
     display:flex; align-items:center; gap:10px;
@@ -363,6 +385,16 @@
   }
   .site-nav a:hover{ color: var(--gold-soft); }
   .site-nav img{ width:28px; height:28px; border-radius:7px; }
+
+  /* Selettore lingua (30/09/2026): stesse 5 lingue e le stesse bandiere
+     già usate nel selettore dell'app/demo Flutter (impostazioni →
+     "🌐 Language"), per coerenza visiva tra le varie parti del sito. */
+  #lang-select{
+    font-size: 0.85rem;
+    padding: 6px 8px;
+    width: auto;
+    flex-shrink: 0;
+  }
 
   .site-footer{
     max-width: 900px;
@@ -381,9 +413,9 @@
 <body>
 
 <div id="androidAppBanner" class="no-print">
-  <span class="msg">Sei su Android? L'app vera salva tutto per sempre, con trofei e avatar da sbloccare.</span>
-  <a class="cta play-store-link" data-utm-source="sito_stampa" data-utm-campaign="banner" href="https://play.google.com/store/apps/details?id=com.grafitesoft.grafitesudoku" target="_blank" rel="noopener">Installa</a>
-  <button type="button" class="close" onclick="dismissAndroidBanner()" aria-label="Chiudi">✕</button>
+  <span class="msg" data-i18n="bannerMsg">Sei su Android? L'app vera salva tutto per sempre, con trofei e avatar da sbloccare.</span>
+  <a class="cta play-store-link" data-i18n="bannerCta" data-utm-source="sito_stampa" data-utm-campaign="banner" href="https://play.google.com/store/apps/details?id=com.grafitesoft.grafitesudoku" target="_blank" rel="noopener">Installa</a>
+  <button type="button" class="close" onclick="dismissAndroidBanner()" aria-label="Chiudi" data-i18n-aria="bannerClose">✕</button>
 </div>
 
 <nav class="site-nav no-print">
@@ -391,40 +423,42 @@
     <img src="assets/icon.png" alt="">
     Grafite Sudoku
   </a>
+  <select id="lang-select" aria-label="Language / Lingua"></select>
 </nav>
 
   <header class="page-head no-print">
-    <h1>Sudoku da stampare gratis, carta e matita</h1>
-    <p>
-      Nove schemi su un unico foglio A4, pronti per la stampa, con le regole
+    <h1 data-i18n="h1">Sudoku da stampare gratis, carta e matita</h1>
+    <p data-i18n="introP">
+      Più schemi su un unico foglio A4, pronti per la stampa, con le regole
       del gioco e le soluzioni nella pagina successiva. Scegli il tipo di
       schema — Classico, X-Sudoku (con le diagonali), Jigsaw (regioni
-      irregolari) o un foglio Misto con tutti e tre — e se vuoi tutti della
-      stessa difficoltà oppure una progressione che sale gradualmente fino
-      all'Esperto. Tutto si genera nel tuo browser: nessun dato viene
-      inviato altrove.
+      irregolari), Sudoku 12 (griglia 12×12) o un foglio Misto con i primi
+      tre — e se vuoi tutti della stessa difficoltà oppure una progressione
+      che sale gradualmente. Tutto si genera nel tuo browser: nessun dato
+      viene inviato altrove.
     </p>
   </header>
 
   <section class="controls no-print">
     <div class="field">
-      <label for="type-select">Tipo di schema</label>
+      <label for="type-select" data-i18n="fieldType">Tipo di schema</label>
       <select id="type-select">
         <option value="classic" selected>Classico</option>
         <option value="x">X-Sudoku (diagonali)</option>
         <option value="jigsaw">Jigsaw (regioni irregolari)</option>
+        <option value="twelve">Sudoku 12 (griglia 12×12)</option>
         <option value="mixed">Misto (3 Classico + 3 X-Sudoku + 3 Jigsaw)</option>
       </select>
     </div>
     <div class="field">
-      <label for="mode-select">Modalità</label>
+      <label for="mode-select" data-i18n="fieldMode">Modalità</label>
       <select id="mode-select">
         <option value="fixed">Stessa difficoltà per tutti</option>
         <option value="gradual">Difficoltà crescente (1→9)</option>
       </select>
     </div>
     <div class="field" id="fixed-difficulty-field">
-      <label for="difficulty-select">Difficoltà</label>
+      <label for="difficulty-select" data-i18n="fieldDifficulty">Difficoltà</label>
       <select id="difficulty-select">
         <option value="easy">Facile</option>
         <option value="medium" selected>Medio</option>
@@ -438,7 +472,7 @@
     </div>
     <div class="field">
       <label>&nbsp;</label>
-      <button class="btn secondary" id="print-btn">Stampa / salva PDF</button>
+      <button class="btn secondary" id="print-btn" data-i18n="printBtn">Stampa / salva PDF</button>
     </div>
   </section>
 
@@ -449,29 +483,29 @@
       <div class="sheet-band">
         <div>
           <div class="title">Grafite Sudoku</div>
-          <div class="subtitle">marcopdev-ctrl-alt-canc.github.io/grafite-sudoku &nbsp;·&nbsp; nessuna pubblicità, nessun dato raccolto</div>
+          <div class="subtitle"><span id="site-domain">marcopdev-ctrl-alt-canc.github.io/grafite-sudoku</span> &nbsp;·&nbsp; <span data-i18n="sheetSubtitleTagline">nessuna pubblicità, nessun dato raccolto</span></div>
         </div>
         <div class="qr-block">
-          <div class="qr-text">Inquadra per scaricare l'app gratis su Google Play</div>
+          <div class="qr-text" data-i18n="qrText">Inquadra per scaricare l'app gratis su Google Play</div>
           <div id="qrcode-puzzles"></div>
         </div>
       </div>
       <div class="rules-box" id="rules-box">
-        <div class="rules-title">Come si gioca</div>
+        <div class="rules-title" data-i18n="rulesTitle">Come si gioca</div>
         <p id="rules-text">Riempi la griglia 9×9 in modo che ogni riga, ogni colonna e ogni riquadro 3×3 (delimitato da un bordo più spesso) contengano tutti i numeri da 1 a 9, senza mai ripeterli. I numeri già scritti in grassetto sono gli indizi di partenza: non si cancellano né si spostano.</p>
       </div>
       <div class="puzzles-grid" id="puzzles-grid"></div>
-      <div class="sheet-footer-note">Le soluzioni sono nella pagina seguente.</div>
+      <div class="sheet-footer-note" data-i18n="footerNote">Le soluzioni sono nella pagina seguente.</div>
     </div>
 
     <div class="sheet solutions-sheet" id="sheet-solutions">
       <div class="sheet-band">
         <div>
-          <div class="title">Grafite Sudoku — Soluzioni</div>
-          <div class="subtitle">stessa numerazione degli schemi nella pagina precedente</div>
+          <div class="title">Grafite Sudoku <span data-i18n="solutionsTitleSuffix">— Soluzioni</span></div>
+          <div class="subtitle" data-i18n="solutionsSubtitle">stessa numerazione degli schemi nella pagina precedente</div>
         </div>
         <div class="qr-block">
-          <div class="qr-text">Inquadra per scaricare l'app gratis su Google Play</div>
+          <div class="qr-text" data-i18n="qrText">Inquadra per scaricare l'app gratis su Google Play</div>
           <div id="qrcode-solutions"></div>
         </div>
       </div>
@@ -481,13 +515,13 @@
 
   <footer class="site-footer no-print">
     <div class="links">
-      <a href="./">Torna al sito</a>
-      <a href="./play/">Prova il gioco completo nel browser</a>
-      <a href="https://marcopdev-ctrl-alt-canc.github.io/-grafite-sudoku-privacy/">Informativa privacy</a>
-      <a href="mailto:grafitesoft@gmail.com">Scrivici</a>
-      <a href="https://paypal.me/grafitesoft">Offrici un caffè</a>
+      <a href="./" data-i18n="footerBackToSite">Torna al sito</a>
+      <a href="./play/" data-i18n="footerPlayDemo">Prova il gioco completo nel browser</a>
+      <a href="https://marcopdev-ctrl-alt-canc.github.io/-grafite-sudoku-privacy/" data-i18n="footerPrivacy">Informativa privacy</a>
+      <a href="mailto:grafitesoft@gmail.com" data-i18n="footerWriteUs">Scrivici</a>
+      <a href="https://paypal.me/grafitesoft" data-i18n="footerCoffee">Offrici un caffè</a>
     </div>
-    Grafite Sudoku — un progetto Grafite Soft. Nessuna pubblicità, nessun tracciamento.
+    <span data-i18n="footerBottom">Grafite Sudoku — un progetto Grafite Soft. Nessuna pubblicità, nessun tracciamento.</span>
   </footer>
 
 <script src="assets/play-links.js"></script>
@@ -549,19 +583,36 @@ const UNITS = buildUnits();
 const CELL_UNITS = Array.from({ length: 81 }, () => []);
 UNITS.forEach((unit) => unit.forEach((cell) => CELL_UNITS[cell].push(unit)));
 
-function isValidPlacement(grid, r, c, num) {
-  for (let i = 0; i < 9; i++) {
-    if (grid[r * 9 + i] === num) return false;
-    if (grid[i * 9 + c] === num) return false;
+// Versione generalizzata a griglia n×n con riquadri boxW×boxH, usata dal
+// Sudoku 12 (n=12, boxW=4, boxH=3). isValidPlacement (sotto) resta la
+// versione classica 9x9/3x3, ora scritta come un semplice richiamo a
+// questa con i parametri di sempre: nessun cambio di comportamento per
+// Classico/X-Sudoku/Jigsaw, che continuano a chiamare isValidPlacement
+// esattamente come prima.
+function isValidPlacementN(grid, n, boxW, boxH, r, c, num) {
+  for (let i = 0; i < n; i++) {
+    if (grid[r * n + i] === num) return false;
+    if (grid[i * n + c] === num) return false;
   }
-  const br = Math.floor(r / 3) * 3;
-  const bc = Math.floor(c / 3) * 3;
-  for (let i = 0; i < 3; i++) {
-    for (let j = 0; j < 3; j++) {
-      if (grid[(br + i) * 9 + (bc + j)] === num) return false;
+  const br = Math.floor(r / boxH) * boxH;
+  const bc = Math.floor(c / boxW) * boxW;
+  for (let i = 0; i < boxH; i++) {
+    for (let j = 0; j < boxW; j++) {
+      if (grid[(br + i) * n + (bc + j)] === num) return false;
     }
   }
   return true;
+}
+
+function isValidPlacement(grid, r, c, num) {
+  return isValidPlacementN(grid, 9, 3, 3, r, c, num);
+}
+
+// Sudoku 12 (29/09/2026): stessi parametri decisi per l'app e per la demo
+// web (variant.dart / difficulty.dart) — griglia 12×12, riquadri
+// rettangolari 4 colonne × 3 righe, un solo orientamento.
+function isValidPlacementTwelve(grid, r, c, num) {
+  return isValidPlacementN(grid, 12, 4, 3, r, c, num);
 }
 
 // X-Sudoku (11/09/2026, stessa variante già nell'app Android): tutto come
@@ -586,14 +637,16 @@ function isValidPlacementX(grid, r, c, num) {
 // candidati mescolati a caso: veloce e sufficiente per una griglia 9x9.
 // `validator` permette di riusare la stessa funzione per varianti diverse
 // (Classico di default, oppure isValidPlacementX per l'X-Sudoku).
-function generateFullGrid(validator = isValidPlacement) {
-  const grid = new Array(81).fill(0);
+function generateFullGrid(validator = isValidPlacement, n = 9) {
+  const size = n * n;
+  const grid = new Array(size).fill(0);
+  const digits = Array.from({ length: n }, (_, i) => i + 1);
 
   function fill(pos) {
-    if (pos === 81) return true;
-    const r = Math.floor(pos / 9);
-    const c = pos % 9;
-    const candidates = shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+    if (pos === size) return true;
+    const r = Math.floor(pos / n);
+    const c = pos % n;
+    const candidates = shuffle(digits.slice());
     for (const num of candidates) {
       if (validator(grid, r, c, num)) {
         grid[pos] = num;
@@ -716,16 +769,17 @@ function makeJigsawValidator(regionOf) {
 // values): sceglie sempre la cella vuota con meno candidati possibili,
 // molto più veloce della semplice scansione riga per riga quando la
 // griglia è quasi vuota (Esperto, 24 indizi).
-function countSolutions(grid, limit = 2, validator = isValidPlacement) {
+function countSolutions(grid, limit = 2, validator = isValidPlacement, n = 9) {
+  const size = n * n;
   const work = grid.slice();
   let count = 0;
 
   function candidatesFor(pos) {
-    const r = Math.floor(pos / 9);
-    const c = pos % 9;
+    const r = Math.floor(pos / n);
+    const c = pos % n;
     const cands = [];
-    for (let n = 1; n <= 9; n++) {
-      if (validator(work, r, c, n)) cands.push(n);
+    for (let v = 1; v <= n; v++) {
+      if (validator(work, r, c, v)) cands.push(v);
     }
     return cands;
   }
@@ -734,7 +788,7 @@ function countSolutions(grid, limit = 2, validator = isValidPlacement) {
     if (count >= limit) return;
     let bestPos = -1;
     let bestCands = null;
-    for (let pos = 0; pos < 81; pos++) {
+    for (let pos = 0; pos < size; pos++) {
       if (work[pos] !== 0) continue;
       const cands = candidatesFor(pos);
       if (cands.length === 0) return; // vicolo cieco
@@ -762,12 +816,13 @@ function countSolutions(grid, limit = 2, validator = isValidPlacement) {
 }
 
 // Coppie di celle simmetriche per rotazione di 180° attorno al centro.
-function symmetricPairs() {
+function symmetricPairs(n = 9) {
+  const size = n * n;
   const pairs = [];
   const seen = new Set();
-  for (let pos = 0; pos < 81; pos++) {
+  for (let pos = 0; pos < size; pos++) {
     if (seen.has(pos)) continue;
-    const mirror = 80 - pos; // (8-r)*9+(8-c) == 80 - (r*9+c)
+    const mirror = size - 1 - pos; // stesso trucco di (8-r)*9+(8-c), generalizzato a n
     seen.add(pos);
     seen.add(mirror);
     pairs.push(pos === mirror ? [pos] : [pos, mirror]);
@@ -778,10 +833,11 @@ function symmetricPairs() {
 // Toglie indizi a coppie simmetriche finché non si raggiunge targetClues
 // (o finché la simmetria non permette di andare oltre senza rompere
 // l'unicità — in quel caso ci si ferma al valore più vicino raggiunto).
-function removeCluesSymmetric(solution, targetClues, validator = isValidPlacement) {
+function removeCluesSymmetric(solution, targetClues, validator = isValidPlacement, n = 9) {
+  const size = n * n;
   const puzzle = solution.slice();
-  let currentClues = 81;
-  const pairs = shuffle(symmetricPairs());
+  let currentClues = size;
+  const pairs = shuffle(symmetricPairs(n));
 
   for (const pair of pairs) {
     if (currentClues <= targetClues) break;
@@ -798,7 +854,7 @@ function removeCluesSymmetric(solution, targetClues, validator = isValidPlacemen
     }
     const backup = pair.map((pos) => puzzle[pos]);
     pair.forEach((pos) => (puzzle[pos] = 0));
-    if (countSolutions(puzzle, 2, validator) === 1) {
+    if (countSolutions(puzzle, 2, validator, n) === 1) {
       currentClues -= removedCount;
     } else {
       pair.forEach((pos, i) => (puzzle[pos] = backup[i]));
@@ -818,7 +874,7 @@ function removeCluesSymmetric(solution, targetClues, validator = isValidPlacemen
       if (currentClues <= targetClues) break;
       const backup = puzzle[pos];
       puzzle[pos] = 0;
-      if (countSolutions(puzzle, 2, validator) === 1) {
+      if (countSolutions(puzzle, 2, validator, n) === 1) {
         currentClues -= 1;
       } else {
         puzzle[pos] = backup;
@@ -861,6 +917,30 @@ function generateJigsawPuzzle(difficulty) {
   return { puzzle, solution, difficulty, clues, regionOf };
 }
 
+// Sudoku 12 (29/09/2026): stesso motore simmetria+unicità di sopra, solo
+// generalizzato a n=12/boxW=4/boxH=3 (isValidPlacementTwelve). Indizi
+// target allineati ai valori scelti per l'app/demo (difficulty.dart):
+// Media 57/144, Esperto 52/144. Qui, a differenza del motore Flutter, non
+// c'è un filtro sulla tecnica logica minima (SolveTier) né un pool di
+// tentativi multipli: solo indizi-target + unicità, la stessa filosofia
+// già usata qui per Classico/X-Sudoku/Jigsaw. Una prova di fattibilità
+// equivalente (vedi grafite-sudoku-sudoku12-piano-tecnico.md) mostra che
+// senza quel filtro il target 52/144 si raggiunge in pochi secondi anche
+// per un motore più lento di questo (Python vs V8): va bene per la
+// generazione al volo nel browser.
+const TWELVE_DIFFICULTY_CLUES = {
+  media: 57,
+  expert: 52,
+};
+
+function generateTwelvePuzzle(difficulty) {
+  const target = TWELVE_DIFFICULTY_CLUES[difficulty];
+  if (!target) throw new Error(`Difficoltà sconosciuta: ${difficulty}`);
+  const solution = generateFullGrid(isValidPlacementTwelve, 12);
+  const { puzzle, clues } = removeCluesSymmetric(solution, target, isValidPlacementTwelve, 12);
+  return { puzzle, solution, difficulty, clues };
+}
+
 // Nove difficoltà per la modalità "crescente": 2 Facile, 2 Medio,
 // 2 Difficile, 3 Esperto — un vero foglio di allenamento che sale di
 // livello e chiude in forza.
@@ -879,16 +959,22 @@ const GRADUAL_SEQUENCE = [
 if (typeof module !== "undefined" && module.exports) {
   module.exports = {
     DIFFICULTY_CLUES,
+    TWELVE_DIFFICULTY_CLUES,
     GRADUAL_SEQUENCE,
     generateFullGrid,
     countSolutions,
     generatePuzzle,
     isValidPlacement,
+    isValidPlacementN,
     isValidPlacementX,
+    isValidPlacementTwelve,
     generateXPuzzle,
     growJigsawRegions,
     makeJigsawValidator,
     generateJigsawPuzzle,
+    generateTwelvePuzzle,
+    symmetricPairs,
+    removeCluesSymmetric,
   };
 }
 
@@ -901,11 +987,307 @@ if (typeof module !== "undefined" && module.exports) {
 // questo script): un solo posto da aggiornare col link tracciato di Play
 // Console, valido anche qui.
 
-const DIFFICULTY_LABELS = {
-  easy: "Facile",
-  medium: "Medio",
-  hard: "Difficile",
-  expert: "Esperto",
+// Quanti schemi Sudoku 12 stiano su un foglio: la griglia 12×12, coi
+// numeri a due cifre 10/11/12, non ci sta leggibile in 9 su un A4 come il
+// classico (vedi grafite-sudoku-cantiere.md, sezione stampa varianti) — 4
+// per foglio (2×2, vedi CSS .puzzles-grid.twelve) lascia celle abbastanza
+// grandi da restare leggibili anche fotocopiate.
+const TWELVE_PER_PAGE = 4;
+const TWELVE_GRADUAL_SEQUENCE = ["media", "media", "expert", "expert"];
+
+// Traduzioni (30/09/2026, richiesta di Marco: "creiamo la pagina web anche
+// nelle altre lingue disponibili in app"): le 5 lingue già presenti
+// nell'app/demo Flutter (vedi lib/l10n/*.arb). Difficoltà/variante/regole
+// riusano la stessa terminologia già scelta nell'app dove esisteva
+// (difficultyEasy/Medium/Hard/Expert degli .arb, classicRule/xRule/
+// jigsawRule/twelveRule di difficulty.dart per IT/EN/ES) — l'app stessa non
+// ha ancora queste ultime tradotte in PT/ID (ripiega sull'inglese lì), qui
+// invece sono state tradotte per intero: un piccolo miglioramento rispetto
+// allo stato attuale dell'app, segnalato a Marco.
+const LANG_NAMES = {
+  it: "🇮🇹 Italiano",
+  en: "🇬🇧 English",
+  es: "🇪🇸 Español",
+  pt: "🇵🇹 Português",
+  id: "🇮🇩 Bahasa Indonesia",
+};
+
+const I18N = {
+  it: {
+    metaTitle: "Sudoku da stampare gratis — Classico, X-Sudoku, Jigsaw, Sudoku 12 | Grafite Sudoku",
+    metaDescription: "Genera e stampa gratis un foglio A4 con sudoku Classico, X-Sudoku, Jigsaw o Sudoku 12 (griglia 12×12), con le regole del gioco e le soluzioni incluse. Nessuna registrazione, nessun dato raccolto.",
+    ogDescription: "Schemi su un foglio A4, con regole e soluzioni, generati al volo nel browser. Anche la variante 12×12. Nessuna pubblicità, nessun tracciamento.",
+    jsonLdName: "Sudoku da stampare gratis — Grafite Sudoku",
+    jsonLdDescription: "Genera e stampa gratis un foglio A4 con sudoku Classico, X-Sudoku, Jigsaw o Sudoku 12 (griglia 12×12), tutti della stessa difficoltà o in progressione crescente, con regole e soluzioni incluse.",
+    bannerMsg: "Sei su Android? L'app vera salva tutto per sempre, con trofei e avatar da sbloccare.",
+    bannerCta: "Installa",
+    bannerClose: "Chiudi",
+    h1: "Sudoku da stampare gratis, carta e matita",
+    introP: "Più schemi su un unico foglio A4, pronti per la stampa, con le regole del gioco e le soluzioni nella pagina successiva. Scegli il tipo di schema — Classico, X-Sudoku (con le diagonali), Jigsaw (regioni irregolari), Sudoku 12 (griglia 12×12) o un foglio Misto con i primi tre — e se vuoi tutti della stessa difficoltà oppure una progressione che sale gradualmente. Tutto si genera nel tuo browser: nessun dato viene inviato altrove.",
+    fieldType: "Tipo di schema",
+    fieldMode: "Modalità",
+    fieldDifficulty: "Difficoltà",
+    typeOptions: {
+      classic: "Classico",
+      x: "X-Sudoku (diagonali)",
+      jigsaw: "Jigsaw (regioni irregolari)",
+      twelve: "Sudoku 12 (griglia 12×12)",
+      mixed: "Misto (3 Classico + 3 X-Sudoku + 3 Jigsaw)",
+    },
+    modeOptions: { fixed: "Stessa difficoltà per tutti", gradual: "Difficoltà crescente" },
+    diffOptionsClassic: { easy: "Facile", medium: "Medio", hard: "Difficile", expert: "Esperto" },
+    diffOptionsTwelve: { media: "Media", expert: "Esperto" },
+    generateBtn: "Genera {n} nuovi schemi",
+    printBtn: "Stampa / salva PDF",
+    statusGenerating: {
+      jigsaw: "Generazione in corso — le regioni Jigsaw richiedono qualche istante in più…",
+      twelve: "Generazione in corso — gli schemi 12×12 richiedono qualche istante in più…",
+      mixed: "Generazione in corso — foglio misto, richiede qualche istante in più…",
+      default: "Generazione in corso — qualche istante per gli schemi Esperto…",
+    },
+    statusDone: "Fatto — {n} schemi pronti ({ms} ms). Buona stampa!",
+    sheetSubtitleTagline: "nessuna pubblicità, nessun dato raccolto",
+    qrText: "Inquadra per scaricare l'app gratis su Google Play",
+    rulesTitle: "Come si gioca",
+    rulesText: {
+      classic: "Riempi la griglia 9×9 in modo che ogni riga, ogni colonna e ogni riquadro 3×3 (delimitato da un bordo più spesso) contengano tutti i numeri da 1 a 9, senza mai ripeterli. I numeri già scritti in grassetto sono gli indizi di partenza: non si cancellano né si spostano.",
+      x: 'Riempi la griglia 9×9 in modo che ogni riga, ogni colonna e ogni riquadro 3×3 (bordo più spesso) contengano tutti i numeri da 1 a 9, senza ripeterli. In più, anche le due diagonali principali evidenziate devono contenere tutti i numeri da 1 a 9 senza ripetizioni: è la variante "X-Sudoku". I numeri in grassetto sono gli indizi di partenza.',
+      jigsaw: 'Riempi la griglia 9×9 in modo che ogni riga, ogni colonna e ogni regione irregolare (delimitata da un bordo più spesso, al posto dei soliti riquadri 3×3) contengano tutti i numeri da 1 a 9, senza mai ripeterli: è la variante "Jigsaw". I numeri in grassetto sono gli indizi di partenza.',
+      mixed: 'Foglio misto: i primi 3 schemi sono Classici (riga, colonna e riquadro 3×3), i successivi 3 sono X-Sudoku (in più le due diagonali evidenziate) e gli ultimi 3 sono Jigsaw (regioni irregolari al posto dei riquadri, bordo più spesso) — il tipo di ciascuno è indicato sotto il suo numero. La regola di base resta identica per tutti: un numero da 1 a 9 una sola volta in ogni riga, colonna e regione. I numeri in grassetto sono gli indizi di partenza.',
+      twelve: 'Riempi la griglia 12×12 in modo che ogni riga, ogni colonna e ogni riquadro rettangolare 4×3 (delimitato da un bordo più spesso) contengano tutti i numeri da 1 a 12, senza mai ripeterli: è la variante "Sudoku 12", stessa logica del classico ma su una griglia più grande. I numeri già scritti in grassetto sono gli indizi di partenza.',
+    },
+    footerNote: "Le soluzioni sono nella pagina seguente.",
+    solutionsTitleSuffix: "— Soluzioni",
+    solutionsSubtitle: "stessa numerazione degli schemi nella pagina precedente",
+    footerBackToSite: "Torna al sito",
+    footerPlayDemo: "Prova il gioco completo nel browser",
+    footerPrivacy: "Informativa privacy",
+    footerWriteUs: "Scrivici",
+    footerCoffee: "Offrici un caffè",
+    footerBottom: "Grafite Sudoku — un progetto Grafite Soft. Nessuna pubblicità, nessun tracciamento.",
+    difficultyLabels: { easy: "Facile", medium: "Medio", hard: "Difficile", expert: "Esperto", media: "Media" },
+    typeLabels: { classic: "Classico", x: "X-Sudoku", jigsaw: "Jigsaw", twelve: "Sudoku 12" },
+  },
+  en: {
+    metaTitle: "Free printable sudoku — Classic, X-Sudoku, Jigsaw, Sudoku 12 | Grafite Sudoku",
+    metaDescription: "Generate and print a free A4 sheet with Classic, X-Sudoku, Jigsaw or Sudoku 12 (12×12 grid) puzzles, with the game rules and solutions included. No sign-up, no data collected.",
+    ogDescription: "Puzzles on an A4 sheet, with rules and solutions, generated on the fly in your browser. Now with the 12×12 variant too. No ads, no tracking.",
+    jsonLdName: "Free printable sudoku — Grafite Sudoku",
+    jsonLdDescription: "Generate and print a free A4 sheet with Classic, X-Sudoku, Jigsaw or Sudoku 12 (12×12 grid) puzzles, all the same difficulty or in an increasing progression, with rules and solutions included.",
+    bannerMsg: "On Android? The real app saves everything forever, with trophies and avatars to unlock.",
+    bannerCta: "Install",
+    bannerClose: "Close",
+    h1: "Free printable sudoku, pen and paper",
+    introP: "Several puzzles on a single A4 sheet, ready to print, with the game rules and the solutions on the next page. Choose the puzzle type — Classic, X-Sudoku (with diagonals), Jigsaw (irregular regions), Sudoku 12 (12×12 grid) or a Mixed sheet with the first three — and whether you want them all the same difficulty or a gradually increasing progression. Everything is generated in your browser: no data is ever sent anywhere.",
+    fieldType: "Puzzle type",
+    fieldMode: "Mode",
+    fieldDifficulty: "Difficulty",
+    typeOptions: {
+      classic: "Classic",
+      x: "X-Sudoku (diagonals)",
+      jigsaw: "Jigsaw (irregular regions)",
+      twelve: "Sudoku 12 (12×12 grid)",
+      mixed: "Mixed (3 Classic + 3 X-Sudoku + 3 Jigsaw)",
+    },
+    modeOptions: { fixed: "Same difficulty for all", gradual: "Increasing difficulty" },
+    diffOptionsClassic: { easy: "Easy", medium: "Medium", hard: "Hard", expert: "Expert" },
+    diffOptionsTwelve: { media: "Medium", expert: "Expert" },
+    generateBtn: "Generate {n} new puzzles",
+    printBtn: "Print / save as PDF",
+    statusGenerating: {
+      jigsaw: "Generating — Jigsaw regions take a little longer…",
+      twelve: "Generating — 12×12 puzzles take a little longer…",
+      mixed: "Generating — mixed sheet, takes a little longer…",
+      default: "Generating — a moment for Expert puzzles…",
+    },
+    statusDone: "Done — {n} puzzles ready ({ms} ms). Happy printing!",
+    sheetSubtitleTagline: "no ads, no data collected",
+    qrText: "Scan to download the free app on Google Play",
+    rulesTitle: "How to play",
+    rulesText: {
+      classic: "Fill the 9×9 grid so that every row, column and 3×3 box (marked by a thicker border) contains every number from 1 to 9, with no repeats. The numbers already shown in bold are the starting clues: they can't be erased or moved.",
+      x: 'Fill the 9×9 grid so that every row, column and 3×3 box (thicker border) contains every number from 1 to 9, with no repeats. In addition, the two highlighted main diagonals must also contain every number from 1 to 9 with no repeats: this is the "X-Sudoku" variant. The bold numbers are the starting clues.',
+      jigsaw: 'Fill the 9×9 grid so that every row, column and irregular region (marked by a thicker border instead of the usual 3×3 boxes) contains every number from 1 to 9, with no repeats: this is the "Jigsaw" variant. The bold numbers are the starting clues.',
+      mixed: 'Mixed sheet: the first 3 puzzles are Classic (row, column and 3×3 box), the next 3 are X-Sudoku (plus the two highlighted diagonals) and the last 3 are Jigsaw (irregular regions instead of boxes, thicker border) — the type of each is shown under its number. The basic rule stays the same for all: a number from 1 to 9 only once in every row, column and region. The bold numbers are the starting clues.',
+      twelve: 'Fill the 12×12 grid so that every row, column and rectangular 4×3 box (marked by a thicker border) contains every number from 1 to 12, with no repeats: this is the "Sudoku 12" variant, same logic as the classic one on a bigger grid. The numbers already shown in bold are the starting clues.',
+    },
+    footerNote: "The solutions are on the next page.",
+    solutionsTitleSuffix: "— Solutions",
+    solutionsSubtitle: "same numbering as the puzzles on the previous page",
+    footerBackToSite: "Back to the site",
+    footerPlayDemo: "Try the full game in your browser",
+    footerPrivacy: "Privacy policy",
+    footerWriteUs: "Write to us",
+    footerCoffee: "Buy us a coffee",
+    footerBottom: "Grafite Sudoku — a Grafite Soft project. No ads, no tracking.",
+    difficultyLabels: { easy: "Easy", medium: "Medium", hard: "Hard", expert: "Expert", media: "Medium" },
+    typeLabels: { classic: "Classic", x: "X-Sudoku", jigsaw: "Jigsaw", twelve: "Sudoku 12" },
+  },
+  es: {
+    metaTitle: "Sudoku para imprimir gratis — Clásico, X-Sudoku, Jigsaw, Sudoku 12 | Grafite Sudoku",
+    metaDescription: "Genera e imprime gratis una hoja A4 con sudoku Clásico, X-Sudoku, Jigsaw o Sudoku 12 (cuadrícula 12×12), con las reglas del juego y las soluciones incluidas. Sin registro, sin datos recopilados.",
+    ogDescription: "Esquemas en una hoja A4, con reglas y soluciones, generados al instante en tu navegador. También la variante 12×12. Sin publicidad, sin rastreo.",
+    jsonLdName: "Sudoku para imprimir gratis — Grafite Sudoku",
+    jsonLdDescription: "Genera e imprime gratis una hoja A4 con sudoku Clásico, X-Sudoku, Jigsaw o Sudoku 12 (cuadrícula 12×12), todos con la misma dificultad o en progresión creciente, con reglas y soluciones incluidas.",
+    bannerMsg: "¿Estás en Android? La app de verdad lo guarda todo para siempre, con trofeos y avatares por desbloquear.",
+    bannerCta: "Instalar",
+    bannerClose: "Cerrar",
+    h1: "Sudoku para imprimir gratis, papel y lápiz",
+    introP: "Varios esquemas en una sola hoja A4, listos para imprimir, con las reglas del juego y las soluciones en la página siguiente. Elige el tipo de esquema — Clásico, X-Sudoku (con las diagonales), Jigsaw (regiones irregulares), Sudoku 12 (cuadrícula 12×12) o una hoja Mixta con los tres primeros — y si los quieres todos con la misma dificultad o con una progresión que sube gradualmente. Todo se genera en tu navegador: ningún dato se envía a ningún sitio.",
+    fieldType: "Tipo de esquema",
+    fieldMode: "Modo",
+    fieldDifficulty: "Dificultad",
+    typeOptions: {
+      classic: "Clásico",
+      x: "X-Sudoku (diagonales)",
+      jigsaw: "Jigsaw (regiones irregulares)",
+      twelve: "Sudoku 12 (cuadrícula 12×12)",
+      mixed: "Mixto (3 Clásico + 3 X-Sudoku + 3 Jigsaw)",
+    },
+    modeOptions: { fixed: "Misma dificultad para todos", gradual: "Dificultad creciente" },
+    diffOptionsClassic: { easy: "Fácil", medium: "Medio", hard: "Difícil", expert: "Experto" },
+    diffOptionsTwelve: { media: "Media", expert: "Experto" },
+    generateBtn: "Generar {n} esquemas nuevos",
+    printBtn: "Imprimir / guardar PDF",
+    statusGenerating: {
+      jigsaw: "Generando — las regiones Jigsaw tardan un poco más…",
+      twelve: "Generando — los esquemas 12×12 tardan un poco más…",
+      mixed: "Generando — hoja mixta, tarda un poco más…",
+      default: "Generando — un momento para los esquemas Experto…",
+    },
+    statusDone: "Listo — {n} esquemas preparados ({ms} ms). ¡Buena impresión!",
+    sheetSubtitleTagline: "sin publicidad, sin datos recopilados",
+    qrText: "Escanea para descargar la app gratis en Google Play",
+    rulesTitle: "Cómo se juega",
+    rulesText: {
+      classic: "Rellena la cuadrícula 9×9 de modo que cada fila, columna y región 3×3 (delimitada por un borde más grueso) contenga todos los números del 1 al 9, sin repetirlos nunca. Los números ya escritos en negrita son las pistas iniciales: no se borran ni se mueven.",
+      x: 'Rellena la cuadrícula 9×9 de modo que cada fila, columna y región 3×3 (borde más grueso) contenga todos los números del 1 al 9, sin repetirlos. Además, las dos diagonales principales resaltadas también deben contener todos los números del 1 al 9 sin repetirse: es la variante "X-Sudoku". Los números en negrita son las pistas iniciales.',
+      jigsaw: 'Rellena la cuadrícula 9×9 de modo que cada fila, columna y región irregular (delimitada por un borde más grueso en lugar de las habituales regiones 3×3) contenga todos los números del 1 al 9, sin repetirlos nunca: es la variante "Jigsaw". Los números en negrita son las pistas iniciales.',
+      mixed: 'Hoja mixta: los primeros 3 esquemas son Clásicos (fila, columna y región 3×3), los 3 siguientes son X-Sudoku (más las dos diagonales resaltadas) y los últimos 3 son Jigsaw (regiones irregulares en lugar de las regiones fijas, borde más grueso) — el tipo de cada uno se indica debajo de su número. La regla básica es la misma para todos: un número del 1 al 9 una sola vez en cada fila, columna y región. Los números en negrita son las pistas iniciales.',
+      twelve: 'Rellena la cuadrícula 12×12 de modo que cada fila, columna y región rectangular 4×3 (delimitada por un borde más grueso) contenga todos los números del 1 al 12, sin repetirlos nunca: es la variante "Sudoku 12", la misma lógica del clásico pero en una cuadrícula más grande. Los números ya escritos en negrita son las pistas iniciales.',
+    },
+    footerNote: "Las soluciones están en la página siguiente.",
+    solutionsTitleSuffix: "— Soluciones",
+    solutionsSubtitle: "misma numeración que los esquemas de la página anterior",
+    footerBackToSite: "Volver al sitio",
+    footerPlayDemo: "Prueba el juego completo en el navegador",
+    footerPrivacy: "Política de privacidad",
+    footerWriteUs: "Escríbenos",
+    footerCoffee: "Invítanos a un café",
+    footerBottom: "Grafite Sudoku — un proyecto de Grafite Soft. Sin publicidad, sin rastreo.",
+    difficultyLabels: { easy: "Fácil", medium: "Medio", hard: "Difícil", expert: "Experto", media: "Media" },
+    typeLabels: { classic: "Clásico", x: "X-Sudoku", jigsaw: "Jigsaw", twelve: "Sudoku 12" },
+  },
+  pt: {
+    metaTitle: "Sudoku para imprimir grátis — Clássico, X-Sudoku, Jigsaw, Sudoku 12 | Grafite Sudoku",
+    metaDescription: "Gere e imprima grátis uma folha A4 com sudoku Clássico, X-Sudoku, Jigsaw ou Sudoku 12 (grade 12×12), com as regras do jogo e as soluções incluídas. Sem cadastro, sem dados coletados.",
+    ogDescription: "Esquemas em uma folha A4, com regras e soluções, gerados na hora no seu navegador. Agora também a variante 12×12. Sem anúncios, sem rastreamento.",
+    jsonLdName: "Sudoku para imprimir grátis — Grafite Sudoku",
+    jsonLdDescription: "Gere e imprima grátis uma folha A4 com sudoku Clássico, X-Sudoku, Jigsaw ou Sudoku 12 (grade 12×12), todos com a mesma dificuldade ou em progressão crescente, com regras e soluções incluídas.",
+    bannerMsg: "Está no Android? O app de verdade salva tudo para sempre, com troféus e avatares para desbloquear.",
+    bannerCta: "Instalar",
+    bannerClose: "Fechar",
+    h1: "Sudoku para imprimir grátis, papel e lápis",
+    introP: "Vários esquemas em uma única folha A4, prontos para imprimir, com as regras do jogo e as soluções na página seguinte. Escolha o tipo de esquema — Clássico, X-Sudoku (com as diagonais), Jigsaw (regiões irregulares), Sudoku 12 (grade 12×12) ou uma folha Mista com os três primeiros — e se quer todos com a mesma dificuldade ou uma progressão que aumenta gradualmente. Tudo é gerado no seu navegador: nenhum dado é enviado para lugar nenhum.",
+    fieldType: "Tipo de esquema",
+    fieldMode: "Modo",
+    fieldDifficulty: "Dificuldade",
+    typeOptions: {
+      classic: "Clássico",
+      x: "X-Sudoku (diagonais)",
+      jigsaw: "Jigsaw (regiões irregulares)",
+      twelve: "Sudoku 12 (grade 12×12)",
+      mixed: "Misto (3 Clássico + 3 X-Sudoku + 3 Jigsaw)",
+    },
+    modeOptions: { fixed: "Mesma dificuldade para todos", gradual: "Dificuldade crescente" },
+    diffOptionsClassic: { easy: "Fácil", medium: "Médio", hard: "Difícil", expert: "Especialista" },
+    diffOptionsTwelve: { media: "Média", expert: "Especialista" },
+    generateBtn: "Gerar {n} novos esquemas",
+    printBtn: "Imprimir / salvar PDF",
+    statusGenerating: {
+      jigsaw: "Gerando — as regiões Jigsaw demoram um pouco mais…",
+      twelve: "Gerando — os esquemas 12×12 demoram um pouco mais…",
+      mixed: "Gerando — folha mista, demora um pouco mais…",
+      default: "Gerando — um momento para os esquemas Especialista…",
+    },
+    statusDone: "Pronto — {n} esquemas prontos ({ms} ms). Boa impressão!",
+    sheetSubtitleTagline: "sem anúncios, sem dados coletados",
+    qrText: "Aponte a câmera para baixar o app grátis na Google Play",
+    rulesTitle: "Como jogar",
+    rulesText: {
+      classic: "Preencha a grade 9×9 de modo que cada linha, coluna e região 3×3 (marcada por uma borda mais grossa) contenha todos os números de 1 a 9, sem nunca repetir. Os números já escritos em negrito são as dicas iniciais: não se apagam nem se movem.",
+      x: 'Preencha a grade 9×9 de modo que cada linha, coluna e região 3×3 (borda mais grossa) contenha todos os números de 1 a 9, sem repetir. Além disso, as duas diagonais principais destacadas também devem conter todos os números de 1 a 9 sem repetição: é a variante "X-Sudoku". Os números em negrito são as dicas iniciais.',
+      jigsaw: 'Preencha a grade 9×9 de modo que cada linha, coluna e região irregular (marcada por uma borda mais grossa no lugar das costumeiras regiões 3×3) contenha todos os números de 1 a 9, sem nunca repetir: é a variante "Jigsaw". Os números em negrito são as dicas iniciais.',
+      mixed: 'Folha mista: os primeiros 3 esquemas são Clássicos (linha, coluna e região 3×3), os 3 seguintes são X-Sudoku (mais as duas diagonais destacadas) e os últimos 3 são Jigsaw (regiões irregulares no lugar das regiões fixas, borda mais grossa) — o tipo de cada um é indicado abaixo do seu número. A regra básica continua igual para todos: um número de 1 a 9 uma só vez em cada linha, coluna e região. Os números em negrito são as dicas iniciais.',
+      twelve: 'Preencha a grade 12×12 de modo que cada linha, coluna e região retangular 4×3 (marcada por uma borda mais grossa) contenha todos os números de 1 a 12, sem nunca repetir: é a variante "Sudoku 12", mesma lógica do clássico só que numa grade maior. Os números já escritos em negrito são as dicas iniciais.',
+    },
+    footerNote: "As soluções estão na página seguinte.",
+    solutionsTitleSuffix: "— Soluções",
+    solutionsSubtitle: "mesma numeração dos esquemas na página anterior",
+    footerBackToSite: "Voltar ao site",
+    footerPlayDemo: "Experimente o jogo completo no navegador",
+    footerPrivacy: "Política de privacidade",
+    footerWriteUs: "Escreva para nós",
+    footerCoffee: "Ofereça-nos um café",
+    footerBottom: "Grafite Sudoku — um projeto Grafite Soft. Sem anúncios, sem rastreamento.",
+    difficultyLabels: { easy: "Fácil", medium: "Médio", hard: "Difícil", expert: "Especialista", media: "Média" },
+    typeLabels: { classic: "Clássico", x: "X-Sudoku", jigsaw: "Jigsaw", twelve: "Sudoku 12" },
+  },
+  id: {
+    metaTitle: "Sudoku gratis untuk dicetak — Klasik, X-Sudoku, Jigsaw, Sudoku 12 | Grafite Sudoku",
+    metaDescription: "Buat dan cetak gratis lembar A4 berisi sudoku Klasik, X-Sudoku, Jigsaw, atau Sudoku 12 (kisi 12×12), lengkap dengan aturan permainan dan kunci jawaban. Tanpa pendaftaran, tanpa data yang dikumpulkan.",
+    ogDescription: "Soal dalam satu lembar A4, lengkap dengan aturan dan kunci jawaban, dibuat langsung di browser Anda. Kini ada juga varian 12×12. Tanpa iklan, tanpa pelacakan.",
+    jsonLdName: "Sudoku gratis untuk dicetak — Grafite Sudoku",
+    jsonLdDescription: "Buat dan cetak gratis lembar A4 berisi sudoku Klasik, X-Sudoku, Jigsaw, atau Sudoku 12 (kisi 12×12), semuanya tingkat kesulitan sama atau progresi meningkat, lengkap dengan aturan dan kunci jawaban.",
+    bannerMsg: "Sedang pakai Android? Aplikasi aslinya menyimpan semuanya selamanya, dengan trofi dan avatar yang bisa dibuka.",
+    bannerCta: "Pasang",
+    bannerClose: "Tutup",
+    h1: "Sudoku gratis untuk dicetak, kertas dan pensil",
+    introP: "Beberapa soal dalam satu lembar A4, siap dicetak, dengan aturan permainan dan kunci jawaban di halaman berikutnya. Pilih jenis soal — Klasik, X-Sudoku (dengan diagonal), Jigsaw (wilayah tidak beraturan), Sudoku 12 (kisi 12×12), atau lembar Campuran dengan tiga jenis pertama — dan apakah ingin semuanya tingkat kesulitan yang sama atau progresi yang meningkat bertahap. Semuanya dibuat langsung di browser Anda: tidak ada data yang dikirim ke mana pun.",
+    fieldType: "Jenis soal",
+    fieldMode: "Mode",
+    fieldDifficulty: "Tingkat kesulitan",
+    typeOptions: {
+      classic: "Klasik",
+      x: "X-Sudoku (diagonal)",
+      jigsaw: "Jigsaw (wilayah tidak beraturan)",
+      twelve: "Sudoku 12 (kisi 12×12)",
+      mixed: "Campuran (3 Klasik + 3 X-Sudoku + 3 Jigsaw)",
+    },
+    modeOptions: { fixed: "Tingkat kesulitan sama untuk semua", gradual: "Tingkat kesulitan meningkat" },
+    diffOptionsClassic: { easy: "Mudah", medium: "Sedang", hard: "Sulit", expert: "Ahli" },
+    diffOptionsTwelve: { media: "Sedang", expert: "Ahli" },
+    generateBtn: "Buat {n} soal baru",
+    printBtn: "Cetak / simpan PDF",
+    statusGenerating: {
+      jigsaw: "Membuat soal — wilayah Jigsaw butuh waktu sedikit lebih lama…",
+      twelve: "Membuat soal — soal 12×12 butuh waktu sedikit lebih lama…",
+      mixed: "Membuat soal — lembar campuran, butuh waktu sedikit lebih lama…",
+      default: "Membuat soal — sebentar untuk soal tingkat Ahli…",
+    },
+    statusDone: "Selesai — {n} soal siap ({ms} md). Selamat mencetak!",
+    sheetSubtitleTagline: "tanpa iklan, tanpa data yang dikumpulkan",
+    qrText: "Pindai untuk mengunduh aplikasi gratis di Google Play",
+    rulesTitle: "Cara bermain",
+    rulesText: {
+      classic: "Isi kisi 9×9 sehingga setiap baris, kolom, dan kotak 3×3 (ditandai dengan garis tebal) berisi semua angka 1 sampai 9, tanpa pernah berulang. Angka yang sudah tertulis tebal adalah petunjuk awal: tidak boleh dihapus atau dipindah.",
+      x: 'Isi kisi 9×9 sehingga setiap baris, kolom, dan kotak 3×3 (garis tebal) berisi semua angka 1 sampai 9, tanpa berulang. Selain itu, kedua diagonal utama yang ditandai juga harus berisi semua angka 1 sampai 9 tanpa berulang: inilah varian "X-Sudoku". Angka tebal adalah petunjuk awal.',
+      jigsaw: 'Isi kisi 9×9 sehingga setiap baris, kolom, dan wilayah tidak beraturan (ditandai dengan garis tebal, bukan kotak 3×3 seperti biasa) berisi semua angka 1 sampai 9, tanpa pernah berulang: inilah varian "Jigsaw". Angka tebal adalah petunjuk awal.',
+      mixed: 'Lembar campuran: 3 soal pertama adalah Klasik (baris, kolom, dan kotak 3×3), 3 berikutnya X-Sudoku (ditambah dua diagonal yang ditandai), dan 3 terakhir Jigsaw (wilayah tidak beraturan menggantikan kotak, garis tebal) — jenis masing-masing tertulis di bawah nomornya. Aturan dasarnya tetap sama untuk semua: satu angka 1 sampai 9 hanya sekali di setiap baris, kolom, dan wilayah. Angka tebal adalah petunjuk awal.',
+      twelve: 'Isi kisi 12×12 sehingga setiap baris, kolom, dan kotak persegi panjang 4×3 (ditandai dengan garis tebal) berisi semua angka 1 sampai 12, tanpa pernah berulang: inilah varian "Sudoku 12", logikanya sama seperti sudoku klasik tapi pada kisi yang lebih besar. Angka yang sudah tertulis tebal adalah petunjuk awal.',
+    },
+    footerNote: "Kunci jawabannya ada di halaman berikutnya.",
+    solutionsTitleSuffix: "— Kunci Jawaban",
+    solutionsSubtitle: "penomoran yang sama dengan soal di halaman sebelumnya",
+    footerBackToSite: "Kembali ke situs",
+    footerPlayDemo: "Coba permainan lengkap di browser",
+    footerPrivacy: "Kebijakan privasi",
+    footerWriteUs: "Hubungi kami",
+    footerCoffee: "Traktir kami kopi",
+    footerBottom: "Grafite Sudoku — proyek dari Grafite Soft. Tanpa iklan, tanpa pelacakan.",
+    difficultyLabels: { easy: "Mudah", medium: "Sedang", hard: "Sulit", expert: "Ahli", media: "Sedang" },
+    typeLabels: { classic: "Klasik", x: "X-Sudoku", jigsaw: "Jigsaw", twelve: "Sudoku 12" },
+  },
 };
 
 // Disegna i confini di regione del Jigsaw cella per cella: dove il vicino
@@ -934,17 +1316,18 @@ function applyJigsawBorders(table, regionOf) {
   }
 }
 
-function renderGridTable(cells, isSolution, type, regionOf) {
+function renderGridTable(cells, isSolution, type, regionOf, n = 9) {
   const table = document.createElement("table");
-  table.className = "grid" + (type === "jigsaw" ? " jigsaw" : "");
-  for (let r = 0; r < 9; r++) {
+  table.className =
+    "grid" + (type === "jigsaw" ? " jigsaw" : "") + (type === "twelve" ? " twelve" : "");
+  for (let r = 0; r < n; r++) {
     const tr = document.createElement("tr");
-    for (let c = 0; c < 9; c++) {
+    for (let c = 0; c < n; c++) {
       const td = document.createElement("td");
-      const v = cells[r * 9 + c];
+      const v = cells[r * n + c];
       td.textContent = v === 0 ? "" : String(v);
       if (!isSolution && v !== 0) td.style.fontWeight = "700";
-      if (type === "x" && (r === c || r + c === 8)) td.classList.add("diag");
+      if (type === "x" && (r === c || r + c === n - 1)) td.classList.add("diag");
       tr.appendChild(td);
     }
     table.appendChild(tr);
@@ -959,27 +1342,64 @@ function renderGridTable(cells, isSolution, type, regionOf) {
 // differenze grafiche (ombreggiatura diagonali, bordi irregolari) bastano
 // per chi conosce già le varianti, ma non per un volantino lasciato in
 // giro. `typeLabel` è passato solo quando serve (foglio Misto); altrimenti
-// resta implicito nel titolo/selettore, come già prima.
-const TYPE_LABELS = { classic: "Classico", x: "X-Sudoku", jigsaw: "Jigsaw" };
+// resta implicito nel titolo/selettore, come già prima. (30/09/2026: le
+// etichette Classico/X-Sudoku/Jigsaw/Sudoku12 vivono ora in I18N, non più
+// in una costante a sé — vedi TYPE_LABELS sostituita da I18N[lang].typeLabels.)
+function buildLabelHtml(index, difficulty, typeLabel, lang) {
+  const diffLabels = I18N[lang].difficultyLabels;
+  return (
+    (index + 1) +
+    ' <span class="diff">· ' +
+    diffLabels[difficulty] +
+    (typeLabel ? " · " + typeLabel : "") +
+    "</span>"
+  );
+}
 
-function renderCard(index, difficulty, cells, isSolution, type, regionOf, typeLabel) {
+function renderCard(index, difficulty, cells, isSolution, type, regionOf, typeLabel, n = 9) {
   const card = document.createElement("div");
   card.className = "puzzle-card";
   const label = document.createElement("div");
   label.className = "label";
-  label.innerHTML =
-    (index + 1) +
-    ' <span class="diff">· ' +
-    DIFFICULTY_LABELS[difficulty] +
-    (typeLabel ? " · " + typeLabel : "") +
-    "</span>";
+  label.innerHTML = buildLabelHtml(index, difficulty, typeLabel, currentLang);
   card.appendChild(label);
-  card.appendChild(renderGridTable(cells, isSolution, type, regionOf));
+  card.appendChild(renderGridTable(cells, isSolution, type, regionOf, n));
   return card;
 }
 
-function sequenceForMode() {
+// Etichette dell'ultima serie generata (solo difficoltà/tipo per schema),
+// tenute da parte per poter ri-etichettare le schede già a schermo quando
+// si cambia lingua, senza dover rigenerare gli schemi (i numeri non
+// dipendono dalla lingua, solo le etichette intorno).
+let currentLang = "it";
+let lastRenderMeta = null; // { items: [{difficulty, puzzleType}], isMixed }
+let lastRenderMs = null; // tempo dell'ultima generazione, per ritradurre lo status "Fatto — ..." a cambio lingua
+
+function relabelAllCards(lang) {
+  if (!lastRenderMeta) return;
+  const typeLabels = I18N[lang].typeLabels;
+  ["puzzles-grid", "solutions-grid"].forEach((gridId) => {
+    const grid = document.getElementById(gridId);
+    if (!grid) return;
+    const cards = grid.querySelectorAll(".puzzle-card");
+    cards.forEach((card, i) => {
+      const meta = lastRenderMeta.items[i];
+      if (!meta) return;
+      const label = card.querySelector(".label");
+      if (!label) return;
+      const typeLabel = lastRenderMeta.isMixed ? typeLabels[meta.puzzleType] : null;
+      label.innerHTML = buildLabelHtml(i, meta.difficulty, typeLabel, lang);
+    });
+  });
+}
+
+function sequenceForMode(type) {
   const mode = document.getElementById("mode-select").value;
+  if (type === "twelve") {
+    if (mode === "gradual") return TWELVE_GRADUAL_SEQUENCE.slice();
+    const fixed = document.getElementById("difficulty-select").value;
+    return new Array(TWELVE_PER_PAGE).fill(fixed);
+  }
   if (mode === "gradual") return GRADUAL_SEQUENCE.slice();
   const fixed = document.getElementById("difficulty-select").value;
   return new Array(9).fill(fixed);
@@ -987,20 +1407,12 @@ function sequenceForMode() {
 
 // Testo delle regole stampato in cima alla prima pagina, uno per tipo di
 // schema — cambia solo il vincolo aggiuntivo/sostitutivo del riquadro 3x3.
-const RULES_TEXT = {
-  classic:
-    "Riempi la griglia 9×9 in modo che ogni riga, ogni colonna e ogni riquadro 3×3 (delimitato da un bordo più spesso) contengano tutti i numeri da 1 a 9, senza mai ripeterli. I numeri già scritti in grassetto sono gli indizi di partenza: non si cancellano né si spostano.",
-  x:
-    'Riempi la griglia 9×9 in modo che ogni riga, ogni colonna e ogni riquadro 3×3 (bordo più spesso) contengano tutti i numeri da 1 a 9, senza ripeterli. In più, anche le due diagonali principali evidenziate devono contenere tutti i numeri da 1 a 9 senza ripetizioni: è la variante "X-Sudoku". I numeri in grassetto sono gli indizi di partenza.',
-  jigsaw:
-    'Riempi la griglia 9×9 in modo che ogni riga, ogni colonna e ogni regione irregolare (delimitata da un bordo più spesso, al posto dei soliti riquadri 3×3) contengano tutti i numeri da 1 a 9, senza mai ripeterli: è la variante "Jigsaw". I numeri in grassetto sono gli indizi di partenza.',
-  mixed:
-    'Foglio misto: i primi 3 schemi sono Classici (riga, colonna e riquadro 3×3), i successivi 3 sono X-Sudoku (in più le due diagonali evidenziate) e gli ultimi 3 sono Jigsaw (regioni irregolari al posto dei riquadri, bordo più spesso) — il tipo di ciascuno è indicato sotto il suo numero. La regola di base resta identica per tutti: un numero da 1 a 9 una sola volta in ogni riga, colonna e regione. I numeri in grassetto sono gli indizi di partenza.',
-};
-
-function updateRulesText(type) {
+// (30/09/2026: il testo vive ora in I18N[lang].rulesText, una versione per
+// lingua invece di una costante unica in italiano.)
+function updateRulesText(lang, type) {
   const el = document.getElementById("rules-text");
-  if (el) el.textContent = RULES_TEXT[type] || RULES_TEXT.classic;
+  const rules = I18N[lang].rulesText;
+  if (el) el.textContent = rules[type] || rules.classic;
 }
 
 function typeFromSelect() {
@@ -1010,7 +1422,175 @@ function typeFromSelect() {
 function generateForDifficulty(type, difficulty) {
   if (type === "x") return generateXPuzzle(difficulty);
   if (type === "jigsaw") return generateJigsawPuzzle(difficulty);
+  if (type === "twelve") return generateTwelvePuzzle(difficulty);
   return generatePuzzle(difficulty);
+}
+
+// Il Sudoku 12 ha solo due difficoltà (Media/Esperto, come nell'app): il
+// selettore "Difficoltà" cambia le sue opzioni a seconda del tipo scelto,
+// invece di mostrare le quattro classiche che per questa variante non
+// esistono. Il Sudoku 12 non entra nel foglio "Misto" (typeForIndexMixed
+// resta solo Classico/X-Sudoku/Jigsaw): ha un formato fisico diverso — 4
+// schemi grandi invece di 9 — che non si sposerebbe con gli altri tre
+// sulla stessa pagina.
+// (30/09/2026: tradotto per lingua + preserva la selezione corrente quando
+// possibile, invece di resettare sempre al valore di default — così un
+// cambio di SOLA lingua non perde la difficoltà già scelta, mentre un
+// cambio di TIPO che rende quel valore non valido ripiega sul default.)
+function updateDifficultyOptions(lang, type) {
+  const sel = document.getElementById("difficulty-select");
+  const prev = sel.value;
+  let html, fallback;
+  if (type === "twelve") {
+    const o = I18N[lang].diffOptionsTwelve;
+    html = '<option value="media">' + o.media + "</option>" + '<option value="expert">' + o.expert + "</option>";
+    fallback = "media";
+  } else {
+    const o = I18N[lang].diffOptionsClassic;
+    html =
+      '<option value="easy">' + o.easy + "</option>" +
+      '<option value="medium">' + o.medium + "</option>" +
+      '<option value="hard">' + o.hard + "</option>" +
+      '<option value="expert">' + o.expert + "</option>";
+    fallback = "medium";
+  }
+  sel.innerHTML = html;
+  const validValues = Array.from(sel.options).map((opt) => opt.value);
+  sel.value = validValues.includes(prev) ? prev : fallback;
+}
+
+function updateGenerateButtonLabel(lang, type) {
+  const btn = document.getElementById("generate-btn");
+  const count = type === "twelve" ? TWELVE_PER_PAGE : 9;
+  btn.textContent = I18N[lang].generateBtn.replace("{n}", count);
+}
+
+// Selettore "Tipo di schema": opzioni ricostruite per lingua, preservando
+// il valore selezionato (le opzioni sono le stesse in ogni lingua, cambia
+// solo l'etichetta visibile).
+function buildTypeOptions(lang) {
+  const sel = document.getElementById("type-select");
+  const prev = sel.value || "classic";
+  const o = I18N[lang].typeOptions;
+  sel.innerHTML =
+    '<option value="classic">' + o.classic + "</option>" +
+    '<option value="x">' + o.x + "</option>" +
+    '<option value="jigsaw">' + o.jigsaw + "</option>" +
+    '<option value="twelve">' + o.twelve + "</option>" +
+    '<option value="mixed">' + o.mixed + "</option>";
+  sel.value = prev;
+}
+
+// Selettore "Modalità": l'etichetta della progressione crescente include il
+// conteggio schemi del foglio corrente (9 per le altre varianti, 4 per il
+// Sudoku 12 — vedi TWELVE_PER_PAGE) così il numero mostrato resta sempre
+// corretto invece di restare fisso su "(1→9)" anche per il Sudoku 12.
+function buildModeOptions(lang, type) {
+  const sel = document.getElementById("mode-select");
+  const prev = sel.value || "fixed";
+  const o = I18N[lang].modeOptions;
+  const count = type === "twelve" ? TWELVE_PER_PAGE : 9;
+  sel.innerHTML =
+    '<option value="fixed">' + o.fixed + "</option>" +
+    '<option value="gradual">' + o.gradual + " (1→" + count + ")</option>";
+  sel.value = prev;
+}
+
+// Popola il selettore lingua con le 5 bandiere/nomi (invariati qualunque
+// sia la lingua attiva: sono i NOMI delle lingue stesse).
+function buildLangSelector(lang) {
+  const sel = document.getElementById("lang-select");
+  if (!sel) return;
+  sel.innerHTML = Object.keys(LANG_NAMES)
+    .map((code) => '<option value="' + code + '">' + LANG_NAMES[code] + "</option>")
+    .join("");
+  sel.value = lang;
+}
+
+// Lingua di default: quella scelta l'ultima volta (localStorage), altrimenti
+// quella del browser se tra le 5 supportate, altrimenti l'italiano (lingua
+// principale del sito).
+function detectDefaultLang() {
+  try {
+    const saved = localStorage.getItem("grafiteSudokuPrintLang");
+    if (saved && I18N[saved]) return saved;
+  } catch (e) {
+    // localStorage non disponibile (es. modalità privata rigorosa): si
+    // ripiega sulla lingua del browser, nessun problema per il resto.
+  }
+  const nav = ((navigator.language || navigator.userLanguage || "it") + "").slice(0, 2).toLowerCase();
+  return I18N[nav] ? nav : "it";
+}
+
+// Applica tutte le stringhe statiche marcate [data-i18n]/[data-i18n-aria],
+// più titolo/meta/JSON-LD della pagina.
+function applyStaticI18n(lang) {
+  document.documentElement.lang = lang;
+  const dict = I18N[lang];
+  document.querySelectorAll("[data-i18n]").forEach((el) => {
+    const key = el.getAttribute("data-i18n");
+    if (dict[key] !== undefined) el.textContent = dict[key];
+  });
+  document.querySelectorAll("[data-i18n-aria]").forEach((el) => {
+    const key = el.getAttribute("data-i18n-aria");
+    if (dict[key] !== undefined) el.setAttribute("aria-label", dict[key]);
+  });
+  document.title = dict.metaTitle;
+  const setMetaContent = (selector, value) => {
+    const el = document.querySelector(selector);
+    if (el) el.setAttribute("content", value);
+  };
+  setMetaContent('meta[name="description"]', dict.metaDescription);
+  setMetaContent('meta[property="og:title"]', dict.metaTitle);
+  setMetaContent('meta[property="og:description"]', dict.ogDescription);
+  const jsonLd = document.getElementById("jsonld-schema");
+  if (jsonLd) {
+    try {
+      const data = JSON.parse(jsonLd.textContent);
+      data.name = dict.jsonLdName;
+      data.description = dict.jsonLdDescription;
+      jsonLd.textContent = JSON.stringify(data, null, 2);
+    } catch (e) {
+      // JSON-LD malformato per qualche motivo: non blocca il resto della
+      // pagina, semplicemente non viene aggiornato.
+    }
+  }
+}
+
+// Punto d'ingresso unico per un cambio lingua: aggiorna testi statici,
+// selettori, pulsanti, testo delle regole ed eventuali schemi già a
+// schermo (senza rigenerarli — vedi relabelAllCards). Usata sia al primo
+// caricamento sia a ogni cambio dal selettore lingua.
+function applyLanguage(lang) {
+  if (!I18N[lang]) lang = "it";
+  currentLang = lang;
+  try {
+    localStorage.setItem("grafiteSudokuPrintLang", lang);
+  } catch (e) {
+    // niente localStorage: la scelta vale solo per questa visita, non è
+    // un problema bloccante.
+  }
+  const type = typeFromSelect();
+  applyStaticI18n(lang);
+  buildTypeOptions(lang);
+  buildModeOptions(lang, type);
+  updateDifficultyOptions(lang, type);
+  updateGenerateButtonLabel(lang, type);
+  updateRulesText(lang, type);
+  relabelAllCards(lang);
+  // Ritraduce anche l'ultimo messaggio di stato "Fatto — N schemi pronti
+  // (X ms)" se un foglio è già stato generato, invece di lasciarlo nella
+  // lingua precedente fino alla prossima generazione.
+  if (lastRenderMeta && lastRenderMs !== null) {
+    const statusEl = document.getElementById("status");
+    if (statusEl && statusEl.textContent) {
+      statusEl.textContent = I18N[lang].statusDone
+        .replace("{n}", lastRenderMeta.items.length)
+        .replace("{ms}", lastRenderMs);
+    }
+  }
+  const langSelect = document.getElementById("lang-select");
+  if (langSelect) langSelect.value = lang;
 }
 
 // Foglio "Misto" (16/09/2026, richiesta esplicita: "crea una variante
@@ -1029,36 +1609,53 @@ function generateAndRender() {
   const status = document.getElementById("status");
   const type = typeFromSelect();
   const isMixed = type === "mixed";
+  const lang = currentLang;
+  const statusGenerating = I18N[lang].statusGenerating;
   btn.disabled = true;
   status.textContent =
     type === "jigsaw"
-      ? "Generazione in corso — le regioni Jigsaw richiedono qualche istante in più…"
+      ? statusGenerating.jigsaw
+      : type === "twelve"
+      ? statusGenerating.twelve
       : isMixed
-      ? "Generazione in corso — foglio misto, richiede qualche istante in più…"
-      : "Generazione in corso — qualche istante per gli schemi Esperto…";
+      ? statusGenerating.mixed
+      : statusGenerating.default;
 
   // Un piccolo rinvio lascia al browser il tempo di disegnare il
   // messaggio di stato prima del lavoro sincrono (che può durare fino a
   // circa un secondo o due per 9 schemi, di solito molto meno).
   setTimeout(() => {
     const t0 = performance.now();
-    const sequence = sequenceForMode();
+    const sequence = sequenceForMode(type);
     const puzzlesGrid = document.getElementById("puzzles-grid");
     const solutionsGrid = document.getElementById("solutions-grid");
     puzzlesGrid.innerHTML = "";
     solutionsGrid.innerHTML = "";
+    puzzlesGrid.classList.toggle("twelve", type === "twelve");
+    solutionsGrid.classList.toggle("twelve", type === "twelve");
+
+    const typeLabels = I18N[lang].typeLabels;
+    lastRenderMeta = {
+      items: sequence.map((difficulty, i) => ({
+        difficulty,
+        puzzleType: isMixed ? typeForIndexMixed(i) : type,
+      })),
+      isMixed,
+    };
 
     sequence.forEach((difficulty, i) => {
       const puzzleType = isMixed ? typeForIndexMixed(i) : type;
+      const n = puzzleType === "twelve" ? 12 : 9;
       const { puzzle, solution, regionOf } = generateForDifficulty(puzzleType, difficulty);
-      const typeLabel = isMixed ? TYPE_LABELS[puzzleType] : null;
-      puzzlesGrid.appendChild(renderCard(i, difficulty, puzzle, false, puzzleType, regionOf, typeLabel));
-      solutionsGrid.appendChild(renderCard(i, difficulty, solution, true, puzzleType, regionOf, typeLabel));
+      const typeLabel = isMixed ? typeLabels[puzzleType] : null;
+      puzzlesGrid.appendChild(renderCard(i, difficulty, puzzle, false, puzzleType, regionOf, typeLabel, n));
+      solutionsGrid.appendChild(renderCard(i, difficulty, solution, true, puzzleType, regionOf, typeLabel, n));
     });
 
-    updateRulesText(type);
+    updateRulesText(lang, type);
     const ms = Math.round(performance.now() - t0);
-    status.textContent = "Fatto — 9 schemi pronti (" + ms + " ms). Buona stampa!";
+    lastRenderMs = ms;
+    status.textContent = I18N[lang].statusDone.replace("{n}", sequence.length).replace("{ms}", ms);
     btn.disabled = false;
   }, 30);
 }
@@ -1087,11 +1684,23 @@ document.getElementById("mode-select").addEventListener("change", (e) => {
 // già cosa aspettarsi), ma i 9 schemi si rigenerano solo premendo il
 // pulsante "Genera" — stessa logica già in uso per modalità e difficoltà.
 document.getElementById("type-select").addEventListener("change", (e) => {
-  updateRulesText(e.target.value);
+  const type = e.target.value;
+  updateRulesText(currentLang, type);
+  updateDifficultyOptions(currentLang, type);
+  updateGenerateButtonLabel(currentLang, type);
+  buildModeOptions(currentLang, type);
+});
+// Cambio lingua (30/09/2026): ritraduce subito tutta l'interfaccia e le
+// etichette degli schemi già generati, senza rigenerarli (vedi
+// applyLanguage/relabelAllCards) — "traduce immediatamente" come richiesto.
+document.getElementById("lang-select").addEventListener("change", (e) => {
+  applyLanguage(e.target.value);
 });
 document.getElementById("generate-btn").addEventListener("click", generateAndRender);
 document.getElementById("print-btn").addEventListener("click", () => window.print());
 
+buildLangSelector(detectDefaultLang());
+applyLanguage(detectDefaultLang());
 initQrCodes();
 generateAndRender();
 </script>
