@@ -63,8 +63,9 @@ quasi uguali sono viste come contenuto sottile.
   in `assets/fonts/` (OFL).
 - Sulla privacy dell'app solo le frasi ammesse: "l'app non chiede il permesso
   Internet e non contiene librerie Google" e "0 tracker secondo Exodus
-  Privacy" con "(report della versione 2.5.0)" finché non c'è un report più
-  recente.
+  Privacy" con il report Exodus della versione indicata (oggi 2.9.3, report
+  792199); quando ne esce uno nuovo si aggiornano link e versione in
+  `tools/site_content.py`.
 - Niente valutazioni, download o recensioni inventati.
 - I fatti sull'app (varianti, lingue, Academy) vanno presi dal sorgente
   dell'app (`sudoku_test`), non a memoria.

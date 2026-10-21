@@ -14,7 +14,7 @@ PATHS = {
     'en': {'home': 'en/', 'printable': 'en/printable-sudoku/', 'guides': 'en/sudoku-techniques/'},
 }
 
-EXODUS_URL = 'https://reports.exodus-privacy.eu.org/it/reports/784212/'
+EXODUS_URL = 'https://reports.exodus-privacy.eu.org/it/reports/792199/'
 PRIVACY_URL = 'https://marcopdev-ctrl-alt-canc.github.io/-grafite-sudoku-privacy/'
 
 UI = {
@@ -24,7 +24,7 @@ UI = {
         'breadcrumb': 'Percorso', 'menu': 'Menu del sito',
         'footer_tag': 'Grafite Sudoku, un progetto GrafiteSoft. Nessuna pubblicità, nessun account.',
         'privacy_line': ("L'app non chiede il permesso Internet e non contiene librerie Google: "
-                         '<a href="{exodus}">0 tracker secondo Exodus Privacy</a> (report della versione 2.5.0).'),
+                         '<a href="{exodus}">0 tracker secondo Exodus Privacy</a> (report della versione 2.9.3).'),
         'privacy_policy': 'Informativa privacy', 'contact': 'Scrivici', 'coffee': 'Offrici un caffè',
         'cta_title': 'Gioca anche sul telefono',
         'cta_text': ('Grafite Sudoku per Android: Classico, X-Sudoku, Jigsaw, 12×12 e la Città, '
@@ -42,7 +42,7 @@ UI = {
         'breadcrumb': 'Breadcrumb', 'menu': 'Site menu',
         'footer_tag': 'Grafite Sudoku, a GrafiteSoft project. No ads, no account.',
         'privacy_line': ("The app doesn't ask for the Internet permission and contains no Google libraries: "
-                         '<a href="{exodus}">0 trackers according to Exodus Privacy</a> (report for version 2.5.0).'),
+                         '<a href="{exodus}">0 trackers according to Exodus Privacy</a> (report for version 2.9.3).'),
         'privacy_policy': 'Privacy policy', 'contact': 'Contact', 'coffee': 'Buy us a coffee',
         'cta_title': 'Play on your phone too',
         'cta_text': ('Grafite Sudoku for Android: Classic, X-Sudoku, Jigsaw, 12×12 and City, '
