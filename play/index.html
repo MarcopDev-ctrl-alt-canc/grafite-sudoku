@@ -31,6 +31,7 @@
   <link rel="icon" type="image/png" href="favicon.png"/>
 
   <title>Grafite Sudoku — gioca nel browser</title>
+  <link rel="canonical" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/play/">
   <link rel="manifest" href="manifest.json">
 
   <!--
@@ -111,9 +112,44 @@
       text-decoration:none;
       box-shadow:0 6px 18px rgba(0,0,0,.35);
     }
+
+    /* Riquadro introduttivo sopra la demo: è il testo che Google legge (il
+       gioco Flutter è un canvas). Copre il gioco finché non si preme
+       "Inizia a giocare"; il gioco intanto si carica sotto. */
+    #playIntro{
+      position:fixed; inset:0; z-index:200000; overflow:auto;
+      background:#14181F; color:#f7f3e8;
+      font-family:"Noto Sans", system-ui, -apple-system, sans-serif; line-height:1.6;
+      display:flex; align-items:center; justify-content:center; padding:24px 16px;
+    }
+    #playIntro .box{ max-width:560px; }
+    #playIntro h1{ font-family:"Shippori Mincho", serif; font-size:clamp(1.7rem,6vw,2.4rem); line-height:1.2; margin:0 0 .5em; }
+    #playIntro p{ color:#dde0e6; margin:0 0 1em; }
+    #playIntro a{ color:#e3c583; }
+    #playIntro .links{ display:flex; flex-wrap:wrap; gap:4px 18px; margin-bottom:22px; }
+    #playIntro .links a{ min-height:44px; display:inline-flex; align-items:center; }
+    #playIntro button{
+      background:#C99A3E; color:#1a1408; border:0; border-radius:12px;
+      font:700 1.05rem "Noto Sans", sans-serif; padding:14px 28px; min-height:48px; cursor:pointer;
+    }
   </style>
+  <link rel="preload" href="../assets/fonts/noto-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../assets/fonts/fonts.css">
 </head>
 <body>
+  <main id="playIntro">
+    <div class="box">
+      <h1>Gioca a sudoku nel browser, gratis</h1>
+      <p>Questa è la demo di Grafite Sudoku: sudoku classico, X-Sudoku con le diagonali, Jigsaw con le regioni irregolari e il 12×12, a più livelli di difficoltà, con le note a matita, il Time Attack e le sfide tra amici. Non serve installare niente né creare un account, e non ci sono pubblicità. I progressi restano in questo browser. Sul telefono c'è l'app per Android, con la Sudoku Academy e la Città.</p>
+      <p class="links">
+        <a href="../sudoku-da-stampare/">Sudoku da stampare</a>
+        <a href="../en/printable-sudoku/" lang="en">Printable sudoku</a>
+        <a href="../tecniche-sudoku/">Tecniche del sudoku</a>
+        <a href="../">Home</a>
+      </p>
+      <button type="button" onclick="document.getElementById('playIntro').remove()">▶ Inizia a giocare</button>
+    </div>
+  </main>
   <div id="androidAppBanner">
     <span class="msg">Sei su Android? L'app vera ha salvataggio permanente, trofei e avatar.</span>
     <a class="cta play-store-link" data-utm-source="demo_web" data-utm-campaign="banner" href="https://play.google.com/store/apps/details?id=com.grafitesoft.grafitesudoku" target="_blank" rel="noopener">Installa</a>
