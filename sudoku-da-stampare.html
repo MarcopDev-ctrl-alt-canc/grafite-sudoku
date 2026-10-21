@@ -10,7 +10,7 @@
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Sudoku da stampare gratis — Classico, X-Sudoku, Jigsaw, Sudoku 12 | Grafite Sudoku">
-<meta property="og:description" content="Schemi su un foglio A4, con regole e soluzioni, generati al volo nel browser. Anche la variante 12×12. Nessuna pubblicità, nessun tracciamento.">
+<meta property="og:description" content="Schemi su un foglio A4, con regole e soluzioni, generati al volo nel browser. Anche la variante 12×12. Nessuna pubblicità, nessun account.">
 <meta property="og:url" content="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare.html">
 <meta property="og:image" content="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/assets/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -38,9 +38,9 @@
   }
 }
 </script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Noto+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="preload" href="assets/fonts/noto-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/shippori-mincho-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts/fonts.css">
 <style>
   :root {
     --ink: #14181F;
@@ -54,6 +54,8 @@
   }
 
   * { box-sizing: border-box; }
+  .hub-links { display: flex; flex-wrap: wrap; gap: 8px 22px; margin: 14px 0 0; font-weight: 600; }
+  .hub-links a { color: var(--gold-soft); min-height: 44px; display: inline-flex; align-items: center; }
 
   body {
     margin: 0;
@@ -437,6 +439,11 @@
       che sale gradualmente. Tutto si genera nel tuo browser: nessun dato
       viene inviato altrove.
     </p>
+    <p class="hub-links">
+      <a href="sudoku-da-stampare/" lang="it">Sudoku da stampare uno per pagina, con PDF e soluzione →</a>
+      <a href="en/printable-sudoku/" lang="en">Printable sudoku in English, one per page →</a>
+      <a href="tecniche-sudoku/" lang="it">Tecniche del sudoku →</a>
+    </p>
   </header>
 
   <section class="controls no-print">
@@ -521,11 +528,10 @@
       <a href="mailto:grafitesoft@gmail.com" data-i18n="footerWriteUs">Scrivici</a>
       <a href="https://paypal.me/grafitesoft" data-i18n="footerCoffee">Offrici un caffè</a>
     </div>
-    <span data-i18n="footerBottom">Grafite Sudoku — un progetto Grafite Soft. Nessuna pubblicità, nessun tracciamento.</span>
+    <span data-i18n="footerBottom">Grafite Sudoku — un progetto Grafite Soft. Nessuna pubblicità, nessun account.</span>
   </footer>
 
 <script src="assets/play-links.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
 /* ====================================================================
  * Motore sudoku (identico a sudoku-engine.js): generazione con
@@ -1016,7 +1022,7 @@ const I18N = {
   it: {
     metaTitle: "Sudoku da stampare gratis — Classico, X-Sudoku, Jigsaw, Sudoku 12 | Grafite Sudoku",
     metaDescription: "Genera e stampa gratis un foglio A4 con sudoku Classico, X-Sudoku, Jigsaw o Sudoku 12 (griglia 12×12), con le regole del gioco e le soluzioni incluse. Nessuna registrazione, nessun dato raccolto.",
-    ogDescription: "Schemi su un foglio A4, con regole e soluzioni, generati al volo nel browser. Anche la variante 12×12. Nessuna pubblicità, nessun tracciamento.",
+    ogDescription: "Schemi su un foglio A4, con regole e soluzioni, generati al volo nel browser. Anche la variante 12×12. Nessuna pubblicità, nessun account.",
     jsonLdName: "Sudoku da stampare gratis — Grafite Sudoku",
     jsonLdDescription: "Genera e stampa gratis un foglio A4 con sudoku Classico, X-Sudoku, Jigsaw o Sudoku 12 (griglia 12×12), tutti della stessa difficoltà o in progressione crescente, con regole e soluzioni incluse.",
     bannerMsg: "Sei su Android? L'app vera salva tutto per sempre, con trofei e avatar da sbloccare.",
@@ -1064,14 +1070,14 @@ const I18N = {
     footerPrivacy: "Informativa privacy",
     footerWriteUs: "Scrivici",
     footerCoffee: "Offrici un caffè",
-    footerBottom: "Grafite Sudoku — un progetto Grafite Soft. Nessuna pubblicità, nessun tracciamento.",
+    footerBottom: "Grafite Sudoku — un progetto Grafite Soft. Nessuna pubblicità, nessun account.",
     difficultyLabels: { easy: "Facile", medium: "Medio", hard: "Difficile", expert: "Esperto", media: "Media" },
     typeLabels: { classic: "Classico", x: "X-Sudoku", jigsaw: "Jigsaw", twelve: "Sudoku 12" },
   },
   en: {
     metaTitle: "Free printable sudoku — Classic, X-Sudoku, Jigsaw, Sudoku 12 | Grafite Sudoku",
     metaDescription: "Generate and print a free A4 sheet with Classic, X-Sudoku, Jigsaw or Sudoku 12 (12×12 grid) puzzles, with the game rules and solutions included. No sign-up, no data collected.",
-    ogDescription: "Puzzles on an A4 sheet, with rules and solutions, generated on the fly in your browser. Now with the 12×12 variant too. No ads, no tracking.",
+    ogDescription: "Puzzles on an A4 sheet, with rules and solutions, generated on the fly in your browser. Now with the 12×12 variant too. No ads, no account.",
     jsonLdName: "Free printable sudoku — Grafite Sudoku",
     jsonLdDescription: "Generate and print a free A4 sheet with Classic, X-Sudoku, Jigsaw or Sudoku 12 (12×12 grid) puzzles, all the same difficulty or in an increasing progression, with rules and solutions included.",
     bannerMsg: "On Android? The real app saves everything forever, with trophies and avatars to unlock.",
@@ -1119,14 +1125,14 @@ const I18N = {
     footerPrivacy: "Privacy policy",
     footerWriteUs: "Write to us",
     footerCoffee: "Buy us a coffee",
-    footerBottom: "Grafite Sudoku — a Grafite Soft project. No ads, no tracking.",
+    footerBottom: "Grafite Sudoku — a Grafite Soft project. No ads, no account.",
     difficultyLabels: { easy: "Easy", medium: "Medium", hard: "Hard", expert: "Expert", media: "Medium" },
     typeLabels: { classic: "Classic", x: "X-Sudoku", jigsaw: "Jigsaw", twelve: "Sudoku 12" },
   },
   es: {
     metaTitle: "Sudoku para imprimir gratis — Clásico, X-Sudoku, Jigsaw, Sudoku 12 | Grafite Sudoku",
     metaDescription: "Genera e imprime gratis una hoja A4 con sudoku Clásico, X-Sudoku, Jigsaw o Sudoku 12 (cuadrícula 12×12), con las reglas del juego y las soluciones incluidas. Sin registro, sin datos recopilados.",
-    ogDescription: "Esquemas en una hoja A4, con reglas y soluciones, generados al instante en tu navegador. También la variante 12×12. Sin publicidad, sin rastreo.",
+    ogDescription: "Esquemas en una hoja A4, con reglas y soluciones, generados al instante en tu navegador. También la variante 12×12. Sin publicidad, sin cuenta.",
     jsonLdName: "Sudoku para imprimir gratis — Grafite Sudoku",
     jsonLdDescription: "Genera e imprime gratis una hoja A4 con sudoku Clásico, X-Sudoku, Jigsaw o Sudoku 12 (cuadrícula 12×12), todos con la misma dificultad o en progresión creciente, con reglas y soluciones incluidas.",
     bannerMsg: "¿Estás en Android? La app de verdad lo guarda todo para siempre, con trofeos y avatares por desbloquear.",
@@ -1174,14 +1180,14 @@ const I18N = {
     footerPrivacy: "Política de privacidad",
     footerWriteUs: "Escríbenos",
     footerCoffee: "Invítanos a un café",
-    footerBottom: "Grafite Sudoku — un proyecto de Grafite Soft. Sin publicidad, sin rastreo.",
+    footerBottom: "Grafite Sudoku — un proyecto de Grafite Soft. Sin publicidad, sin cuenta.",
     difficultyLabels: { easy: "Fácil", medium: "Medio", hard: "Difícil", expert: "Experto", media: "Media" },
     typeLabels: { classic: "Clásico", x: "X-Sudoku", jigsaw: "Jigsaw", twelve: "Sudoku 12" },
   },
   pt: {
     metaTitle: "Sudoku para imprimir grátis — Clássico, X-Sudoku, Jigsaw, Sudoku 12 | Grafite Sudoku",
     metaDescription: "Gere e imprima grátis uma folha A4 com sudoku Clássico, X-Sudoku, Jigsaw ou Sudoku 12 (grade 12×12), com as regras do jogo e as soluções incluídas. Sem cadastro, sem dados coletados.",
-    ogDescription: "Esquemas em uma folha A4, com regras e soluções, gerados na hora no seu navegador. Agora também a variante 12×12. Sem anúncios, sem rastreamento.",
+    ogDescription: "Esquemas em uma folha A4, com regras e soluções, gerados na hora no seu navegador. Agora também a variante 12×12. Sem anúncios, sem conta.",
     jsonLdName: "Sudoku para imprimir grátis — Grafite Sudoku",
     jsonLdDescription: "Gere e imprima grátis uma folha A4 com sudoku Clássico, X-Sudoku, Jigsaw ou Sudoku 12 (grade 12×12), todos com a mesma dificuldade ou em progressão crescente, com regras e soluções incluídas.",
     bannerMsg: "Está no Android? O app de verdade salva tudo para sempre, com troféus e avatares para desbloquear.",
@@ -1229,14 +1235,14 @@ const I18N = {
     footerPrivacy: "Política de privacidade",
     footerWriteUs: "Escreva para nós",
     footerCoffee: "Ofereça-nos um café",
-    footerBottom: "Grafite Sudoku — um projeto Grafite Soft. Sem anúncios, sem rastreamento.",
+    footerBottom: "Grafite Sudoku — um projeto Grafite Soft. Sem anúncios, sem conta.",
     difficultyLabels: { easy: "Fácil", medium: "Médio", hard: "Difícil", expert: "Especialista", media: "Média" },
     typeLabels: { classic: "Clássico", x: "X-Sudoku", jigsaw: "Jigsaw", twelve: "Sudoku 12" },
   },
   id: {
     metaTitle: "Sudoku gratis untuk dicetak — Klasik, X-Sudoku, Jigsaw, Sudoku 12 | Grafite Sudoku",
     metaDescription: "Buat dan cetak gratis lembar A4 berisi sudoku Klasik, X-Sudoku, Jigsaw, atau Sudoku 12 (kisi 12×12), lengkap dengan aturan permainan dan kunci jawaban. Tanpa pendaftaran, tanpa data yang dikumpulkan.",
-    ogDescription: "Soal dalam satu lembar A4, lengkap dengan aturan dan kunci jawaban, dibuat langsung di browser Anda. Kini ada juga varian 12×12. Tanpa iklan, tanpa pelacakan.",
+    ogDescription: "Soal dalam satu lembar A4, lengkap dengan aturan dan kunci jawaban, dibuat langsung di browser Anda. Kini ada juga varian 12×12. Tanpa iklan, tanpa akun.",
     jsonLdName: "Sudoku gratis untuk dicetak — Grafite Sudoku",
     jsonLdDescription: "Buat dan cetak gratis lembar A4 berisi sudoku Klasik, X-Sudoku, Jigsaw, atau Sudoku 12 (kisi 12×12), semuanya tingkat kesulitan sama atau progresi meningkat, lengkap dengan aturan dan kunci jawaban.",
     bannerMsg: "Sedang pakai Android? Aplikasi aslinya menyimpan semuanya selamanya, dengan trofi dan avatar yang bisa dibuka.",
@@ -1284,7 +1290,7 @@ const I18N = {
     footerPrivacy: "Kebijakan privasi",
     footerWriteUs: "Hubungi kami",
     footerCoffee: "Traktir kami kopi",
-    footerBottom: "Grafite Sudoku — proyek dari Grafite Soft. Tanpa iklan, tanpa pelacakan.",
+    footerBottom: "Grafite Sudoku — proyek dari Grafite Soft. Tanpa iklan, tanpa akun.",
     difficultyLabels: { easy: "Mudah", medium: "Sedang", hard: "Sulit", expert: "Ahli", media: "Sedang" },
     typeLabels: { classic: "Klasik", x: "X-Sudoku", jigsaw: "Jigsaw", twelve: "Sudoku 12" },
   },
@@ -1660,17 +1666,16 @@ function generateAndRender() {
   }, 30);
 }
 
+// QR statico (assets/qr-play-foglio-stampato.svg, campagna "foglio-stampato"):
+// niente librerie da CDN.
 function initQrCodes() {
-  if (typeof QRCode === "undefined") return; // CDN non raggiungibile: niente QR, il resto della pagina resta utilizzabile
   ["qrcode-puzzles", "qrcode-solutions"].forEach((id) => {
-    new QRCode(document.getElementById(id), {
-      text: buildPlayStoreUrl('foglio_stampato', 'qr'),
-      width: 200,
-      height: 200,
-      colorDark: "#14181F",
-      colorLight: "#ffffff",
-      correctLevel: QRCode.CorrectLevel.M,
-    });
+    const img = document.createElement("img");
+    img.src = "assets/qr-play-foglio-stampato.svg";
+    img.alt = "QR code Google Play";
+    img.width = 200;
+    img.height = 200;
+    document.getElementById(id).appendChild(img);
   });
 }
 
