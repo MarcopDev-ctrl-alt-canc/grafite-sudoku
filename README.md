@@ -1,60 +1,77 @@
-# Grafite Sudoku — sito e demo web
+# Grafite Sudoku — sito, sudoku da stampare e demo web
 
-Repository pubblico con la pagina di presentazione di **Grafite Sudoku** e una
-demo giocabile nel browser, pensati per portare pubblico verso la scheda
-Google Play dell'app.
+Sito statico su GitHub Pages: https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/
 
-Il codice sorgente Dart del gioco **non** vive qui: questo repo contiene solo
-la pagina statica e l'output già compilato (`flutter build web`) della demo.
-Il sorgente della demo resta sul PC, in una cartella separata
-(`grafite_sudoku_web_demo`, a fianco del progetto principale `sudoku_test`).
+Porta pubblico alla scheda Google Play dell'app con pagine che rispondono a
+ricerche vere: sudoku da stampare (uno per pagina, con PDF), guide alle
+tecniche, demo giocabile. Italiano e inglese, con hreflang.
 
 ## Struttura
 
 ```
-index.html      → pagina di presentazione (root, così GitHub Pages la serve
-                   direttamente senza configurazioni particolari)
-assets/         → icona, immagine di anteprima social, illustrazioni avatar
-play/           → qui va copiato l'output di `flutter build web` della demo
-                   (vuoto finché non lo generi la prima volta, vedi sotto)
-PUBBLICAZIONE.md → guida passo-passo per la messa online e per ogni
-                   aggiornamento successivo
+index.html                    home italiana            (generata)
+en/                           home e pagine inglesi    (generate)
+sudoku-da-stampare/           hub, categorie e schemi  (generati)
+en/printable-sudoku/          idem in inglese          (generati)
+tecniche-sudoku/              guide alle tecniche      (generate)
+en/sudoku-techniques/         idem in inglese          (generate)
+sudoku-da-stampare.html       generatore di fogli A4 nel browser (scritto a mano)
+play/                         demo Flutter compilata (non si modifica a mano,
+                              tranne index.html: vedi PUBBLICAZIONE.md)
+pdf/                          PDF degli schemi (pagina 1 schema, pagina 2 soluzione)
+assets/                       immagini, font self-hosted, QR, play-links.js
+assets/og/                    anteprime social 1200×630 di ogni schema
+data/puzzles.json             gli schemi delle pagine
+data/serie3.json              i 5 schemi della serie 3 di Pinterest
+tools/                        motore, generatore di schemi, build e controlli
+sitemap.xml                   generata dal build
+SEO_AUDIT.md                  audit prima e dopo il rinnovo
 ```
 
-## Cosa contiene la demo (e cosa no)
+Le pagine generate non si modificano a mano: si cambiano i testi in
+`tools/site_content.py` (o la logica in `tools/build_site.py`) e si rilancia il
+build.
 
-Inclusi: griglia sudoku giocabile, tutte le difficoltà, matite/note, i 5 temi
-carta, livelli/XP e titoli, Time Attack, sfide tra amici (codice
-condivisibile).
+## Comandi
 
-Esclusi apposta, per tenere la demo leggera e per lasciare un motivo in più
-per scaricare l'app vera: i 30 trofei, gli avatar da sbloccare e
-l'Accademia (le lezioni guidate di tecniche di risoluzione) — restano
-un'esclusiva dell'app Android (la sezione "Nell'app completa" della pagina
-li mostra come anticipazione). In tutti e tre i casi i punti d'accesso sono
-stati nascosti nel codice, non cancellata la logica sottostante — solo il
-modo per raggiungerla.
+```
+python tools/make_puzzles.py         # rigenera data/puzzles.json (stessi seed: stesso risultato)
+python tools/build_site.py           # pagine, PDF e anteprime mancanti, sitemap
+python tools/build_site.py --pages   # solo HTML e sitemap
+python tools/build_site.py --force   # rigenera anche PDF e anteprime
+python tools/check_site.py           # griglie, link interni, JSON-LD, hreflang
+```
 
-La demo salva i progressi solo nel browser di chi gioca (stesso meccanismo di
-`shared_preferences` dell'app, ma è uno spazio di salvataggio separato: non si
-sincronizza con l'app Android).
+Serve Python 3 con la sola libreria standard. Per PDF e anteprime serve Google
+Chrome (o Chromium: variabile `CHROME`).
+
+## Aggiungere schemi
+
+1. In `tools/make_puzzles.py`, aggiungi slot in fondo alla categoria in `PLAN`
+   (i vecchi schemi non cambiano).
+2. `python tools/make_puzzles.py`, poi `python tools/build_site.py` e
+   `python tools/check_site.py`.
+3. Commit, poi di nuovo `python tools/build_site.py --pages` per avere nella
+   sitemap le date dei file appena committati, e commit della sitemap.
+
+Le pagine vanno aggiunte solo se hanno valore proprio: centinaia di pagine
+quasi uguali sono viste come contenuto sottile.
+
+## Regole del sito
+
+- Nessuno script di analytics, nessun CDN di terze parti, nessun cookie. Font
+  in `assets/fonts/` (OFL).
+- Sulla privacy dell'app solo le frasi ammesse: "l'app non chiede il permesso
+  Internet e non contiene librerie Google" e "0 tracker secondo Exodus
+  Privacy" con "(report della versione 2.5.0)" finché non c'è un report più
+  recente.
+- Niente valutazioni, download o recensioni inventati.
+- I fatti sull'app (varianti, lingue, Academy) vanno presi dal sorgente
+  dell'app (`sudoku_test`), non a memoria.
 
 ## Link utili
 
-- Informativa privacy (repo separato, non toccarlo): https://marcopdev-ctrl-alt-canc.github.io/-grafite-sudoku-privacy/
-- Scheda Google Play: https://play.google.com/store/apps/details?id=com.grafitesoft.grafitesudoku — definita in un solo punto, `assets/play-links.js` (`PLAY_STORE_URL`), da cui la leggono sia i pulsanti "Scarica su Google Play" sia il banner per chi arriva da Android; vedi `PUBBLICAZIONE.md` punto 5 per come sostituirla con un link tracciato da Play Console.
+- Scheda Google Play: link e campagne in `assets/play-links.js`; le pagine
+  generate hanno già l'href con `referrer=utm_source=site&utm_medium=web&utm_campaign=<pagina>`.
+- Informativa privacy (repo separato): https://marcopdev-ctrl-alt-canc.github.io/-grafite-sudoku-privacy/
 - Contatti: grafitesoft@gmail.com
-
-## Banner "vieni da Android?"
-
-Chi apre il sito (o la demo giocabile) da un browser Android vede un
-banner richiudibile in cima con un pulsante verso la scheda Play Store —
-chi è già sul telefono è a un tap dall'installare l'app vera, niente
-motivo di trattenerlo sulla demo. Non è un redirect forzato: chi lo chiude
-non lo rivede più su quel browser. Dettagli in `PUBBLICAZIONE.md`, punto 7.
-
-## Aggiornare la demo in futuro
-
-Vedi `PUBBLICAZIONE.md` — in breve: si modifica il sorgente in
-`grafite_sudoku_web_demo`, si rilancia `flutter build web`, si ricopia
-l'output in `play/`, si fa commit e push.

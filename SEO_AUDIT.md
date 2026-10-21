@@ -62,3 +62,48 @@ Il punteggio SEO 100 di Lighthouse misura solo l'igiene tecnica della pagina: no
 ## Parere
 
 Il sito è pulito ma quasi invisibile: tecnicamente a posto, non ha pagine che corrispondano a quello che la gente cerca, e tutto il contenuto utile (schemi, inglese) vive in JavaScript. Il guadagno vero sta nei punti 1-4: pagine statiche in inglese e italiano, con testo proprio e non ripetuto. Le prestazioni (5-6) sono lavoro rapido e sicuro, da fare insieme.
+
+---
+
+# Dopo il rinnovo (branch `seo-refresh`)
+
+## Cosa è cambiato
+
+| Intervento | Stato |
+|---|---|
+| 1. Pagine di schemi statiche | 24 schemi × 2 lingue = 48 pagine, griglia in `<table>` con `<caption>` e `scope`, PDF A4 (schema + soluzione), soluzione in `<details>`, suggerimento sul primo passo calcolato dallo schema, consigli per categoria, schema precedente/successivo, `BreadcrumbList`, `og:image` 1200×630 dedicata. I 5 URL della serie 3 di Pinterest sono online con gli slug esatti. |
+| 2. Inglese con URL proprie | `/en/` e tutte le pagine nuove in coppia it/en con hreflang reciproco e `x-default` verso l'inglese. |
+| 3. Hub e categorie | Hub `/sudoku-da-stampare/` e `/en/printable-sudoku/` (testo originale, FAQ visibile + `FAQPage`) e 6 pagine di categoria per lingua (facili, medi, difficili, caratteri grandi, X, jigsaw): una query principale per pagina, così gli schemi singoli non si contendono la stessa ricerca. |
+| 4. Guide alle tecniche | 6 guide per lingua con diagramma SVG (singolo nascosto, candidato bloccato, coppia nascosta, X-Wing, XY-Wing, grattacieli/Città), più l'indice delle guide. Ognuna rimanda alla lezione della Sudoku Academy e al Play Store. |
+| 5. Font self-hosted | Noto Sans (variabile) e Shippori Mincho 500/700, solo latino e latino esteso, `preload` e `font-display: swap`. Nessuna richiesta a Google Fonts. |
+| 6. Immagini | Avatar e screenshot in WebP ridimensionati (circa 1,3 MB → 210 KB), con `width`/`height` e `loading="lazy"` sotto la piega. |
+| 7. Sitemap | 80 URL con `lastmod` da `git log` e `xhtml:link` hreflang, compresi generatore e `/play/`. |
+| 8. Title e description | Con le query della pagina, entro 60/160 caratteri circa. Testi della home allineati all'app 2.9.3 (5 modi di giocare, 7 lingue, decine di lezioni e trofei, frasi sulla privacy ammesse). |
+| 9. Dati strutturati | Home: `MobileApplication` completa, `WebSite`, `Organization`. Altre pagine: `BreadcrumbList`; hub: `FAQPage`. Validati da `tools/check_site.py`. |
+| 10. `/play/` e QR | Riquadro di testo con h1 sopra la demo, canonical. QR come SVG statici: niente più qrcodejs da CDN. |
+| Link al Play Store | `referrer` con la campagna della pagina (`utm_campaign=<slug-pagina>`), anche senza JavaScript. |
+
+## Lighthouse (mobile, dopo)
+
+| Pagina | Performance | Accessibilità | Best practices | SEO | LCP | CLS |
+|---|---|---|---|---|---|---|
+| Home it | 99 | 100 | 100 | 100 | 2,0 s | 0,003 |
+| Home en | 99 | 100 | 100 | 100 | 2,0 s | 0,014 |
+| Hub en | 99 | 100 | 100 | 100 | 1,9 s | 0 |
+| Schema (jigsaw-sudoku-easy) | 100 | 100 | 100 | 100 | 1,6 s | 0 |
+| Guida (x-wing) | 100 | 100 | 100 | 100 | 1,6 s | 0 |
+| Generatore | 99 | 92 | 100 | 100 | 1,9 s | 0 |
+
+Il generatore (`sudoku-da-stampare.html`) è rimasto com'era a parte font, QR e link agli hub: restano i difetti di accessibilità che aveva (contrasto di qualche testo, bersagli piccoli, tabelle senza intestazioni).
+
+## Controlli
+
+- `python tools/check_site.py`: 78 pagine, nessun link interno rotto, JSON-LD valido, hreflang reciproci, griglie di tutte le 48 pagine schema uguali a `data/puzzles.json`.
+- Testo dei 48 PDF confrontato con `data/puzzles.json` (pagina 1 schema, pagina 2 soluzione): nessuna differenza.
+- Nessuna risorsa esterna nelle pagine del sito, esclusa la demo compilata in `play/`.
+
+## Cosa resta
+
+- Fase 3 (schema del giorno con GitHub Action): non fatta, da valutare dopo che le fasi 1-2 sono online e indicizzate.
+- Volumi delle query da verificare in Search Console dopo l'indicizzazione.
+- Accessibilità del generatore, se si decide di rimetterci mano.

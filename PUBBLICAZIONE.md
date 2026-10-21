@@ -1,134 +1,78 @@
-# Pubblicazione su GitHub Pages — guida passo passo
+# Pubblicazione su GitHub Pages
 
-Comandi pensati per PowerShell su Windows. Presuppongo che tu riceva due
-cartelle da Claude:
+Comandi per PowerShell su Windows, dalla cartella del repo.
 
-- `grafite-sudoku` (questa cartella: sito + spazio per la demo compilata) →
-  da mettere sul repository GitHub pubblico
-- `grafite_sudoku_web_demo` (sorgente Flutter della sola demo web) → resta
-  **solo sul tuo PC**, non va su GitHub
-
-## 1. Creare il repository su GitHub
-
-Sul sito github.com, con il tuo account `marcopdev-ctrl-alt-canc`:
-
-1. New repository → nome **`grafite-sudoku`** → Public → NON aggiungere
-   README/.gitignore/licenza (li portiamo già noi) → Create repository.
-
-(In alternativa, se hai GitHub CLI installato: `gh repo create grafite-sudoku --public --source=. --remote=origin`.)
-
-## 2. Primo push del sito
-
-Apri PowerShell nella cartella `grafite-sudoku` che hai ricevuto e lancia:
+## Pubblicare un aggiornamento del sito
 
 ```powershell
-cd percorso\della\cartella\grafite-sudoku
-git init
+python tools/build_site.py
+python tools/check_site.py          # deve dire "Nessun problema."
 git add -A
-git commit -m "Sito e demo web di Grafite Sudoku"
-git branch -M main
-git remote add origin https://github.com/marcopdev-ctrl-alt-canc/grafite-sudoku.git
-git push -u origin main
+git reset play/flutter_bootstrap.js # solo se è modificato e non va pubblicato
+git commit -m "Descrizione della modifica"
+python tools/build_site.py --pages  # sitemap con le date del commit appena fatto
+git add sitemap.xml
+git commit -m "Sitemap aggiornata"
+git push
 ```
 
-A questo punto su GitHub c'è già la pagina di presentazione, ma la cartella
-`play/` è vuota: il pulsante "Gioca ora nel browser" non funziona ancora.
-Si sistema al punto 3.
+GitHub Pages pubblica `main` dalla radice (Settings → Pages → Deploy from a
+branch → main, /(root)). Dopo un paio di minuti il sito è online.
 
-## 3. Compilare la demo e pubblicarla in `play/`
+## Search Console
 
-Nella cartella `grafite_sudoku_web_demo` (il sorgente Flutter della demo):
+1. La proprietà è verificata con il meta tag `google-site-verification` nella
+   home italiana (lo scrive `tools/build_site.py`: non toglierlo).
+2. Dopo ogni pubblicazione con pagine nuove: Search Console → Sitemap →
+   invia `https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sitemap.xml`.
+   `robots.txt` sta in un sottopercorso e i crawler non lo leggono: la sitemap
+   va inviata a mano.
+3. Per controllare la sitemap pubblicata:
+
+   ```powershell
+   curl.exe -s https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sitemap.xml | Select-String "<loc>" | Measure-Object
+   ```
+
+## Rigenerare gli schemi
+
+Vedi README.md, "Aggiungere schemi". I 5 schemi e i PDF della serie 3 di
+Pinterest (`data/serie3.json`, `pdf/grafite-sudoku-<slug>.pdf` con gli slug
+inglesi della serie) non si rigenerano mai: le pin puntano a quelle URL.
+
+## Cambiare dominio
+
+Tutte le URL delle pagine generate partono da `SITE_URL` in
+`tools/build_site.py` (o dalla variabile d'ambiente `SITE_URL`). Con un dominio
+proprio: si cambia quella riga, si rilancia il build, si aggiungono a mano gli
+indirizzi scritti nei file non generati (`sudoku-da-stampare.html`,
+`play/index.html`, `robots.txt`) e si configura il dominio in Settings →
+Pages. GitHub reindirizza dal vecchio indirizzo.
+
+## Demo in `play/`
+
+Si aggiorna ricompilando il sorgente della demo e copiando `build/web` in
+`play/`:
 
 ```powershell
-cd percorso\della\cartella\grafite_sudoku_web_demo
-flutter pub get
 flutter build web --release --base-href "/grafite-sudoku/play/"
+Remove-Item -Recurse -Force <repo>\play\*
+Copy-Item -Recurse build\web\* <repo>\play\
 ```
 
-Poi copia il contenuto generato dentro il repository del sito (sovrascrivendo
-il contenuto attuale di `play/`):
+Attenzione: `play/index.html` contiene il riquadro di testo introduttivo
+(`#playIntro`, quello che Google legge) e la canonical. Prima di ricompilare,
+riporta le stesse righe nel `web/index.html` del sorgente della demo,
+altrimenti la build le cancella.
 
-```powershell
-Remove-Item -Recurse -Force percorso\della\cartella\grafite-sudoku\play\*
-Copy-Item -Recurse build\web\* percorso\della\cartella\grafite-sudoku\play\
-```
+## Link al Play Store
 
-E pubblica:
+Le pagine generate hanno già l'href completo con la campagna della pagina:
+`...&referrer=utm_source%3Dsite%26utm_medium%3Dweb%26utm_campaign%3D<pagina>`.
+`assets/play-links.js` fa lo stesso per le pagine scritte a mano
+(`data-utm-campaign`) e mostra il banner "sei su Android?". Gli installi per
+campagna si vedono in Play Console → Crescita → Acquisizione utenti.
 
-```powershell
-cd percorso\della\cartella\grafite-sudoku
-git add -A
-git commit -m "Aggiunge la demo web compilata"
-git push
-```
+## Informativa privacy
 
-## 4. Attivare GitHub Pages
-
-Sul repository, su GitHub: Settings → Pages → sotto "Build and deployment",
-Source: **Deploy from a branch** → Branch: **main**, cartella **/(root)** →
-Save.
-
-Dopo un minuto o due il sito è live su:
-
-**https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/**
-
-## 5. Collegare la scheda Google Play
-
-Fatto: la scheda vera
-(`https://play.google.com/store/apps/details?id=com.grafitesoft.grafitesudoku`)
-è già collegata ovunque — i due pulsanti "Scarica su Google Play" in
-`index.html`, il banner per chi arriva da Android (punto 7) e lo stesso
-banner dentro la demo giocabile. **Non è più scritta a mano in ogni punto**:
-tutti la leggono da un'unica riga in `assets/play-links.js`
-(`PLAY_STORE_URL = "..."`). Se in futuro vuoi cambiarla, modifica solo
-quella riga, poi:
-
-```powershell
-git add assets\play-links.js
-git commit -m "Aggiorna il link alla scheda Google Play"
-git push
-```
-
-**Consigliato appena hai un momento**: quel link oggi non porta nessun
-tracciamento — un `?utm_source=...` scritto a mano sull'URL della Play
-Store, come quello che avevi inizialmente, **Google Play lo ignora**: non
-è così che funziona l'attribuzione lì. Per sapere davvero quanti installi
-arrivano da questo sito, genera il link giusto da Play Console: **Crescita
-→ Acquisizione utenti → Acquisizione tramite URL personalizzati → Crea URL
-per campagna personalizzata** — dai un nome tipo "sito-github-pages",
-sorgente "sito web", e Play Console ti dà un link con un parametro
-`referrer=...` che quello sì viene letto. Incolla quel link al posto del
-valore in `PLAY_STORE_URL` (dentro `assets/play-links.js`) e da quel
-momento avrai un numero vero in Play Console, non solo un click count.
-
-## 6. Aggiornare la demo in futuro
-
-Ogni volta che vuoi aggiornare la demo (nuova funzione, correzione), ripeti
-solo il punto 3: build in `grafite_sudoku_web_demo`, copia in `play/`, commit,
-push. La pagina di presentazione (`index.html`) puoi modificarla e pubblicarla
-in qualsiasi momento allo stesso modo, senza toccare la demo.
-
-## 7. Banner "vieni da Android?"
-
-Chi apre il sito (o la demo in `play/`) da un browser Android vede comparire
-in cima un piccolo banner richiudibile: "Sei su Android? L'app vera ha
-salvataggio permanente, trofei e avatar da sbloccare" con un pulsante
-"Installa" verso la scheda Play Store. L'idea: chi è già sul telefono è a
-un tap dall'installare l'app vera, ha poco senso tenerlo su una demo
-ridotta pensata soprattutto per chi è al computer. Non è un redirect
-forzato — chi non è interessato lo chiude con la ✕ e non lo rivede più
-(fino a quando non cancella i dati del sito da quel browser). Su iPhone o
-computer il banner non compare mai, dato che l'app oggi è solo su Android:
-mostrarlo lì manderebbe verso un link inutile.
-
-La logica vive tutta in `assets/play-links.js`, condivisa fra `index.html`
-e la demo — cambiare il testo del banner si fa in due punti (l'HTML del
-banner è duplicato in `index.html` e in `grafite_sudoku_web_demo/web/index.html`,
-dato che sono due pagine HTML distinte), ma il link e la logica di
-rilevamento/promemoria restano in un solo file.
-
-## Nota sul repository della privacy policy
-
-`marcopdev-ctrl-alt-canc.github.io/-grafite-sudoku-privacy` resta un
-repository separato e non va toccato da questa procedura: è quello linkato
-(probabilmente) nella Play Console, meglio non rischiare di romperlo.
+`marcopdev-ctrl-alt-canc.github.io/-grafite-sudoku-privacy` è un repository
+separato, linkato dalla Play Console: non si tocca da qui.
