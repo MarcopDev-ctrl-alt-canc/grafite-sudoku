@@ -2,479 +2,556 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/</loc>
-    <lastmod>2026-10-01</lastmod>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/facili/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/facili/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/easy/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/easy/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/easy/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/facili/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/easy/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/easy/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/medi/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/medi/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/medium/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/medium/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/medium/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/medi/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/medium/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/medium/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/difficili/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/difficili/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/hard/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/hard/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/hard/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/difficili/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/hard/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/hard/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/caratteri-grandi/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/caratteri-grandi/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/large-print/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/large-print/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/large-print/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/caratteri-grandi/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/large-print/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/large-print/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-x/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-x/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/x-sudoku/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/x-sudoku/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/x-sudoku/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-x/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/x-sudoku/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/x-sudoku/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/jigsaw/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/jigsaw/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/jigsaw/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/jigsaw/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/jigsaw/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/jigsaw/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/jigsaw/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/jigsaw/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-facile-1/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-facile-1/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/quick-easy-sudoku/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/quick-easy-sudoku/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/quick-easy-sudoku/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-facile-1/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/quick-easy-sudoku/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/quick-easy-sudoku/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-facile-2/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-facile-2/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/easy-sudoku-2/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/easy-sudoku-2/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/easy-sudoku-2/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-facile-2/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/easy-sudoku-2/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/easy-sudoku-2/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-facile-3/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-facile-3/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/easy-sudoku-3/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/easy-sudoku-3/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/easy-sudoku-3/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-facile-3/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/easy-sudoku-3/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/easy-sudoku-3/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-facile-4/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-facile-4/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/easy-sudoku-4/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/easy-sudoku-4/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/easy-sudoku-4/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-facile-4/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/easy-sudoku-4/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/easy-sudoku-4/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-medio-1/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-medio-1/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/medium-sudoku-1/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/medium-sudoku-1/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/medium-sudoku-1/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-medio-1/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/medium-sudoku-1/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/medium-sudoku-1/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-medio-2/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-medio-2/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/medium-sudoku-2/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/medium-sudoku-2/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/medium-sudoku-2/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-medio-2/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/medium-sudoku-2/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/medium-sudoku-2/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-medio-3/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-medio-3/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/medium-sudoku-3/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/medium-sudoku-3/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/medium-sudoku-3/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-medio-3/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/medium-sudoku-3/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/medium-sudoku-3/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-medio-4/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-medio-4/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/medium-sudoku-4/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/medium-sudoku-4/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/medium-sudoku-4/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-medio-4/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/medium-sudoku-4/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/medium-sudoku-4/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-difficile-1/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-difficile-1/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/hard-sudoku-challenge/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/hard-sudoku-challenge/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/hard-sudoku-challenge/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-difficile-1/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/hard-sudoku-challenge/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/hard-sudoku-challenge/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-difficile-2/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-difficile-2/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/hard-sudoku-2/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/hard-sudoku-2/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/hard-sudoku-2/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-difficile-2/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/hard-sudoku-2/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/hard-sudoku-2/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-difficile-3/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-difficile-3/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/hard-sudoku-3/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/hard-sudoku-3/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/hard-sudoku-3/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-difficile-3/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/hard-sudoku-3/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/hard-sudoku-3/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-difficile-4/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-difficile-4/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/hard-sudoku-4/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/hard-sudoku-4/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/hard-sudoku-4/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-difficile-4/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/hard-sudoku-4/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/hard-sudoku-4/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-caratteri-grandi-1/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-caratteri-grandi-1/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/large-print-sudoku-easy/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/large-print-sudoku-easy/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/large-print-sudoku-easy/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-caratteri-grandi-1/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/large-print-sudoku-easy/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/large-print-sudoku-easy/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-caratteri-grandi-2/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-caratteri-grandi-2/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/large-print-sudoku-2/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/large-print-sudoku-2/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/large-print-sudoku-2/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-caratteri-grandi-2/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/large-print-sudoku-2/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/large-print-sudoku-2/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-caratteri-grandi-3/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-caratteri-grandi-3/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/large-print-sudoku-3/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/large-print-sudoku-3/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/large-print-sudoku-3/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-caratteri-grandi-3/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/large-print-sudoku-3/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/large-print-sudoku-3/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-caratteri-grandi-4/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-caratteri-grandi-4/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/large-print-sudoku-4/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/large-print-sudoku-4/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/large-print-sudoku-4/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-caratteri-grandi-4/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/large-print-sudoku-4/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/large-print-sudoku-4/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-x-1/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-x-1/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/x-sudoku-1/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/x-sudoku-1/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/x-sudoku-1/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-x-1/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/x-sudoku-1/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/x-sudoku-1/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-x-2/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-x-2/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/x-sudoku-2/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/x-sudoku-2/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/x-sudoku-2/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-x-2/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/x-sudoku-2/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/x-sudoku-2/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-x-3/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-x-3/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/x-sudoku-medium/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/x-sudoku-medium/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/x-sudoku-medium/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-x-3/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/x-sudoku-medium/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/x-sudoku-medium/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-x-4/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-x-4/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/x-sudoku-4/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/x-sudoku-4/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/x-sudoku-4/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-x-4/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/x-sudoku-4/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/x-sudoku-4/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-jigsaw-1/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-jigsaw-1/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/jigsaw-sudoku-easy/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/jigsaw-sudoku-easy/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/jigsaw-sudoku-easy/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-jigsaw-1/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/jigsaw-sudoku-easy/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/jigsaw-sudoku-easy/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-jigsaw-2/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-jigsaw-2/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/jigsaw-sudoku-2/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/jigsaw-sudoku-2/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/jigsaw-sudoku-2/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-jigsaw-2/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/jigsaw-sudoku-2/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/jigsaw-sudoku-2/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-jigsaw-3/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-jigsaw-3/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/jigsaw-sudoku-3/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/jigsaw-sudoku-3/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/jigsaw-sudoku-3/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-jigsaw-3/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/jigsaw-sudoku-3/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/jigsaw-sudoku-3/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-jigsaw-4/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-jigsaw-4/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/jigsaw-sudoku-4/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/jigsaw-sudoku-4/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/jigsaw-sudoku-4/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-jigsaw-4/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/jigsaw-sudoku-4/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/jigsaw-sudoku-4/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/tecniche-sudoku/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/tecniche-sudoku/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/sudoku-techniques/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/sudoku-techniques/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/sudoku-techniques/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/tecniche-sudoku/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/sudoku-techniques/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/sudoku-techniques/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/tecniche-sudoku/singolo-nascosto/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/tecniche-sudoku/singolo-nascosto/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/sudoku-techniques/hidden-single/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/sudoku-techniques/hidden-single/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/sudoku-techniques/hidden-single/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/tecniche-sudoku/singolo-nascosto/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/sudoku-techniques/hidden-single/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/sudoku-techniques/hidden-single/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/tecniche-sudoku/candidato-bloccato/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/tecniche-sudoku/candidato-bloccato/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/sudoku-techniques/locked-candidates/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/sudoku-techniques/locked-candidates/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/sudoku-techniques/locked-candidates/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/tecniche-sudoku/candidato-bloccato/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/sudoku-techniques/locked-candidates/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/sudoku-techniques/locked-candidates/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/tecniche-sudoku/coppia-nascosta/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/tecniche-sudoku/coppia-nascosta/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/sudoku-techniques/hidden-pair/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/sudoku-techniques/hidden-pair/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/sudoku-techniques/hidden-pair/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/tecniche-sudoku/coppia-nascosta/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/sudoku-techniques/hidden-pair/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/sudoku-techniques/hidden-pair/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/tecniche-sudoku/x-wing/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/tecniche-sudoku/x-wing/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/sudoku-techniques/x-wing/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/sudoku-techniques/x-wing/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/sudoku-techniques/x-wing/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/tecniche-sudoku/x-wing/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/sudoku-techniques/x-wing/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/sudoku-techniques/x-wing/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/tecniche-sudoku/xy-wing/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/tecniche-sudoku/xy-wing/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/sudoku-techniques/xy-wing/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/sudoku-techniques/xy-wing/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/sudoku-techniques/xy-wing/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/tecniche-sudoku/xy-wing/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/sudoku-techniques/xy-wing/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/sudoku-techniques/xy-wing/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/tecniche-sudoku/grattacieli/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/tecniche-sudoku/grattacieli/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/sudoku-techniques/skyscrapers-puzzle/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/sudoku-techniques/skyscrapers-puzzle/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/sudoku-techniques/skyscrapers-puzzle/</loc>
+    <lastmod>2026-10-21</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/tecniche-sudoku/grattacieli/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/sudoku-techniques/skyscrapers-puzzle/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/sudoku-techniques/skyscrapers-puzzle/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare.html</loc>
-    <lastmod>2026-09-30</lastmod>
+    <lastmod>2026-10-21</lastmod>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/play/</loc>
-    <lastmod>2026-09-27</lastmod>
+    <lastmod>2026-10-21</lastmod>
   </url>
 </urlset>
