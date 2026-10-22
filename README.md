@@ -61,6 +61,8 @@ quasi uguali sono viste come contenuto sottile.
 
 - Nessuno script di analytics, nessun CDN di terze parti, nessun cookie. Font
   in `assets/fonts/` (OFL).
+  Unica eccezione: il badge live di PixelPicked nel piè di pagina (immagine
+  da `api.pixelpicked.com`, caricata in modo pigro e senza referer).
 - Sulla privacy dell'app solo le frasi ammesse: "l'app non chiede il permesso
   Internet e non contiene librerie Google" e "0 tracker secondo Exodus
   Privacy" con il report Exodus della versione indicata (oggi 2.9.3, report

@@ -38,6 +38,11 @@ GENERATOR = 'sudoku-da-stampare.html'
 APP_LANGUAGES = ['it', 'en', 'es', 'pt', 'id', 'de', 'fr']
 e = html.escape
 
+# Badge di PixelPicked (immagine live con like e follower): l'unica risorsa
+# esterna delle pagine, caricata solo quando si arriva al piè di pagina e
+# senza referer.
+PIXELPICKED_BADGE = ('<a href="https://pixelpicked.com/game/7SViDJjd0No/grafite-sudoku-offline-puzzle" target="_blank" rel="noopener"><img src="https://api.pixelpicked.com/api/badges/7SViDJjd0No/live.png?theme=dark" width="250" height="54" alt="Approved on PixelPicked" loading="lazy" referrerpolicy="no-referrer"></a>')
+
 
 def play_url(campaign):
     """Link alla scheda Play con la campagna della pagina: Play Console
@@ -264,6 +269,7 @@ footer.site{border-top:1px solid #2a3040;padding:28px 0 40px;font-size:.88rem;co
 footer.site .links{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 18px;margin-bottom:12px}
 footer.site .links a{min-height:44px;display:inline-flex;align-items:center}
 footer.site p{color:#a3a8b4;margin:.4em auto;max-width:720px}
+footer.site .badge{margin-top:16px}footer.site .badge img{display:inline-block;max-width:100%;height:auto}
 #androidAppBanner{display:none;position:sticky;top:0;z-index:100;align-items:center;gap:12px;background:#0d1016;border-bottom:1px solid var(--gold);padding:10px 16px;font-size:.88rem}
 #androidAppBanner .msg{flex:1;color:var(--cream)}
 #androidAppBanner .cta-b{background:var(--gold);color:#1a1408;font-weight:700;padding:8px 16px;border-radius:8px;text-decoration:none;white-space:nowrap}
@@ -384,6 +390,7 @@ def page(*, lang, path, title, description, body, alternates, campaign, og_image
 <div class="links"><a href="{href(C.PATHS[lang]['printable'])}">{U['nav_printable']}</a><a href="{href(C.PATHS[lang]['guides'])}">{U['nav_guides']}</a><a href="{href(GENERATOR)}">{'Generatore di schemi' if lang == 'it' else 'Puzzle generator'}</a><a href="{C.PRIVACY_URL}">{U['privacy_policy']}</a><a href="mailto:grafitesoft@gmail.com">{U['contact']}</a><a href="https://paypal.me/grafitesoft">{U['coffee']}</a></div>
 <p>{privacy}</p>
 <p>{U['footer_tag']}</p>
+<p class="badge">{PIXELPICKED_BADGE}</p>
 </div></footer>
 <script src="{href('assets/play-links.js')}" defer></script>
 </body>
