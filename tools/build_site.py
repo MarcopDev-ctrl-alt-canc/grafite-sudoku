@@ -621,7 +621,7 @@ def home_page(puzzles, lang):
            'operatingSystem': 'ANDROID', 'applicationCategory': 'GameApplication', 'url': absolute(path),
            'downloadUrl': PLAY_BASE, 'installUrl': PLAY_BASE, 'image': absolute('assets/icon.png'),
            'description': H['description'], 'inLanguage': APP_LANGUAGES,
-           'screenshot': [absolute(f'assets/{f}.jpg') for f, _ in H['shots']],
+           'screenshot': [absolute(f'assets/{f}.webp') for f, _ in H['shots']],
            'featureList': [t for _, t, _ in H['cards']],
            'offers': {'@type': 'Offer', 'price': '0', 'priceCurrency': 'EUR'},
            'publisher': org}
