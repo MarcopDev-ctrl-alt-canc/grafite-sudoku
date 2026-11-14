@@ -27,7 +27,7 @@ UI = {
                          '<a href="{exodus}">0 tracker secondo Exodus Privacy</a> (report della versione 2.9.3).'),
         'privacy_policy': 'Informativa privacy', 'contact': 'Scrivici', 'coffee': 'Offrici un caffè',
         'cta_title': 'Gioca anche sul telefono',
-        'cta_text': ('Grafite Sudoku per Android: Classico, X-Sudoku, Jigsaw, 12×12 e la Città, '
+        'cta_text': ('Grafite Sudoku per Android: Classico, X-Sudoku, Jigsaw, 12×12, Città e Killer, '
                      'con decine di lezioni nella Sudoku Academy. Gratis, senza pubblicità, anche offline.'),
         'cta_button': 'Scarica su Google Play',
         'android_banner': "Sei su Android? L'app ha salvataggio permanente, trofei e la Sudoku Academy.",
@@ -45,7 +45,7 @@ UI = {
                          '<a href="{exodus}">0 trackers according to Exodus Privacy</a> (report for version 2.9.3).'),
         'privacy_policy': 'Privacy policy', 'contact': 'Contact', 'coffee': 'Buy us a coffee',
         'cta_title': 'Play on your phone too',
-        'cta_text': ('Grafite Sudoku for Android: Classic, X-Sudoku, Jigsaw, 12×12 and City, '
+        'cta_text': ('Grafite Sudoku for Android: Classic, X-Sudoku, Jigsaw, 12×12, City and Killer, '
                      'with dozens of lessons in the Sudoku Academy. Free, no ads, works offline.'),
         'cta_button': 'Get it on Google Play',
         'android_banner': 'On Android? The app keeps your progress, with trophies and the Sudoku Academy.',
@@ -680,7 +680,7 @@ GUIDE_UI = {
 HOME = {
     'it': {
         'title': 'Grafite Sudoku: app di sudoku gratis senza pubblicità',
-        'description': 'Grafite Sudoku: sudoku classico, X, Jigsaw, 12×12 e la Città, con la Sudoku Academy. Gratis, senza pubblicità e senza account. Gioca nel browser o su Android.',
+        'description': 'Grafite Sudoku: sudoku classico, X, Jigsaw, 12×12, Città e Killer, con la Sudoku Academy. Gratis, senza pubblicità e senza account. Gioca nel browser o su Android.',
         'h1': 'Grafite Sudoku',
         'tagline': 'Il sudoku con anima giapponese, senza pubblicità.',
         'sub': 'Griglie disegnate come pagine di un taccuino, temi carta, livelli da scalare e lezioni che insegnano le tecniche vere. Nessuna pubblicità, nessun account.',
@@ -690,8 +690,9 @@ HOME = {
         'why_sub': 'Un sudoku pensato per essere bello da guardare quanto da giocare, e per rispettare chi gioca.',
         'cards': [
             ('🚫', 'Niente pubblicità, niente account', "Nessun banner, nessun video forzato, nessuna registrazione. L'app si sostiene con un caffè offerto da chi vuole."),
-            ('🧩', 'Cinque modi di giocare', 'Classico, X-Sudoku con le diagonali, Jigsaw con le regioni irregolari, il 12×12 e la Città, il rompicapo dei grattacieli.'),
+            ('🧩', 'Sei modi di giocare', 'Classico, X-Sudoku con le diagonali, Jigsaw con le regioni irregolari, il 12×12, la Città dei grattacieli e il Killer, con le gabbie da sommare.'),
             ('🎓', 'Sudoku Academy', 'Decine di lezioni sulla griglia, esercizi presi da schemi veri e un esame finale. In partita, l\'aiuto "Quale tecnica?" ti dice cosa cercare senza svelare il numero.'),
+            ('🔘', 'Fatta per leggere bene', "Il testo usa Atkinson Hyperlegible, disegnato per chi ci vede poco. Dalla tavolozza in partita scegli numeri più leggibili e il contrasto alto; dalle Impostazioni numeri e tastierino più grandi."),
             ('🎨', 'Temi carta', 'Diverse texture di carta per la griglia, dalla crema alla lavagna, per giocare su una pagina che sembra vera.'),
             ('📈', 'Livelli, record e trofei', 'Ogni partita fa salire di livello. Il gioco festeggia i tuoi record personali e ha decine di trofei e avatar da sbloccare.'),
             ('⏱️', 'Sfida del giorno e Time Attack', 'Uno schema nuovo ogni giorno, con la tua serie di giorni, e partite a tempo per difficoltà crescenti.'),
@@ -710,7 +711,7 @@ HOME = {
                     ('incenso', 'Time Attack', 'Incenso', 'Incenso, avatar della linea Time Attack')],
         'trophy_alt': "Schermata Traguardi con la rivelazione dell'avatar Samurai",
         'trophy_caption': "La schermata Traguardi, nell'app",
-        'app_list': "Decine di trofei, la Sudoku Academy con le sue lezioni, la Città con i suoi indizi ai bordi, statistiche e la Sfida del giorno: tutto salvato sul tuo telefono, senza account.",
+        'app_list': "Decine di trofei, la Sudoku Academy con le sue lezioni, la Città con i suoi indizi ai bordi, il Killer con le sue gabbie, statistiche e la Sfida del giorno: tutto salvato sul tuo telefono, senza account.",
         'shots_title': 'Uno sguardo al gioco',
         'shots_sub': "Alcune schermate dall'app.",
         'shots': [('shot-home', 'Schermata iniziale di Grafite Sudoku con le difficoltà e la Sfida del giorno'),
@@ -721,12 +722,12 @@ HOME = {
         'print_sub': 'Schemi in PDF con la soluzione a pagina 2: facili, medi, difficili, a caratteri grandi, Sudoku X e jigsaw.',
         'print_all': 'Tutti i sudoku da stampare',
         'demo_title': 'Prova subito, senza installare nulla',
-        'demo_sub': "La versione browser include Classico, X-Sudoku, Jigsaw e 12×12, con i livelli, il Time Attack e le sfide tra amici, per assaggiare il gioco. Trofei, avatar, la Sudoku Academy e la Città sono nell'app per Android.",
+        'demo_sub': "La versione browser include Classico, X-Sudoku, Jigsaw e 12×12, con i livelli, il Time Attack e le sfide tra amici, per assaggiare il gioco. Trofei, avatar, la Sudoku Academy, la Città e il Killer sono nell'app per Android.",
         'demo_note': "<b>Nota:</b> la demo salva i progressi solo in questo browser, su questo dispositivo. Se poi scarichi l'app per Android riparti da zero: sono due mondi separati, per scelta. Nessun account, nessun server nel mezzo.",
     },
     'en': {
         'title': 'Grafite Sudoku: a free sudoku app with no ads',
-        'description': 'Grafite Sudoku: classic sudoku, X, Jigsaw, 12×12 and City, with the Sudoku Academy. Free, no ads, no account. Play in your browser or on Android.',
+        'description': 'Grafite Sudoku: classic sudoku, X, Jigsaw, 12×12, City and Killer, with the Sudoku Academy. Free, no ads, no account. Play in your browser or on Android.',
         'h1': 'Grafite Sudoku',
         'tagline': 'Sudoku with a Japanese soul, and no ads.',
         'sub': 'Grids drawn like notebook pages, paper themes, levels to climb and lessons that teach real solving techniques. No ads, no account.',
@@ -736,8 +737,9 @@ HOME = {
         'why_sub': 'A sudoku made to be as nice to look at as it is to play, and to respect the people who play it.',
         'cards': [
             ('🚫', 'No ads, no account', 'No banners, no forced videos, no sign-up. The app is supported by a coffee from whoever wants to offer one.'),
-            ('🧩', 'Five ways to play', 'Classic, X-Sudoku with the diagonals, Jigsaw with irregular regions, 12×12 and City, the skyscrapers puzzle.'),
+            ('🧩', 'Six ways to play', 'Classic, X-Sudoku with the diagonals, Jigsaw with irregular regions, 12×12, the City of skyscrapers and Killer, with its sum cages.'),
             ('🎓', 'Sudoku Academy', 'Dozens of lessons on the grid, exercises from real puzzles and a final exam. In a game, the "Which technique?" help tells you what to look for without giving away the number.'),
+            ('🔘', 'Built to be easy to read', 'Text is set in Atkinson Hyperlegible, designed for low vision. From the palette in a game, pick more legible numbers and high contrast; in Settings, bigger numbers and keypad.'),
             ('🎨', 'Paper themes', 'Several paper textures for the grid, from cream to chalkboard, so you play on a page that feels real.'),
             ('📈', 'Levels, records and trophies', 'Every game earns experience. The game celebrates your personal bests, with dozens of trophies and avatars to unlock.'),
             ('⏱️', 'Daily Challenge and Time Attack', 'A new puzzle every day, with your day streak, and timed games at rising difficulty.'),
@@ -756,7 +758,7 @@ HOME = {
                     ('incenso', 'Time Attack', 'Incense', 'Incense, avatar of the Time Attack line')],
         'trophy_alt': 'Trophies screen revealing the Samurai avatar',
         'trophy_caption': 'The Trophies screen, in the app',
-        'app_list': 'Dozens of trophies, the Sudoku Academy with its lessons, City with its edge clues, statistics and the Daily Challenge: all saved on your phone, no account.',
+        'app_list': 'Dozens of trophies, the Sudoku Academy with its lessons, City with its edge clues, Killer with its cages, statistics and the Daily Challenge: all saved on your phone, no account.',
         'shots_title': 'A look at the game',
         'shots_sub': 'A few screens from the app (in Italian).',
         'shots': [('shot-home', 'Grafite Sudoku home screen with difficulty levels and the Daily Challenge'),
@@ -767,7 +769,7 @@ HOME = {
         'print_sub': 'PDF puzzles with the answers on page 2: easy, medium, hard, large print, X-Sudoku and jigsaw.',
         'print_all': 'All printable sudoku',
         'demo_title': 'Try it now, nothing to install',
-        'demo_sub': 'The browser version has Classic, X-Sudoku, Jigsaw and 12×12, with levels, Time Attack and challenges with friends, to get a taste of the game. Trophies, avatars, the Sudoku Academy and City are in the Android app.',
+        'demo_sub': 'The browser version has Classic, X-Sudoku, Jigsaw and 12×12, with levels, Time Attack and challenges with friends, to get a taste of the game. Trophies, avatars, the Sudoku Academy, City and Killer are in the Android app.',
         'demo_note': '<b>Note:</b> the demo saves your progress only in this browser, on this device. If you then install the Android app you start from scratch: they are two separate worlds, on purpose. No account, no server in between.',
     },
 }
