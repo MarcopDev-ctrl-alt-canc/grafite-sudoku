@@ -15,6 +15,7 @@ generate qui. Non tocca invece sudoku-da-stampare.html (il generatore nel
 browser) né i file compilati della demo in play/.
 """
 import html
+import itertools
 import json
 import os
 import re
@@ -63,6 +64,7 @@ def absolute(path):
 
 def load_puzzles():
     data = json.load(open(os.path.join(ROOT, 'data', 'puzzles.json'), encoding='utf-8'))
+    data += load_killer()
     for p in data:
         cat = p['category']
         for lang in C.LANGS:
@@ -70,15 +72,41 @@ def load_puzzles():
                 slug = p['serie3_slug']
             else:
                 prefix = {'it': {'easy': 'sudoku-facile', 'medium': 'sudoku-medio', 'hard': 'sudoku-difficile',
-                                 'large-print': 'sudoku-caratteri-grandi', 'x': 'sudoku-x', 'jigsaw': 'sudoku-jigsaw'},
+                                 'large-print': 'sudoku-caratteri-grandi', 'x': 'sudoku-x', 'jigsaw': 'sudoku-jigsaw',
+                                 'killer': 'sudoku-killer'},
                           'en': {'easy': 'easy-sudoku', 'medium': 'medium-sudoku', 'hard': 'hard-sudoku',
-                                 'large-print': 'large-print-sudoku', 'x': 'x-sudoku', 'jigsaw': 'jigsaw-sudoku'}}[lang][cat]
+                                 'large-print': 'large-print-sudoku', 'x': 'x-sudoku', 'jigsaw': 'jigsaw-sudoku',
+                                 'killer': 'killer-sudoku'}}[lang][cat]
                 slug = f'{prefix}-{p["number"]}'
             p[f'slug_{lang}'] = slug
             p[f'path_{lang}'] = f'{C.PATHS[lang]["printable"]}{slug}/'
             p[f'pdf_{lang}'] = f'pdf/grafite-sudoku-{slug}.pdf'
             p[f'og_{lang}'] = f'assets/og/{lang}-{slug}.png'
     return data
+
+
+def load_killer():
+    """Gli schemi Killer delle pagine (data/killer.json), generati e verificati
+    con il motore dell'app (sudoku_test/tool/killer_export.dart): soluzione
+    unica, chiusura a logica, nessuna gabbia da una cella. `regions` è la
+    gabbia di ogni casella; la griglia di partenza è vuota."""
+    out = []
+    alphabet = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    for n, k in enumerate(json.load(open(os.path.join(ROOT, 'data', 'killer.json'), encoding='utf-8')), start=1):
+        sol = [int(d) for d in k['s']]
+        cages = [alphabet.index(ch) for ch in k['g']]
+        assert all(sorted(sol[r * 9:r * 9 + 9]) == list(range(1, 10)) for r in range(9)), k
+        out.append(dict(variant='killer', level=k['level'], clues=0, puzzle=[0] * 81, solution=sol,
+                        regions=cages, singles_only=False, category='killer', number=n))
+    return out
+
+
+def cage_list(p):
+    """[(caselle in ordine, somma)] delle gabbie di uno schema Killer."""
+    groups = {}
+    for i, g in enumerate(p['regions']):
+        groups.setdefault(g, []).append(i)
+    return [(cells, sum(p['solution'][i] for i in cells)) for cells in groups.values()]
 
 
 def by_category(puzzles, cat):
@@ -103,6 +131,14 @@ def first_hint(p, lang):
     """Il primo passo con un singolo: casella con un solo candidato oppure
     numero con un solo posto in un'unità. Frase pronta nella lingua."""
     T = C.PUZZLE[lang]
+    if p['variant'] == 'killer':
+        # La prima gabbia (in ordine di lettura) che si fa in un modo solo.
+        for cells, s in sorted(cage_list(p), key=lambda x: x[0][0]):
+            combos = [c for c in itertools.combinations(range(1, 10), len(cells)) if sum(c) == s]
+            if len(combos) == 1:
+                r, c = divmod(cells[0], 9)
+                return T['hint_killer'].format(sum=s, k=len(cells), r=r + 1, c=c + 1, combo='+'.join(map(str, combos[0])))
+        return None
     units = eng.units_for(p['variant'], p['regions'])
     peers = eng.peers_from(units)
     grid = p['puzzle']
@@ -163,8 +199,67 @@ def cell_classes(p, i):
     return cls
 
 
+def killer_svg(p, values, *, sums=True, width=None, height=None, label=None, cls='ksvg'):
+    """Griglia Killer in SVG (lato di una casella = 100): righe sottili,
+    riquadri spessi, gabbie tratteggiate rientrate dentro le caselle (come
+    nell'app, vedi KillerCagePainter) e la somma nell'angolo della prima
+    casella, su un fondo color carta che interrompe il tratteggio."""
+    cage = p['regions']
+    inset = 9.0
+
+    def same(g, r, c):
+        return 0 <= r < 9 and 0 <= c < 9 and cage[r * 9 + c] == g
+
+    def start(along, diag, edge, sign):
+        return (edge - sign * inset if diag else edge) if along else edge + sign * inset
+
+    segs = []
+    for i, g in enumerate(cage):
+        r, c = divmod(i, 9)
+        x0, y0, x1, y1 = c * 100, r * 100, c * 100 + 100, r * 100 + 100
+        if not same(g, r - 1, c):
+            y = y0 + inset
+            segs.append((start(same(g, r, c - 1), same(g, r - 1, c - 1), x0, 1), y, start(same(g, r, c + 1), same(g, r - 1, c + 1), x1, -1), y))
+        if not same(g, r + 1, c):
+            y = y1 - inset
+            segs.append((start(same(g, r, c - 1), same(g, r + 1, c - 1), x0, 1), y, start(same(g, r, c + 1), same(g, r + 1, c + 1), x1, -1), y))
+        if not same(g, r, c - 1):
+            x = x0 + inset
+            segs.append((x, start(same(g, r - 1, c), same(g, r - 1, c - 1), y0, 1), x, start(same(g, r + 1, c), same(g, r + 1, c - 1), y1, -1)))
+        if not same(g, r, c + 1):
+            x = x1 - inset
+            segs.append((x, start(same(g, r - 1, c), same(g, r - 1, c + 1), y0, 1), x, start(same(g, r + 1, c), same(g, r + 1, c + 1), y1, -1)))
+    path = ''.join(f'M{a:g} {b:g}L{c2:g} {d:g}' for a, b, c2, d in segs)
+    thin = ''.join(f'M{k * 100} 0V900M0 {k * 100}H900' for k in range(1, 9) if k % 3)
+    thick = ''.join(f'M{k * 100} 0V900M0 {k * 100}H900' for k in (3, 6))
+    size = ''.join(f' {a}="{v}"' for a, v in (('width', width), ('height', height)) if v)
+    aria = f' role="img" aria-label="{e(label)}"' if label else ' aria-hidden="true" focusable="false"'
+    out = [f'<svg class="{cls}" viewBox="-4 -4 908 908"{size}{aria}>',
+           '<rect x="-4" y="-4" width="908" height="908" fill="#fbf8ef"/>',
+           f'<path d="{thin}" stroke="#b9ae92" stroke-width="2" fill="none"/>',
+           f'<path d="{path}" stroke="#3d3a33" stroke-width="2.6" stroke-dasharray="9 7" fill="none"/>',
+           f'<path d="{thick}" stroke="#14181F" stroke-width="7" fill="none"/>',
+           '<rect x="0" y="0" width="900" height="900" stroke="#14181F" stroke-width="8" fill="none"/>']
+    if sums:
+        for cells, s in cage_list(p):
+            r, c = divmod(cells[0], 9)
+            w = 13 * len(str(s)) + 8
+            out.append(f'<rect x="{c * 100 + 4}" y="{r * 100 + 4}" width="{w}" height="25" fill="#fbf8ef"/>'
+                       f'<text x="{c * 100 + 8}" y="{r * 100 + 25}" font-size="23" font-weight="700" fill="#14181F" '
+                       f'font-family="Noto Sans,sans-serif">{s}</text>')
+    for i, v in enumerate(values):
+        if v:
+            r, c = divmod(i, 9)
+            out.append(f'<text x="{c * 100 + 50}" y="{r * 100 + 68}" font-size="50" text-anchor="middle" fill="#3d4a6b" '
+                       f'font-family="Noto Sans,sans-serif">{v}</text>')
+    out.append('</svg>')
+    return ''.join(out)
+
+
 def grid_table(p, lang, values, caption, solution=False):
     T = C.PUZZLE[lang]
+    if p['variant'] == 'killer':
+        return killer_svg(p, values, label=caption) + f'<p class="kcap">{e(caption)}</p>'
     big = ' big' if p['category'] == 'large-print' else ''
     rows = [f'<table class="sudoku{big}"><caption>{e(caption)}</caption>',
             '<thead><tr><td style="border:0;background:none"></td>' + ''.join(f'<th scope="col" abbr="{T["col"]} {c}">{c}</th>' for c in range(1, 10)) + '</tr></thead><tbody>']
@@ -188,6 +283,8 @@ def grid_table(p, lang, values, caption, solution=False):
 
 def mini_svg(p, size=96):
     """Miniatura decorativa della griglia (aria-hidden)."""
+    if p['variant'] == 'killer':
+        return killer_svg(p, [0] * 81, sums=False, width=size, height=size, cls='mini')
     s = size / 9
     parts = [f'<svg class="mini" viewBox="0 0 {size} {size}" width="{size}" height="{size}" aria-hidden="true" focusable="false">',
              f'<rect width="{size}" height="{size}" fill="#F0EAD9"/>']
@@ -241,6 +338,10 @@ main{padding:8px 0 48px}
 .sheet{background:var(--paper);color:var(--ink);border-radius:16px;padding:10px 8px;max-width:560px;overflow-x:auto}
 table.sudoku{border-collapse:collapse;margin:0 auto;font-family:"Noto Sans",sans-serif;color:var(--ink)}
 table.sudoku caption{caption-side:bottom;font-size:.8rem;color:#5a5446;padding-top:8px}
+svg.ksvg{display:block;width:100%;max-width:520px;height:auto;margin:0 auto}.kcap{text-align:center;font-size:.8rem;color:#5a5446;margin:8px 0 0}
+.gen{margin:24px 0;background:var(--paper);color:var(--ink);border-radius:18px;padding:22px;display:flex;flex-wrap:wrap;gap:16px 24px;align-items:center;border:2px solid var(--gold)}
+.gen h2{color:var(--ink);margin:0 0 .3em;font-size:1.35rem}.gen p{color:var(--ink-soft);margin:0}.gen p a{color:#7a5a12}.gen>div{flex:1 1 280px}
+.gen .btn-secondary{color:var(--ink);border-color:var(--ink)}.gen .btn-secondary:hover{color:#7a5a12}
 table.sudoku th{font-size:.62rem;font-weight:600;color:#7a7260;padding:0 3px 0 0;width:12px}
 table.sudoku thead th{height:14px}
 table.sudoku td{width:min(calc((100vw - 74px) / 9),52px);height:min(calc((100vw - 74px) / 9),52px);border:1px solid #b9ae92;text-align:center;font-size:min(5vw,1.55rem);color:#3d4a6b;background:#fbf8ef;padding:0}
@@ -324,6 +425,23 @@ def breadcrumb_html(lang, items):
     return f'<nav class="crumbs" aria-label="{C.UI[lang]["breadcrumb"]}"><ol>{"".join(lis)}</ol></nav>'
 
 
+def generator_href(lang, kind=None):
+    path = C.GENERATOR_PATHS[lang]
+    if kind:
+        path += ('&' if '?' in path else '?') + f'type={kind}'
+    return href(path)
+
+
+def generator_block(lang, killer_first=False):
+    """Il generatore di fogli A4: un riquadro in evidenza, con il pulsante."""
+    U = C.UI[lang]
+    main_btn = f'<a class="btn btn-primary" href="{generator_href(lang)}">{U["generator_button"]}</a>'
+    killer_btn = f'<a class="btn btn-secondary" href="{generator_href(lang, "killer")}">{U["generator_killer"]}</a>'
+    buttons = killer_btn + main_btn if killer_first else main_btn + killer_btn
+    return (f'<aside class="gen"><div><h2>{U["generator_link"]}</h2><p>{U["generator_text"].format(gen=generator_href(lang))}</p></div>'
+            f'<div class="row" style="flex:0 1 auto">{buttons}</div></aside>')
+
+
 def cta_block(lang, campaign):
     U = C.UI[lang]
     return (f'<aside class="cta"><div><h2>{U["cta_title"]}</h2><p>{U["cta_text"]}</p></div>'
@@ -342,6 +460,7 @@ def page(*, lang, path, title, description, body, alternates, campaign, og_image
     other_path = alternates.get(other, C.PATHS[other]['home'])
     nav = []
     for key, label, target in (('printable', U['nav_printable'], C.PATHS[lang]['printable']),
+                               ('generator', U['nav_generator'], C.GENERATOR_PATHS[lang]),
                                ('guides', U['nav_guides'], C.PATHS[lang]['guides']),
                                ('play', U['nav_play'], 'play/')):
         cur = ' aria-current="page"' if section == key else ''
@@ -387,7 +506,7 @@ def page(*, lang, path, title, description, body, alternates, campaign, og_image
 {body}
 </main>
 <footer class="site"><div class="wrap">
-<div class="links"><a href="{href(C.PATHS[lang]['printable'])}">{U['nav_printable']}</a><a href="{href(C.PATHS[lang]['guides'])}">{U['nav_guides']}</a><a href="{href(GENERATOR)}">{'Generatore di schemi' if lang == 'it' else 'Puzzle generator'}</a><a href="{C.PRIVACY_URL}">{U['privacy_policy']}</a><a href="mailto:grafitesoft@gmail.com">{U['contact']}</a><a href="https://paypal.me/grafitesoft">{U['coffee']}</a></div>
+<div class="links"><a href="{href(C.PATHS[lang]['printable'])}">{U['nav_printable']}</a><a href="{href(C.PATHS[lang]['guides'])}">{U['nav_guides']}</a><a href="{generator_href(lang)}">{U['nav_generator']}</a><a href="{C.PRIVACY_URL}">{U['privacy_policy']}</a><a href="mailto:grafitesoft@gmail.com">{U['contact']}</a><a href="https://paypal.me/grafitesoft">{U['coffee']}</a></div>
 <p>{privacy}</p>
 <p>{U['footer_tag']}</p>
 <p class="badge">{PIXELPICKED_BADGE}</p>
@@ -411,7 +530,11 @@ def puzzle_page(puzzles, p, lang):
     crumbs = [(C.UI[lang]['nav_home'], C.PATHS[lang]['home']), (C.UI[lang]['nav_printable'], C.PATHS[lang]['printable']),
               (cat['short'], cat_path(lang, p['category'])), (f'{name} {"n. " if lang == "it" else "#"}{p["number"]}', path)]
     hint = first_hint(p, lang)
-    facts = T['facts'].format(clues=p['clues'], level=level, singles=T['singles_yes'] if p['singles_only'] else T['singles_no'])
+    killer = p['variant'] == 'killer'
+    if killer:
+        facts = T['facts_killer'].format(cages=len(cage_list(p)), level=level)
+    else:
+        facts = T['facts'].format(clues=p['clues'], level=level, singles=T['singles_yes'] if p['singles_only'] else T['singles_no'])
     rules = C.RULES[lang][p['variant']]
     tips = C.TIPS[lang][p['category']]
     pager = []
@@ -420,7 +543,8 @@ def puzzle_page(puzzles, p, lang):
     pager.append(f'<a href="{href(cat_path(lang, p["category"]))}">{T["all"].format(short=cat["short"].lower())}</a>')
     if k < len(siblings) - 1:
         pager.append(f'<a href="{href(siblings[k + 1][f"path_{lang}"])}">{T["next"]}</a>')
-    caption = T['caption'].format(name=name, n=p['number'], clues=p['clues'])
+    caption = (T['caption_killer'].format(name=name, n=p['number'], cages=len(cage_list(p))) if killer
+               else T['caption'].format(name=name, n=p['number'], clues=p['clues']))
     body = f"""<div class="wrap">
 {breadcrumb_html(lang, crumbs)}
 <h1>{e(T['h1'].format(name=name, n=p['number']))}</h1>
@@ -454,6 +578,12 @@ def slug_campaign(path):
     return path.strip('/').replace('/', '-') or 'home'
 
 
+def count_label(p, lang):
+    if p['variant'] == 'killer':
+        return f'{len(cage_list(p))} {C.PUZZLE[lang]["cages"]}'
+    return f'{p["clues"]} {"numeri" if lang == "it" else "clues"}'
+
+
 def puzzle_cards(puzzles, lang, cat):
     T = C.PUZZLE[lang]
     items = []
@@ -461,7 +591,7 @@ def puzzle_cards(puzzles, lang, cat):
         name = C.CATEGORIES[lang][cat]['name']
         label = f'{name} {"n. " if lang == "it" else "#"}{p["number"]}'
         items.append(f'<li><a href="{href(p[f"path_{lang}"])}">{mini_svg(p)}<span>{e(label)}</span>'
-                     f'<small>{T["level"][p["level"]]} · {p["clues"]} {"numeri" if lang == "it" else "clues"}</small></a></li>')
+                     f'<small>{T["level"][p["level"]]} · {count_label(p, lang)}</small></a></li>')
     return f'<ul class="pz-list">{"".join(items)}</ul>'
 
 
@@ -469,9 +599,8 @@ def category_page(puzzles, lang, cat):
     D = C.CATEGORIES[lang][cat]
     path = cat_path(lang, cat)
     crumbs = [(C.UI[lang]['nav_home'], C.PATHS[lang]['home']), (C.UI[lang]['nav_printable'], C.PATHS[lang]['printable']), (D['short'], path)]
-    gen = C.UI[lang]['generator_text'].format(gen=href(GENERATOR))
     guide_links = ''.join(f'<li><a href="{href(guide_path(lang, g))}">{e(C.GUIDES[lang][g]["name"])}</a></li>'
-                          for g in (('hidden-single', 'locked', 'hidden-pair') if cat in ('easy', 'large-print', 'x', 'jigsaw') else ('locked', 'hidden-pair', 'x-wing', 'xy-wing')))
+                          for g in (('hidden-single', 'locked', 'hidden-pair') if cat in ('easy', 'large-print', 'x', 'jigsaw', 'killer') else ('locked', 'hidden-pair', 'x-wing', 'xy-wing')))
     body = f"""<div class="wrap">
 {breadcrumb_html(lang, crumbs)}
 <h1>{e(D['h1'])}</h1>
@@ -480,7 +609,7 @@ def category_page(puzzles, lang, cat):
 {puzzle_cards(puzzles, lang, cat)}
 <h2>{'Tecniche utili' if lang == 'it' else 'Useful techniques'}</h2>
 <ul>{guide_links}</ul>
-<p>{gen}</p>
+{generator_block(lang, killer_first=cat == 'killer')}
 {cta_block(lang, slug_campaign(path))}
 </div>"""
     first = by_category(puzzles, cat)[0]
@@ -506,10 +635,9 @@ def hub_page(puzzles, lang):
 {breadcrumb_html(lang, crumbs)}
 <h1>{e(H['h1'])}</h1>
 {''.join(f'<p class="lead">{e(t)}</p>' for t in H['intro'])}
+{generator_block(lang)}
 <h2>{H['categories_title']}</h2>
 {''.join(sections)}
-<h2>{C.UI[lang]['generator_link']}</h2>
-<p>{C.UI[lang]['generator_text'].format(gen=href(GENERATOR))}</p>
 <h2>{H['guides_title']}</h2>
 <p>{H['guides_text']}</p>
 <ul>{guides}</ul>
@@ -587,7 +715,7 @@ def home_page(puzzles, lang):
     path = C.PATHS[lang]['home']
     campaign = 'home' if lang == 'it' else 'en-home'
     qr = href(f'assets/qr-play-{campaign}.svg')
-    quick = ''.join(f'<a href="{href(C.PATHS[lang][k])}">{e(t)}</a>' for k, t in H['quick'])
+    quick = ''.join(f'<a href="{generator_href(lang) if k == "generator" else href(C.PATHS[lang][k])}">{e(t)}</a>' for k, t in H['quick'])
     cards = ''.join(f'<div class="card"><span class="emoji" aria-hidden="true">{em}</span><h3>{e(t)}</h3><p>{e(d)}</p></div>' for em, t, d in H['cards'])
     avatars = ''.join(f'<div class="avatar"><img src="{href(f"assets/{f}.webp")}" alt="{e(a)}" width="300" height="300" loading="lazy" decoding="async"><span>{e(n)}</span><small>{e(s)}</small></div>'
                       for f, n, s, a in H['avatars'])
@@ -610,7 +738,7 @@ def home_page(puzzles, lang):
 <p style="text-align:center;margin-top:22px">{e(H['app_list'])}</p>
 <div class="row" style="justify-content:center;margin-top:20px"><a class="btn btn-primary play-store-link" data-utm-campaign="{campaign}" href="{play_link}" rel="noopener">{C.UI[lang]['cta_button']}</a></div>
 </div></section>
-<section><div class="wrap"><div class="head"><h2>{e(H['print_title'])}</h2><p>{e(H['print_sub'])}</p></div><div class="cards">{print_cards}</div>
+<section><div class="wrap"><div class="head"><h2>{e(H['print_title'])}</h2><p>{e(H['print_sub'])}</p></div>{generator_block(lang)}<div class="cards">{print_cards}</div>
 <p style="text-align:center;margin-top:20px"><a href="{href(C.PATHS[lang]['printable'])}">{e(H['print_all'])}</a> · <a href="{href(C.PATHS[lang]['guides'])}">{e(C.GUIDES_HUB[lang]['h1'])}</a></p></div></section>
 <section class="alt"><div class="wrap"><div class="head"><h2>{e(H['shots_title'])}</h2><p>{e(H['shots_sub'])}</p></div><div class="shots">{shots}</div></div></section>
 <section><div class="wrap" style="text-align:center"><div class="head"><h2>{e(H['demo_title'])}</h2><p>{e(H['demo_sub'])}</p></div>
@@ -787,6 +915,9 @@ td:first-child{border-left:0.9mm solid #14181F}td:last-child{border-right:0.9mm 
 
 
 def pdf_grid(p, values, cell_mm, font_pt):
+    if p['variant'] == 'killer':
+        side = f'{cell_mm * 9:g}mm'
+        return killer_svg(p, values, width=side, height=side)
     rows = []
     for r in range(9):
         tds = []
@@ -813,7 +944,7 @@ def pdf_html(p, lang):
     sol = 'Soluzione' if lang == 'it' else 'Solution'
     fonts = 'file:///' + os.path.join(ROOT, 'assets', 'fonts', 'fonts.css').replace('\\', '/')
     return f"""<!DOCTYPE html><html lang="{lang}"><head><meta charset="utf-8"><link rel="stylesheet" href="{fonts}"><style>{PRINT_CSS}</style></head><body>
-<div class="pg"><div class="band"><b>Grafite Sudoku</b><span>{e(name)} · {level} · {p['clues']} {'numeri' if lang == 'it' else 'clues'}</span></div>
+<div class="pg"><div class="band"><b>Grafite Sudoku</b><span>{e(name)} · {level} · {count_label(p, lang)}</span></div>
 <h1>{e(title)}</h1>{pdf_grid(p, p['puzzle'], 19.5 if big else 18, 30 if big else 22)}
 <p class="rules">{e(C.RULES[lang][p['variant']])}</p>
 <p class="foot">{'Soluzione a pagina 2' if lang == 'it' else 'Solution on page 2'} · {e(url)}</p></div>
@@ -847,6 +978,8 @@ h1{{font-family:"Shippori Mincho",serif;font-size:58px;line-height:1.1;margin:14
 
 
 def og_grid(p):
+    if p['variant'] == 'killer':
+        return killer_svg(p, p['puzzle'], width=522, height=522)
     rows = []
     for r in range(9):
         tds = []

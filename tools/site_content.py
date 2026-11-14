@@ -13,6 +13,7 @@ PATHS = {
     'it': {'home': '', 'printable': 'sudoku-da-stampare/', 'guides': 'tecniche-sudoku/'},
     'en': {'home': 'en/', 'printable': 'en/printable-sudoku/', 'guides': 'en/sudoku-techniques/'},
 }
+GENERATOR_PATHS = {'it': 'sudoku-da-stampare.html', 'en': 'sudoku-da-stampare.html?lang=en'}
 
 EXODUS_URL = 'https://reports.exodus-privacy.eu.org/it/reports/792199/'
 PRIVACY_URL = 'https://marcopdev-ctrl-alt-canc.github.io/-grafite-sudoku-privacy/'
@@ -32,9 +33,12 @@ UI = {
         'cta_button': 'Scarica su Google Play',
         'android_banner': "Sei su Android? L'app ha salvataggio permanente, trofei e la Sudoku Academy.",
         'android_install': 'Installa', 'close': 'Chiudi',
-        'generator_link': 'Generatore: un foglio A4 con più schemi',
-        'generator_text': ('Vuoi un foglio con più schemi insieme? Il <a href="{gen}">generatore di sudoku da stampare</a> '
-                           'crea al volo un foglio A4 con più schemi, le regole e le soluzioni.'),
+        'nav_generator': 'Generatore',
+        'generator_link': 'Crea il tuo foglio da stampare',
+        'generator_text': ('Con il <a href="{gen}">generatore</a> scegli tipo e difficoltà e hai subito un foglio A4 nuovo, '
+                           'con le regole e le soluzioni: Classico, X-Sudoku, Jigsaw, 12×12 e Killer. Ogni volta schemi diversi.'),
+        'generator_button': 'Apri il generatore',
+        'generator_killer': 'Un foglio di Killer',
     },
     'en': {
         'nav_home': 'Home', 'nav_printable': 'Printable sudoku', 'nav_guides': 'Techniques',
@@ -50,16 +54,18 @@ UI = {
         'cta_button': 'Get it on Google Play',
         'android_banner': 'On Android? The app keeps your progress, with trophies and the Sudoku Academy.',
         'android_install': 'Install', 'close': 'Close',
-        'generator_link': 'Generator: an A4 sheet with several puzzles',
-        'generator_text': ('Want several puzzles on one page? The <a href="{gen}">printable sudoku generator</a> '
-                           'builds an A4 sheet with several puzzles, the rules and the answers (the page opens in Italian; '
-                           'pick English from its language menu).'),
+        'nav_generator': 'Generator',
+        'generator_link': 'Make your own printable sheet',
+        'generator_text': ('With the <a href="{gen}">generator</a> you pick the type and difficulty and get a fresh A4 sheet '
+                           'right away, with the rules and the answers: Classic, X-Sudoku, Jigsaw, 12×12 and Killer. New puzzles every time.'),
+        'generator_button': 'Open the generator',
+        'generator_killer': 'A Killer sheet',
     },
 }
 
 # ---------------------------------------------------------------- categorie
 
-CATEGORY_ORDER = ('easy', 'medium', 'hard', 'large-print', 'x', 'jigsaw')
+CATEGORY_ORDER = ('easy', 'medium', 'hard', 'large-print', 'x', 'jigsaw', 'killer')
 
 CATEGORIES = {
     'it': {
@@ -127,6 +133,16 @@ CATEGORIES = {
                 "Nel sudoku jigsaw (detto anche sudoku irregolare) i riquadri 3×3 non ci sono: la griglia è divisa in nove regioni dalle forme libere, ognuna di nove caselle. Righe e colonne funzionano come sempre, e ogni regione deve contenere i numeri da 1 a 9.",
                 "Le forme strane sono anche un aiuto: dove una regione \"sporge\" in un'altra riga o colonna, il conteggio dei numeri mancanti dice spesso dove va un numero. Nel PDF le regioni sono disegnate con bordi spessi, così si distinguono anche in bianco e nero.",
                 "Ci sono schemi facili e medi, tutti con soluzione unica e la soluzione a pagina 2.",
+            ],
+        },        'killer': {
+            'slug': 'killer', 'name': 'Killer sudoku', 'short': 'Killer',
+            'title': 'Killer sudoku da stampare gratis (gabbie e somme, PDF con soluzioni)',
+            'h1': 'Killer sudoku da stampare',
+            'description': 'Killer sudoku da stampare gratis: nessun numero scritto, solo gabbie tratteggiate con la loro somma. PDF A4 con la soluzione a pagina 2.',
+            'intro': [
+                "Nel killer sudoku la griglia parte vuota: al posto dei numeri ci sono le gabbie, gruppi di caselle con un contorno tratteggiato e una somma nell'angolo. Le cifre di una gabbia danno quella somma e non si ripetono; righe, colonne e riquadri 3×3 funzionano come nel classico.",
+                "Si comincia dalle somme che si fanno in un modo solo: in due caselle 3 è per forza 1+2 e 17 è 8+9, in tre caselle 6 è 1+2+3 e 24 è 7+8+9. Poi aiuta la regola del 45: ogni riga, colonna e riquadro somma 45.",
+                "Ci sono schemi facili, fatti quasi solo di gabbie da due, e normali, con gabbie più lunghe. Tutti hanno una sola soluzione, si risolvono con la logica e nessuna gabbia è di una casella sola. La soluzione è a pagina 2.",
             ],
         },
     },
@@ -196,6 +212,16 @@ CATEGORIES = {
                 "The odd shapes are also a clue: where a region pokes into another row or column, counting the missing numbers often tells you where one must go. In the PDF the regions have thick borders, so they stay clear even in black and white.",
                 "There are easy and medium puzzles, all with a unique solution and the answers on page 2.",
             ],
+        },        'killer': {
+            'slug': 'killer-sudoku', 'name': 'Killer Sudoku', 'short': 'Killer',
+            'title': 'Killer Sudoku Printable – Free PDFs with Cages and Answers',
+            'h1': 'Printable killer sudoku',
+            'description': 'Free printable killer sudoku: no given numbers, just dashed cages with their sums. A4 PDFs with the solution on page 2.',
+            'intro': [
+                "In killer sudoku the grid starts empty: instead of numbers there are cages, groups of cells with a dashed outline and a sum in the corner. The digits in a cage add up to that sum and never repeat; rows, columns and 3×3 boxes work as in classic sudoku.",
+                "Start from the sums that can be made only one way: in two cells, 3 is always 1+2 and 17 is 8+9; in three cells, 6 is 1+2+3 and 24 is 7+8+9. Then the rule of 45 helps: every row, column and box adds up to 45.",
+                "There are easy puzzles, made mostly of two-cell cages, and normal ones with longer cages. All have exactly one solution, can be solved with logic, and no cage is a single cell. The solution is on page 2.",
+            ],
         },
     },
 }
@@ -204,7 +230,11 @@ CATEGORIES = {
 
 PUZZLE = {
     'it': {
-        'level': {'easy': 'facile', 'medium': 'medio', 'hard': 'difficile'},
+        'level': {'easy': 'facile', 'medium': 'medio', 'hard': 'difficile', 'normal': 'normale'},
+        'caption_killer': '{name} n. {n}: {cages} gabbie',
+        'facts_killer': '{cages} gabbie, nessun numero di partenza, livello {level}.',
+        'hint_killer': 'La gabbia da {sum} su {k} caselle (riga {r}, colonna {c}) può essere solo {combo}: parti da lì.',
+        'cages': 'gabbie',
         'h1': '{name} n. {n} da stampare',
         'title': '{name} n. {n} da stampare (PDF con soluzione)',
         'description': '{name} n. {n}, livello {level}: griglia da stampare in PDF A4 gratis con la soluzione a pagina 2 e un suggerimento su dove iniziare.',
@@ -231,7 +261,11 @@ PUZZLE = {
         'print_note': 'Stampa su A4 senza ridimensionare. A pagina 2 c\'è la soluzione.',
     },
     'en': {
-        'level': {'easy': 'easy', 'medium': 'medium', 'hard': 'hard'},
+        'level': {'easy': 'easy', 'medium': 'medium', 'hard': 'hard', 'normal': 'normal'},
+        'caption_killer': '{name} #{n}: {cages} cages',
+        'facts_killer': '{cages} cages, no given numbers, {level} level.',
+        'hint_killer': 'The {sum} cage in {k} cells (row {r}, column {c}) can only be {combo}: start there.',
+        'cages': 'cages',
         'h1': 'Printable {name} #{n}',
         'title': '{name} #{n}: Printable PDF with Answers',
         'description': '{name} #{n} ({level}): a free printable A4 PDF with the answers on page 2 and a hint on where to start.',
@@ -264,11 +298,13 @@ RULES = {
         'classic': 'Ogni riga, ogni colonna e ogni riquadro 3×3 deve contenere i numeri da 1 a 9, ognuno una volta sola.',
         'x': 'Come nel sudoku classico, ogni riga, colonna e riquadro 3×3 contiene i numeri da 1 a 9. In più anche le due diagonali colorate devono contenere i numeri da 1 a 9.',
         'jigsaw': 'Ogni riga e ogni colonna contiene i numeri da 1 a 9. Al posto dei riquadri 3×3 ci sono nove regioni dai bordi spessi: anche ognuna di loro contiene i numeri da 1 a 9.',
+        'killer': "Ogni riga, colonna e riquadro 3×3 contiene i numeri da 1 a 9. Le cifre di ogni gabbia tratteggiata sommano il numero nell'angolo e non si ripetono dentro la gabbia. Non ci sono numeri di partenza.",
     },
     'en': {
         'classic': 'Every row, every column and every 3×3 box must contain the numbers 1 to 9, each exactly once.',
         'x': 'As in classic sudoku, every row, column and 3×3 box contains 1 to 9. On top of that, both shaded diagonals must also contain 1 to 9.',
         'jigsaw': 'Every row and every column contains 1 to 9. Instead of 3×3 boxes there are nine regions with thick borders: each of them also contains 1 to 9.',
+        'killer': 'Every row, column and 3×3 box contains 1 to 9. The digits in each dashed cage add up to the number in its corner and never repeat within the cage. There are no given numbers.',
     },
 }
 
@@ -309,6 +345,12 @@ TIPS = {
             'Una regione lunga e stretta tocca molte righe: i suoi numeri si incastrano presto.',
             'Ricorda che righe e colonne valgono come nel classico: non dimenticarle guardando le forme.',
         ],
+        'killer': [
+            'Parti dalle gabbie con una sola combinazione: in due caselle 3 = 1+2, 4 = 1+3, 16 = 7+9, 17 = 8+9.',
+            'Quando in una gabbia resta una casella libera, la sua cifra è la somma meno quelle già scritte.',
+            'Regola del 45: ogni riquadro somma 45. Se le gabbie tutte dentro un riquadro lasciano fuori una casella, quella vale 45 meno la loro somma.',
+            'Annota le combinazioni possibili di una gabbia: incrociate con righe e colonne si restringono in fretta.',
+        ],
     },
     'en': {
         'easy': [
@@ -346,6 +388,12 @@ TIPS = {
             'A long, narrow region touches many rows: its numbers fall into place early.',
             'Remember that rows and columns still work as in the classic: do not forget them while looking at the shapes.',
         ],
+        'killer': [
+            'Start from cages with only one combination: in two cells 3 = 1+2, 4 = 1+3, 16 = 7+9, 17 = 8+9.',
+            'When a cage has one free cell left, its digit is the sum minus the digits already written.',
+            'Rule of 45: every box adds up to 45. If the cages fully inside a box leave out one cell, that cell is 45 minus their total.',
+            'Note the possible combinations of a cage: crossed with rows and columns they shrink quickly.',
+        ],
     },
 }
 
@@ -353,13 +401,13 @@ TIPS = {
 
 HUB = {
     'it': {
-        'title': 'Sudoku da stampare gratis: facili, difficili, X e jigsaw (PDF)',
+        'title': 'Sudoku da stampare gratis: facili, difficili, X, jigsaw e killer (PDF)',
         'h1': 'Sudoku da stampare gratis',
-        'description': 'Sudoku da stampare gratis in PDF con soluzioni: facili, medi, difficili, a caratteri grandi, Sudoku X e jigsaw. Senza registrazione e senza pubblicità.',
+        'description': 'Sudoku da stampare gratis in PDF con soluzioni: facili, medi, difficili, a caratteri grandi, Sudoku X, jigsaw e killer, più un generatore di fogli A4. Senza registrazione e senza pubblicità.',
         'intro': [
             "Sudoku da stampare gratis, uno per pagina: scegli il livello, apri lo schema e scarica il PDF A4. La soluzione sta sempre a pagina 2, così puoi dare il foglio a qualcun altro senza rovinargli la sorpresa.",
             "Tutti gli schemi hanno una sola soluzione, verificata dal programma che li ha generati: si risolvono con la logica, senza tirare a indovinare. Ogni pagina mostra anche la griglia a schermo, le regole e un suggerimento su dove iniziare.",
-            "Oltre al sudoku classico trovi due varianti: il Sudoku X, con le diagonali, e il sudoku jigsaw, con le regioni irregolari. Per chi preferisce numeri grandi ci sono gli schemi a caratteri grandi, facili da leggere.",
+            "Oltre al sudoku classico trovi tre varianti: il Sudoku X, con le diagonali, il sudoku jigsaw, con le regioni irregolari, e il killer sudoku, con le gabbie da sommare. Per chi preferisce numeri grandi ci sono gli schemi a caratteri grandi, facili da leggere.",
             "Non serve registrarsi e non ci sono pubblicità. Il sito è fatto da chi sviluppa Grafite Sudoku, l'app per Android: se un giorno vorrai giocare anche sul telefono, la trovi su Google Play.",
         ],
         'categories_title': 'Scegli il tipo di sudoku',
@@ -373,13 +421,13 @@ HUB = {
         ],
     },
     'en': {
-        'title': 'Free Printable Sudoku: Easy, Hard, X and Jigsaw (PDF)',
+        'title': 'Free Printable Sudoku: Easy, Hard, X, Jigsaw and Killer (PDF)',
         'h1': 'Free printable sudoku',
-        'description': 'Free printable sudoku PDFs with answers: easy, medium, hard, large print, X-Sudoku and jigsaw. No sign-up and no ads.',
+        'description': 'Free printable sudoku PDFs with answers: easy, medium, hard, large print, X-Sudoku, jigsaw and killer, plus an A4 sheet generator. No sign-up and no ads.',
         'intro': [
             "Free printable sudoku, one per page: pick a level, open the puzzle and download the A4 PDF. The answers are always on page 2, so you can hand the sheet to someone else without spoiling it.",
             "Every puzzle has exactly one solution, checked by the program that generated it: you solve them with logic, no guessing. Each page also shows the grid on screen, the rules and a hint on where to start.",
-            "Besides classic sudoku there are two variants: X-Sudoku, with the diagonals, and jigsaw sudoku, with irregular regions. If you prefer big digits, the large print puzzles are easy to read.",
+            "Besides classic sudoku there are three variants: X-Sudoku, with the diagonals, jigsaw sudoku, with irregular regions, and killer sudoku, with cages to add up. If you prefer big digits, the large print puzzles are easy to read.",
             "No sign-up, no ads. The site is made by the developer of Grafite Sudoku, the Android app: if one day you want to play on your phone too, you will find it on Google Play.",
         ],
         'categories_title': 'Pick a type of sudoku',
@@ -685,7 +733,7 @@ HOME = {
         'tagline': 'Il sudoku con anima giapponese, senza pubblicità.',
         'sub': 'Griglie disegnate come pagine di un taccuino, temi carta, livelli da scalare e lezioni che insegnano le tecniche vere. Nessuna pubblicità, nessun account.',
         'play': '▶ Gioca ora nel browser',
-        'quick': [('printable', 'Sudoku da stampare'), ('guides', 'Tecniche del sudoku')],
+        'quick': [('printable', 'Sudoku da stampare'), ('generator', 'Generatore di fogli'), ('guides', 'Tecniche del sudoku')],
         'why_title': 'Perché Grafite Sudoku',
         'why_sub': 'Un sudoku pensato per essere bello da guardare quanto da giocare, e per rispettare chi gioca.',
         'cards': [
@@ -719,7 +767,7 @@ HOME = {
                   ('shot-menu', 'Menu di Grafite Sudoku'),
                   ('shot-duello', 'Finestra Duello con il codice sfida da condividere')],
         'print_title': 'Sudoku da stampare, gratis',
-        'print_sub': 'Schemi in PDF con la soluzione a pagina 2: facili, medi, difficili, a caratteri grandi, Sudoku X e jigsaw.',
+        'print_sub': 'Schemi in PDF con la soluzione a pagina 2: facili, medi, difficili, a caratteri grandi, Sudoku X, jigsaw e killer. O un foglio tutto nuovo dal generatore.',
         'print_all': 'Tutti i sudoku da stampare',
         'demo_title': 'Prova subito, senza installare nulla',
         'demo_sub': "La versione browser include Classico, X-Sudoku, Jigsaw e 12×12, con i livelli, il Time Attack e le sfide tra amici, per assaggiare il gioco. Trofei, avatar, la Sudoku Academy, la Città e il Killer sono nell'app per Android.",
@@ -732,7 +780,7 @@ HOME = {
         'tagline': 'Sudoku with a Japanese soul, and no ads.',
         'sub': 'Grids drawn like notebook pages, paper themes, levels to climb and lessons that teach real solving techniques. No ads, no account.',
         'play': '▶ Play now in your browser',
-        'quick': [('printable', 'Printable sudoku'), ('guides', 'Sudoku techniques')],
+        'quick': [('printable', 'Printable sudoku'), ('generator', 'Sheet generator'), ('guides', 'Sudoku techniques')],
         'why_title': 'Why Grafite Sudoku',
         'why_sub': 'A sudoku made to be as nice to look at as it is to play, and to respect the people who play it.',
         'cards': [
@@ -766,7 +814,7 @@ HOME = {
                   ('shot-menu', 'Grafite Sudoku menu'),
                   ('shot-duello', 'Duel window with the challenge code to share')],
         'print_title': 'Free printable sudoku',
-        'print_sub': 'PDF puzzles with the answers on page 2: easy, medium, hard, large print, X-Sudoku and jigsaw.',
+        'print_sub': 'PDF puzzles with the answers on page 2: easy, medium, hard, large print, X-Sudoku, jigsaw and killer. Or a brand-new sheet from the generator.',
         'print_all': 'All printable sudoku',
         'demo_title': 'Try it now, nothing to install',
         'demo_sub': 'The browser version has Classic, X-Sudoku, Jigsaw and 12×12, with levels, Time Attack and challenges with friends, to get a taste of the game. Trophies, avatars, the Sudoku Academy, City and Killer are in the Android app.',

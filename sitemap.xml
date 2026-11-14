@@ -113,6 +113,18 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/jigsaw/"/>
   </url>
   <url>
+    <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/killer/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/killer/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/killer-sudoku/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/killer-sudoku/"/>
+  </url>
+  <url>
+    <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/killer-sudoku/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/killer/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/killer-sudoku/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/killer-sudoku/"/>
+  </url>
+  <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-facile-1/</loc>
     <lastmod>2026-11-14</lastmod>
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-facile-1/"/>
@@ -447,6 +459,54 @@
     <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-jigsaw-4/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/jigsaw-sudoku-4/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/jigsaw-sudoku-4/"/>
+  </url>
+  <url>
+    <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-killer-1/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-killer-1/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/killer-sudoku-1/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/killer-sudoku-1/"/>
+  </url>
+  <url>
+    <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/killer-sudoku-1/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-killer-1/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/killer-sudoku-1/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/killer-sudoku-1/"/>
+  </url>
+  <url>
+    <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-killer-2/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-killer-2/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/killer-sudoku-2/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/killer-sudoku-2/"/>
+  </url>
+  <url>
+    <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/killer-sudoku-2/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-killer-2/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/killer-sudoku-2/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/killer-sudoku-2/"/>
+  </url>
+  <url>
+    <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-killer-3/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-killer-3/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/killer-sudoku-3/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/killer-sudoku-3/"/>
+  </url>
+  <url>
+    <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/killer-sudoku-3/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-killer-3/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/killer-sudoku-3/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/killer-sudoku-3/"/>
+  </url>
+  <url>
+    <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-killer-4/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-killer-4/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/killer-sudoku-4/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/killer-sudoku-4/"/>
+  </url>
+  <url>
+    <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/killer-sudoku-4/</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare/sudoku-killer-4/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/killer-sudoku-4/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/en/printable-sudoku/killer-sudoku-4/"/>
   </url>
   <url>
     <loc>https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/tecniche-sudoku/</loc>

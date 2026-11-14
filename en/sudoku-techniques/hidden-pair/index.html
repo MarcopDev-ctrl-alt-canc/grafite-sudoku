@@ -56,6 +56,10 @@ main{padding:8px 0 48px}
 .sheet{background:var(--paper);color:var(--ink);border-radius:16px;padding:10px 8px;max-width:560px;overflow-x:auto}
 table.sudoku{border-collapse:collapse;margin:0 auto;font-family:"Noto Sans",sans-serif;color:var(--ink)}
 table.sudoku caption{caption-side:bottom;font-size:.8rem;color:#5a5446;padding-top:8px}
+svg.ksvg{display:block;width:100%;max-width:520px;height:auto;margin:0 auto}.kcap{text-align:center;font-size:.8rem;color:#5a5446;margin:8px 0 0}
+.gen{margin:24px 0;background:var(--paper);color:var(--ink);border-radius:18px;padding:22px;display:flex;flex-wrap:wrap;gap:16px 24px;align-items:center;border:2px solid var(--gold)}
+.gen h2{color:var(--ink);margin:0 0 .3em;font-size:1.35rem}.gen p{color:var(--ink-soft);margin:0}.gen p a{color:#7a5a12}.gen>div{flex:1 1 280px}
+.gen .btn-secondary{color:var(--ink);border-color:var(--ink)}.gen .btn-secondary:hover{color:#7a5a12}
 table.sudoku th{font-size:.62rem;font-weight:600;color:#7a7260;padding:0 3px 0 0;width:12px}
 table.sudoku thead th{height:14px}
 table.sudoku td{width:min(calc((100vw - 74px) / 9),52px);height:min(calc((100vw - 74px) / 9),52px);border:1px solid #b9ae92;text-align:center;font-size:min(5vw,1.55rem);color:#3d4a6b;background:#fbf8ef;padding:0}
@@ -98,7 +102,7 @@ footer.site .badge{margin-top:16px}footer.site .badge img{display:inline-block;m
 <div id="androidAppBanner"><span class="msg">On Android? The app keeps your progress, with trophies and the Sudoku Academy.</span><a class="cta-b play-store-link" data-utm-campaign="en-sudoku-techniques-hidden-pair-banner" href="https://play.google.com/store/apps/details?id=com.grafitesoft.grafitesudoku&amp;referrer=utm_source%3Dsite%26utm_medium%3Dweb%26utm_campaign%3Den-sudoku-techniques-hidden-pair-banner" rel="noopener">Install</a><button type="button" class="close" onclick="dismissAndroidBanner()" aria-label="Close">✕</button></div>
 <div class="rule"></div>
 <header class="top"><a class="brand" href="/grafite-sudoku/en/"><img src="/grafite-sudoku/assets/icon.webp" alt="" width="34" height="34">Grafite Sudoku</a>
-<nav aria-label="Site menu"><a href="/grafite-sudoku/en/printable-sudoku/">Printable sudoku</a><a href="/grafite-sudoku/en/sudoku-techniques/" aria-current="page">Techniques</a><a href="/grafite-sudoku/play/">Play in your browser</a><a class="lang" href="/grafite-sudoku/tecniche-sudoku/coppia-nascosta/" hreflang="it" lang="it">Italiano</a></nav></header>
+<nav aria-label="Site menu"><a href="/grafite-sudoku/en/printable-sudoku/">Printable sudoku</a><a href="/grafite-sudoku/sudoku-da-stampare.html?lang=en">Generator</a><a href="/grafite-sudoku/en/sudoku-techniques/" aria-current="page">Techniques</a><a href="/grafite-sudoku/play/">Play in your browser</a><a class="lang" href="/grafite-sudoku/tecniche-sudoku/coppia-nascosta/" hreflang="it" lang="it">Italiano</a></nav></header>
 <main id="main">
 <div class="wrap" style="max-width:820px">
 <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/grafite-sudoku/en/">Home</a></li><li><a href="/grafite-sudoku/en/sudoku-techniques/">Techniques</a></li><li aria-current="page">Hidden pair</li></ol></nav>
@@ -111,7 +115,7 @@ footer.site .badge{margin-top:16px}footer.site .badge img{display:inline-block;m
 </div>
 </main>
 <footer class="site"><div class="wrap">
-<div class="links"><a href="/grafite-sudoku/en/printable-sudoku/">Printable sudoku</a><a href="/grafite-sudoku/en/sudoku-techniques/">Techniques</a><a href="/grafite-sudoku/sudoku-da-stampare.html">Puzzle generator</a><a href="https://marcopdev-ctrl-alt-canc.github.io/-grafite-sudoku-privacy/">Privacy policy</a><a href="mailto:grafitesoft@gmail.com">Contact</a><a href="https://paypal.me/grafitesoft">Buy us a coffee</a></div>
+<div class="links"><a href="/grafite-sudoku/en/printable-sudoku/">Printable sudoku</a><a href="/grafite-sudoku/en/sudoku-techniques/">Techniques</a><a href="/grafite-sudoku/sudoku-da-stampare.html?lang=en">Generator</a><a href="https://marcopdev-ctrl-alt-canc.github.io/-grafite-sudoku-privacy/">Privacy policy</a><a href="mailto:grafitesoft@gmail.com">Contact</a><a href="https://paypal.me/grafitesoft">Buy us a coffee</a></div>
 <p>The app doesn't ask for the Internet permission and contains no Google libraries: <a href="https://reports.exodus-privacy.eu.org/it/reports/792199/">0 trackers according to Exodus Privacy</a> (report for version 2.9.3).</p>
 <p>Grafite Sudoku, a GrafiteSoft project. No ads, no account.</p>
 <p class="badge"><a href="https://pixelpicked.com/game/7SViDJjd0No/grafite-sudoku-offline-puzzle" target="_blank" rel="noopener"><img src="https://api.pixelpicked.com/api/badges/7SViDJjd0No/live.png?theme=dark" width="250" height="54" alt="Approved on PixelPicked" loading="lazy" referrerpolicy="no-referrer"></a></p>

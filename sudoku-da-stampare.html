@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sudoku da stampare gratis — Classico, X-Sudoku, Jigsaw, Sudoku 12 | Grafite Sudoku</title>
-<meta name="description" content="Genera e stampa gratis un foglio A4 con sudoku Classico, X-Sudoku, Jigsaw o Sudoku 12 (griglia 12×12), con le regole del gioco e le soluzioni incluse. Nessuna registrazione, nessun dato raccolto.">
+<title>Sudoku da stampare gratis — Classico, X-Sudoku, Jigsaw, Sudoku 12, Killer | Grafite Sudoku</title>
+<meta name="description" content="Genera e stampa gratis un foglio A4 con sudoku Classico, X-Sudoku, Jigsaw, Sudoku 12 (griglia 12×12) o Killer, con le regole del gioco e le soluzioni incluse. Nessuna registrazione, nessun dato raccolto.">
 <meta name="theme-color" content="#14181F">
 <link rel="canonical" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare.html">
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="Sudoku da stampare gratis — Classico, X-Sudoku, Jigsaw, Sudoku 12 | Grafite Sudoku">
+<meta property="og:title" content="Sudoku da stampare gratis — Classico, X-Sudoku, Jigsaw, Sudoku 12, Killer | Grafite Sudoku">
 <meta property="og:description" content="Schemi su un foglio A4, con regole e soluzioni, generati al volo nel browser. Anche la variante 12×12. Nessuna pubblicità, nessun account.">
 <meta property="og:url" content="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare.html">
 <meta property="og:image" content="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/assets/og-image.png">
@@ -23,7 +23,7 @@
   "@type": "WebApplication",
   "name": "Sudoku da stampare gratis — Grafite Sudoku",
   "url": "https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare.html",
-  "description": "Genera e stampa gratis un foglio A4 con sudoku Classico, X-Sudoku, Jigsaw o Sudoku 12 (griglia 12×12), tutti della stessa difficoltà o in progressione crescente, con regole e soluzioni incluse.",
+  "description": "Genera e stampa gratis un foglio A4 con sudoku Classico, X-Sudoku, Jigsaw, Sudoku 12 (griglia 12×12) o Killer, tutti della stessa difficoltà o in progressione crescente, con regole e soluzioni incluse.",
   "applicationCategory": "GameApplication",
   "operatingSystem": "Any (browser)",
   "offers": {
@@ -315,6 +315,12 @@
   .solutions-sheet .puzzles-grid.twelve table.grid { width: 85mm; height: 85mm; }
   .solutions-sheet table.grid.twelve td { font-size: 7.2pt; }
 
+  /* Killer: 4 per foglio come il Sudoku 12, griglie in SVG (gabbie
+     tratteggiate e somme), disegnate come nelle pagine del sito. */
+  .puzzles-grid.killer { grid-template-columns: repeat(2, 1fr); gap: 8mm; }
+  svg.ksvg { display: block; margin: 0 auto; width: 88mm; height: 88mm; }
+  .solutions-sheet svg.ksvg { width: 80mm; height: 80mm; }
+
   .hidden { display: none !important; }
 
   /* ---------- Stampa ---------- */
@@ -336,6 +342,7 @@
   @media (max-width: 700px) {
     .sheet { width: 100%; min-height: auto; padding: 6mm; }
     .puzzles-grid table.grid { width: 100% !important; height: auto !important; aspect-ratio: 1 / 1; }
+    svg.ksvg { width: 100% !important; height: auto !important; }
     .sheet-band .qr-block .qr-text { display: none; }
   }
 
@@ -441,7 +448,9 @@
     </p>
     <p class="hub-links">
       <a href="sudoku-da-stampare/" lang="it">Sudoku da stampare uno per pagina, con PDF e soluzione →</a>
+      <a href="sudoku-da-stampare/killer/" lang="it">Killer sudoku da stampare →</a>
       <a href="en/printable-sudoku/" lang="en">Printable sudoku in English, one per page →</a>
+      <a href="en/printable-sudoku/killer-sudoku/" lang="en">Printable killer sudoku →</a>
       <a href="tecniche-sudoku/" lang="it">Tecniche del sudoku →</a>
     </p>
   </header>
@@ -454,6 +463,7 @@
         <option value="x">X-Sudoku (diagonali)</option>
         <option value="jigsaw">Jigsaw (regioni irregolari)</option>
         <option value="twelve">Sudoku 12 (griglia 12×12)</option>
+        <option value="killer">Killer (gabbie con somme)</option>
         <option value="mixed">Misto (3 Classico + 3 X-Sudoku + 3 Jigsaw)</option>
       </select>
     </div>
@@ -1002,6 +1012,100 @@ if (typeof module !== "undefined" && module.exports) {
 const TWELVE_PER_PAGE = 4;
 const TWELVE_GRADUAL_SEQUENCE = ["media", "media", "expert", "expert"];
 
+// Killer: gli schemi arrivano da assets/killer-bank.json, 120 per
+// difficoltà generati e verificati con il motore dell'app (soluzione unica,
+// chiusura a logica, nessuna gabbia da una cella; vedi
+// sudoku_test/tool/killer_export.dart). Generarli qui vorrebbe dire copiare
+// in JavaScript tutto il risolutore Killer: la raccolta, ruotata e
+// specchiata a caso (8 modi), dà già 960 schemi per difficoltà.
+const KILLER_PER_PAGE = 4;
+const KILLER_GRADUAL_SEQUENCE = ["easy", "normal", "normal", "expert"];
+const KILLER_ALPHABET = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+let killerBankPromise = null;
+
+function loadKillerBank() {
+  if (!killerBankPromise) {
+    killerBankPromise = fetch("assets/killer-bank.json").then((r) => {
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return r.json();
+    });
+    killerBankPromise.catch(() => { killerBankPromise = null; });
+  }
+  return killerBankPromise;
+}
+
+function perPage(type) {
+  if (type === "twelve") return TWELVE_PER_PAGE;
+  if (type === "killer") return KILLER_PER_PAGE;
+  return 9;
+}
+
+// Uno schema della raccolta, girato in uno degli 8 modi del quadrato:
+// le gabbie seguono le caselle, quindi restano valide e con soluzione unica.
+function pickKiller(bank, difficulty, used) {
+  const list = bank[difficulty];
+  let k;
+  do { k = Math.floor(Math.random() * list.length); } while (used.has(difficulty + k) && used.size < list.length);
+  used.add(difficulty + k);
+  const t = Math.floor(Math.random() * 8);
+  const solution = new Array(81), cages = new Array(81);
+  for (let i = 0; i < 81; i++) {
+    let r = Math.floor(i / 9), c = i % 9;
+    if (t & 1) c = 8 - c;
+    if (t & 2) r = 8 - r;
+    if (t & 4) [r, c] = [c, r];
+    solution[r * 9 + c] = +list[k].s[i];
+    cages[r * 9 + c] = KILLER_ALPHABET.indexOf(list[k].g[i]);
+  }
+  return { puzzle: new Array(81).fill(0), solution, cages };
+}
+
+// Griglia Killer in SVG (lato di una casella = 100): stesso disegno delle
+// pagine del sito (tools/build_site.py, killer_svg) e dell'app: gabbie
+// tratteggiate rientrate nelle caselle, somma nell'angolo della prima
+// casella su un fondo carta che interrompe il tratteggio.
+function renderKillerSvg(cages, solution, digits) {
+  const inset = 9;
+  const same = (g, r, c) => r >= 0 && r < 9 && c >= 0 && c < 9 && cages[r * 9 + c] === g;
+  const start = (along, diag, edge, sign) => (along ? (diag ? edge - sign * inset : edge) : edge + sign * inset);
+  let path = "";
+  const seg = (a, b, c, d) => { path += "M" + a + " " + b + "L" + c + " " + d; };
+  const sums = {}, first = {};
+  for (let i = 0; i < 81; i++) {
+    const g = cages[i], r = Math.floor(i / 9), c = i % 9;
+    sums[g] = (sums[g] || 0) + solution[i];
+    if (!(g in first)) first[g] = i;
+    const x0 = c * 100, y0 = r * 100, x1 = x0 + 100, y1 = y0 + 100;
+    if (!same(g, r - 1, c)) seg(start(same(g, r, c - 1), same(g, r - 1, c - 1), x0, 1), y0 + inset, start(same(g, r, c + 1), same(g, r - 1, c + 1), x1, -1), y0 + inset);
+    if (!same(g, r + 1, c)) seg(start(same(g, r, c - 1), same(g, r + 1, c - 1), x0, 1), y1 - inset, start(same(g, r, c + 1), same(g, r + 1, c + 1), x1, -1), y1 - inset);
+    if (!same(g, r, c - 1)) seg(x0 + inset, start(same(g, r - 1, c), same(g, r - 1, c - 1), y0, 1), x0 + inset, start(same(g, r + 1, c), same(g, r + 1, c - 1), y1, -1));
+    if (!same(g, r, c + 1)) seg(x1 - inset, start(same(g, r - 1, c), same(g, r - 1, c + 1), y0, 1), x1 - inset, start(same(g, r + 1, c), same(g, r + 1, c + 1), y1, -1));
+  }
+  let thin = "", thick = "";
+  for (let k = 1; k < 9; k++) {
+    const d = "M" + k * 100 + " 0V900M0 " + k * 100 + "H900";
+    if (k % 3) thin += d; else thick += d;
+  }
+  let out =
+    '<svg class="ksvg" viewBox="-4 -4 908 908" aria-hidden="true">' +
+    '<rect x="-4" y="-4" width="908" height="908" fill="#fff"/>' +
+    '<path d="' + thin + '" stroke="#b9ae92" stroke-width="2" fill="none"/>' +
+    '<path d="' + path + '" stroke="#3d3a33" stroke-width="2.6" stroke-dasharray="9 7" fill="none"/>' +
+    '<path d="' + thick + '" stroke="#14181F" stroke-width="7" fill="none"/>' +
+    '<rect x="0" y="0" width="900" height="900" stroke="#14181F" stroke-width="8" fill="none"/>';
+  Object.keys(first).forEach((g) => {
+    const i = first[g], r = Math.floor(i / 9), c = i % 9, s = String(sums[g]);
+    out += '<rect x="' + (c * 100 + 4) + '" y="' + (r * 100 + 4) + '" width="' + (13 * s.length + 8) + '" height="25" fill="#fff"/>' +
+      '<text x="' + (c * 100 + 8) + '" y="' + (r * 100 + 25) + '" font-size="23" font-weight="700" fill="#14181F" font-family="Noto Sans,Arial,sans-serif">' + s + "</text>";
+  });
+  if (digits) {
+    for (let i = 0; i < 81; i++) {
+      out += '<text x="' + ((i % 9) * 100 + 50) + '" y="' + (Math.floor(i / 9) * 100 + 68) + '" font-size="50" text-anchor="middle" fill="#4a4436" font-family="Noto Sans,Arial,sans-serif">' + digits[i] + "</text>";
+    }
+  }
+  return out + "</svg>";
+}
+
 // Traduzioni (30/09/2026, richiesta di Marco: "creiamo la pagina web anche
 // nelle altre lingue disponibili in app"): le 5 lingue già presenti
 // nell'app/demo Flutter (vedi lib/l10n/*.arb). Difficoltà/variante/regole
@@ -1297,6 +1401,57 @@ const I18N = {
   },
 };
 
+const KILLER_I18N = {
+  it: {
+    type: "Killer (gabbie con somme)", label: "Killer", status: "Preparazione dei Killer…",
+    error: "Non riesco a caricare gli schemi Killer: apri la pagina dal sito, non da un file salvato.",
+    diff: { easy: "Facile", normal: "Normale", expert: "Esperto" },
+    rules: "Riempi la griglia 9×9 in modo che ogni riga, colonna e riquadro 3×3 contengano i numeri da 1 a 9. Non ci sono numeri di partenza: le cifre di ogni gabbia tratteggiata sommano il numero nel suo angolo e non si ripetono dentro la gabbia. Ogni schema ha una sola soluzione, raggiungibile con la logica.",
+    intro: " Ora anche il Killer: gabbie con le somme, quattro schemi per foglio.",
+  },
+  en: {
+    type: "Killer (cages with sums)", label: "Killer", status: "Preparing Killer puzzles…",
+    error: "Couldn't load the Killer puzzles: open this page from the website, not from a saved file.",
+    diff: { easy: "Easy", normal: "Normal", expert: "Expert" },
+    rules: "Fill the 9×9 grid so that every row, column and 3×3 box contains the numbers 1 to 9. There are no given numbers: the digits in each dashed cage add up to the number in its corner and never repeat within the cage. Every puzzle has exactly one solution, reachable by logic.",
+    intro: " Now Killer too: cages with sums, four puzzles per sheet.",
+  },
+  es: {
+    type: "Killer (jaulas con sumas)", label: "Killer", status: "Preparando los Killer…",
+    error: "No se pudieron cargar los Killer: abre esta página desde el sitio, no desde un archivo guardado.",
+    diff: { easy: "Fácil", normal: "Normal", expert: "Experto" },
+    rules: "Rellena la cuadrícula 9×9 de modo que cada fila, columna y región 3×3 contenga los números del 1 al 9. No hay números de partida: las cifras de cada jaula punteada suman el número de su esquina y no se repiten dentro de la jaula. Cada esquema tiene una sola solución, a la que se llega con lógica.",
+    intro: " Ahora también el Killer: jaulas con sumas, cuatro esquemas por hoja.",
+  },
+  pt: {
+    type: "Killer (gaiolas com somas)", label: "Killer", status: "Preparando os Killer…",
+    error: "Não foi possível carregar os Killer: abra esta página pelo site, não por um arquivo salvo.",
+    diff: { easy: "Fácil", normal: "Normal", expert: "Especialista" },
+    rules: "Preencha a grade 9×9 de modo que cada linha, coluna e região 3×3 contenha os números de 1 a 9. Não há números iniciais: os algarismos de cada gaiola tracejada somam o número do canto e não se repetem dentro da gaiola. Cada esquema tem uma única solução, alcançável com lógica.",
+    intro: " Agora também o Killer: gaiolas com somas, quatro esquemas por folha.",
+  },
+  id: {
+    type: "Killer (sangkar dengan jumlah)", label: "Killer", status: "Menyiapkan soal Killer…",
+    error: "Soal Killer tidak bisa dimuat: buka halaman ini dari situs, bukan dari file yang disimpan.",
+    diff: { easy: "Mudah", normal: "Normal", expert: "Ahli" },
+    rules: "Isi kisi 9×9 sehingga setiap baris, kolom, dan kotak 3×3 berisi angka 1 sampai 9. Tidak ada angka awal: angka di setiap sangkar bergaris putus-putus berjumlah sama dengan angka di sudutnya dan tidak berulang di dalam sangkar. Setiap soal punya satu solusi saja, yang bisa dicapai dengan logika.",
+    intro: " Sekarang ada Killer juga: sangkar dengan jumlah, empat soal per lembar.",
+  },
+};
+Object.keys(KILLER_I18N).forEach((lang) => {
+  const d = I18N[lang], k = KILLER_I18N[lang];
+  d.typeOptions.killer = k.type;
+  d.typeLabels.killer = k.label;
+  d.statusGenerating.killer = k.status;
+  d.statusKillerError = k.error;
+  d.diffOptionsKiller = k.diff;
+  d.difficultyLabels.normal = k.diff.normal;
+  d.rulesText.killer = k.rules;
+  d.introP += k.intro;
+  d.metaTitle = d.metaTitle.replace(" |", ", Killer |");
+  d.metaDescription += k.intro;
+});
+
 // Disegna i confini di regione del Jigsaw cella per cella: dove il vicino
 // (sopra/sotto/sinistra/destra) appartiene a una regione diversa — o è
 // fuori griglia — il lato prende il bordo spesso, esattamente come i
@@ -1324,6 +1479,11 @@ function applyJigsawBorders(table, regionOf) {
 }
 
 function renderGridTable(cells, isSolution, type, regionOf, n = 9) {
+  if (type === "killer") {
+    const holder = document.createElement("div");
+    holder.innerHTML = renderKillerSvg(regionOf, cells.solution, isSolution ? cells.solution : null);
+    return holder.firstChild;
+  }
   const table = document.createElement("table");
   table.className =
     "grid" + (type === "jigsaw" ? " jigsaw" : "") + (type === "twelve" ? " twelve" : "");
@@ -1402,6 +1562,10 @@ function relabelAllCards(lang) {
 
 function sequenceForMode(type) {
   const mode = document.getElementById("mode-select").value;
+  if (type === "killer") {
+    if (mode === "gradual") return KILLER_GRADUAL_SEQUENCE.slice();
+    return new Array(KILLER_PER_PAGE).fill(document.getElementById("difficulty-select").value);
+  }
   if (type === "twelve") {
     if (mode === "gradual") return TWELVE_GRADUAL_SEQUENCE.slice();
     const fixed = document.getElementById("difficulty-select").value;
@@ -1448,7 +1612,11 @@ function updateDifficultyOptions(lang, type) {
   const sel = document.getElementById("difficulty-select");
   const prev = sel.value;
   let html, fallback;
-  if (type === "twelve") {
+  if (type === "killer") {
+    const o = I18N[lang].diffOptionsKiller;
+    html = ["easy", "normal", "expert"].map((v) => '<option value="' + v + '">' + o[v] + "</option>").join("");
+    fallback = "easy";
+  } else if (type === "twelve") {
     const o = I18N[lang].diffOptionsTwelve;
     html = '<option value="media">' + o.media + "</option>" + '<option value="expert">' + o.expert + "</option>";
     fallback = "media";
@@ -1468,7 +1636,7 @@ function updateDifficultyOptions(lang, type) {
 
 function updateGenerateButtonLabel(lang, type) {
   const btn = document.getElementById("generate-btn");
-  const count = type === "twelve" ? TWELVE_PER_PAGE : 9;
+  const count = perPage(type);
   btn.textContent = I18N[lang].generateBtn.replace("{n}", count);
 }
 
@@ -1484,6 +1652,7 @@ function buildTypeOptions(lang) {
     '<option value="x">' + o.x + "</option>" +
     '<option value="jigsaw">' + o.jigsaw + "</option>" +
     '<option value="twelve">' + o.twelve + "</option>" +
+    '<option value="killer">' + o.killer + "</option>" +
     '<option value="mixed">' + o.mixed + "</option>";
   sel.value = prev;
 }
@@ -1496,7 +1665,7 @@ function buildModeOptions(lang, type) {
   const sel = document.getElementById("mode-select");
   const prev = sel.value || "fixed";
   const o = I18N[lang].modeOptions;
-  const count = type === "twelve" ? TWELVE_PER_PAGE : 9;
+  const count = perPage(type);
   sel.innerHTML =
     '<option value="fixed">' + o.fixed + "</option>" +
     '<option value="gradual">' + o.gradual + " (1→" + count + ")</option>";
@@ -1518,6 +1687,8 @@ function buildLangSelector(lang) {
 // quella del browser se tra le 5 supportate, altrimenti l'italiano (lingua
 // principale del sito).
 function detectDefaultLang() {
+  const fromUrl = new URLSearchParams(location.search).get("lang");
+  if (fromUrl && I18N[fromUrl]) return fromUrl;
   try {
     const saved = localStorage.getItem("grafiteSudokuPrintLang");
     if (saved && I18N[saved]) return saved;
@@ -1624,6 +1795,8 @@ function generateAndRender() {
       ? statusGenerating.jigsaw
       : type === "twelve"
       ? statusGenerating.twelve
+      : type === "killer"
+      ? statusGenerating.killer
       : isMixed
       ? statusGenerating.mixed
       : statusGenerating.default;
@@ -1631,8 +1804,19 @@ function generateAndRender() {
   // Un piccolo rinvio lascia al browser il tempo di disegnare il
   // messaggio di stato prima del lavoro sincrono (che può durare fino a
   // circa un secondo o due per 9 schemi, di solito molto meno).
-  setTimeout(() => {
+  setTimeout(async () => {
     const t0 = performance.now();
+    let bank = null;
+    if (type === "killer") {
+      try {
+        bank = await loadKillerBank();
+      } catch (e) {
+        status.textContent = I18N[lang].statusKillerError;
+        btn.disabled = false;
+        return;
+      }
+    }
+    const usedKiller = new Set();
     const sequence = sequenceForMode(type);
     const puzzlesGrid = document.getElementById("puzzles-grid");
     const solutionsGrid = document.getElementById("solutions-grid");
@@ -1640,6 +1824,8 @@ function generateAndRender() {
     solutionsGrid.innerHTML = "";
     puzzlesGrid.classList.toggle("twelve", type === "twelve");
     solutionsGrid.classList.toggle("twelve", type === "twelve");
+    puzzlesGrid.classList.toggle("killer", type === "killer");
+    solutionsGrid.classList.toggle("killer", type === "killer");
 
     const typeLabels = I18N[lang].typeLabels;
     lastRenderMeta = {
@@ -1653,8 +1839,14 @@ function generateAndRender() {
     sequence.forEach((difficulty, i) => {
       const puzzleType = isMixed ? typeForIndexMixed(i) : type;
       const n = puzzleType === "twelve" ? 12 : 9;
-      const { puzzle, solution, regionOf } = generateForDifficulty(puzzleType, difficulty);
       const typeLabel = isMixed ? typeLabels[puzzleType] : null;
+      if (puzzleType === "killer") {
+        const k = pickKiller(bank, difficulty, usedKiller);
+        puzzlesGrid.appendChild(renderCard(i, difficulty, k, false, "killer", k.cages, typeLabel));
+        solutionsGrid.appendChild(renderCard(i, difficulty, k, true, "killer", k.cages, typeLabel));
+        return;
+      }
+      const { puzzle, solution, regionOf } = generateForDifficulty(puzzleType, difficulty);
       puzzlesGrid.appendChild(renderCard(i, difficulty, puzzle, false, puzzleType, regionOf, typeLabel, n));
       solutionsGrid.appendChild(renderCard(i, difficulty, solution, true, puzzleType, regionOf, typeLabel, n));
     });
@@ -1705,6 +1897,10 @@ document.getElementById("lang-select").addEventListener("change", (e) => {
 document.getElementById("generate-btn").addEventListener("click", generateAndRender);
 document.getElementById("print-btn").addEventListener("click", () => window.print());
 
+const typeFromUrl = new URLSearchParams(location.search).get("type");
+if (typeFromUrl && document.querySelector('#type-select option[value="' + typeFromUrl + '"]')) {
+  document.getElementById("type-select").value = typeFromUrl;
+}
 buildLangSelector(detectDefaultLang());
 applyLanguage(detectDefaultLang());
 initQrCodes();

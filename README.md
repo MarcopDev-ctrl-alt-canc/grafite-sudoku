@@ -57,6 +57,18 @@ Chrome (o Chromium: variabile `CHROME`).
 Le pagine vanno aggiunte solo se hanno valore proprio: centinaia di pagine
 quasi uguali sono viste come contenuto sottile.
 
+## Killer
+
+Gli schemi Killer (pagine `killer`/`killer-sudoku` e la raccolta del generatore,
+`assets/killer-bank.json`) non si generano qui: vengono dal motore dell'app,
+verificati uno per uno (soluzione unica, chiusura a logica, nessuna gabbia da
+una cella). Per rifarli, dalla cartella dell'app:
+
+    dart run tool/killer_export.dart <cartella di questo repository>
+
+Scrive `data/killer.json` (gli schemi fissi delle pagine) e
+`assets/killer-bank.json`. Seed fissi: rilanciarlo dà gli stessi file.
+
 ## Regole del sito
 
 - Nessuno script di analytics, nessun CDN di terze parti, nessun cookie. Font

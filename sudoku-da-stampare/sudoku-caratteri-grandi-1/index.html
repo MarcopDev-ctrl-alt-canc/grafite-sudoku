@@ -56,6 +56,10 @@ main{padding:8px 0 48px}
 .sheet{background:var(--paper);color:var(--ink);border-radius:16px;padding:10px 8px;max-width:560px;overflow-x:auto}
 table.sudoku{border-collapse:collapse;margin:0 auto;font-family:"Noto Sans",sans-serif;color:var(--ink)}
 table.sudoku caption{caption-side:bottom;font-size:.8rem;color:#5a5446;padding-top:8px}
+svg.ksvg{display:block;width:100%;max-width:520px;height:auto;margin:0 auto}.kcap{text-align:center;font-size:.8rem;color:#5a5446;margin:8px 0 0}
+.gen{margin:24px 0;background:var(--paper);color:var(--ink);border-radius:18px;padding:22px;display:flex;flex-wrap:wrap;gap:16px 24px;align-items:center;border:2px solid var(--gold)}
+.gen h2{color:var(--ink);margin:0 0 .3em;font-size:1.35rem}.gen p{color:var(--ink-soft);margin:0}.gen p a{color:#7a5a12}.gen>div{flex:1 1 280px}
+.gen .btn-secondary{color:var(--ink);border-color:var(--ink)}.gen .btn-secondary:hover{color:#7a5a12}
 table.sudoku th{font-size:.62rem;font-weight:600;color:#7a7260;padding:0 3px 0 0;width:12px}
 table.sudoku thead th{height:14px}
 table.sudoku td{width:min(calc((100vw - 74px) / 9),52px);height:min(calc((100vw - 74px) / 9),52px);border:1px solid #b9ae92;text-align:center;font-size:min(5vw,1.55rem);color:#3d4a6b;background:#fbf8ef;padding:0}
@@ -98,7 +102,7 @@ footer.site .badge{margin-top:16px}footer.site .badge img{display:inline-block;m
 <div id="androidAppBanner"><span class="msg">Sei su Android? L'app ha salvataggio permanente, trofei e la Sudoku Academy.</span><a class="cta-b play-store-link" data-utm-campaign="sudoku-da-stampare-sudoku-caratteri-grandi-1-banner" href="https://play.google.com/store/apps/details?id=com.grafitesoft.grafitesudoku&amp;referrer=utm_source%3Dsite%26utm_medium%3Dweb%26utm_campaign%3Dsudoku-da-stampare-sudoku-caratteri-grandi-1-banner" rel="noopener">Installa</a><button type="button" class="close" onclick="dismissAndroidBanner()" aria-label="Chiudi">✕</button></div>
 <div class="rule"></div>
 <header class="top"><a class="brand" href="/grafite-sudoku/"><img src="/grafite-sudoku/assets/icon.webp" alt="" width="34" height="34">Grafite Sudoku</a>
-<nav aria-label="Menu del sito"><a href="/grafite-sudoku/sudoku-da-stampare/" aria-current="page">Sudoku da stampare</a><a href="/grafite-sudoku/tecniche-sudoku/">Tecniche</a><a href="/grafite-sudoku/play/">Gioca nel browser</a><a class="lang" href="/grafite-sudoku/en/printable-sudoku/large-print-sudoku-easy/" hreflang="en" lang="en">English</a></nav></header>
+<nav aria-label="Menu del sito"><a href="/grafite-sudoku/sudoku-da-stampare/" aria-current="page">Sudoku da stampare</a><a href="/grafite-sudoku/sudoku-da-stampare.html">Generatore</a><a href="/grafite-sudoku/tecniche-sudoku/">Tecniche</a><a href="/grafite-sudoku/play/">Gioca nel browser</a><a class="lang" href="/grafite-sudoku/en/printable-sudoku/large-print-sudoku-easy/" hreflang="en" lang="en">English</a></nav></header>
 <main id="main">
 <div class="wrap">
 <nav class="crumbs" aria-label="Percorso"><ol><li><a href="/grafite-sudoku/">Home</a></li><li><a href="/grafite-sudoku/sudoku-da-stampare/">Sudoku da stampare</a></li><li><a href="/grafite-sudoku/sudoku-da-stampare/caratteri-grandi/">Caratteri grandi</a></li><li aria-current="page">Sudoku a caratteri grandi n. 1</li></ol></nav>
@@ -125,7 +129,7 @@ footer.site .badge{margin-top:16px}footer.site .badge img{display:inline-block;m
 </div>
 </main>
 <footer class="site"><div class="wrap">
-<div class="links"><a href="/grafite-sudoku/sudoku-da-stampare/">Sudoku da stampare</a><a href="/grafite-sudoku/tecniche-sudoku/">Tecniche</a><a href="/grafite-sudoku/sudoku-da-stampare.html">Generatore di schemi</a><a href="https://marcopdev-ctrl-alt-canc.github.io/-grafite-sudoku-privacy/">Informativa privacy</a><a href="mailto:grafitesoft@gmail.com">Scrivici</a><a href="https://paypal.me/grafitesoft">Offrici un caffè</a></div>
+<div class="links"><a href="/grafite-sudoku/sudoku-da-stampare/">Sudoku da stampare</a><a href="/grafite-sudoku/tecniche-sudoku/">Tecniche</a><a href="/grafite-sudoku/sudoku-da-stampare.html">Generatore</a><a href="https://marcopdev-ctrl-alt-canc.github.io/-grafite-sudoku-privacy/">Informativa privacy</a><a href="mailto:grafitesoft@gmail.com">Scrivici</a><a href="https://paypal.me/grafitesoft">Offrici un caffè</a></div>
 <p>L'app non chiede il permesso Internet e non contiene librerie Google: <a href="https://reports.exodus-privacy.eu.org/it/reports/792199/">0 tracker secondo Exodus Privacy</a> (report della versione 2.9.3).</p>
 <p>Grafite Sudoku, un progetto GrafiteSoft. Nessuna pubblicità, nessun account.</p>
 <p class="badge"><a href="https://pixelpicked.com/game/7SViDJjd0No/grafite-sudoku-offline-puzzle" target="_blank" rel="noopener"><img src="https://api.pixelpicked.com/api/badges/7SViDJjd0No/live.png?theme=dark" width="250" height="54" alt="Approved on PixelPicked" loading="lazy" referrerpolicy="no-referrer"></a></p>

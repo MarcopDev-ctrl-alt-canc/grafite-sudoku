@@ -141,6 +141,15 @@ def main():
     for pz in B.load_puzzles():
         for lang in B.C.LANGS:
             file = os.path.normpath(os.path.join(ROOT, pz[f'path_{lang}'], 'index.html'))
+            if pz['variant'] == 'killer':
+                # Griglie in SVG: lo schema vuoto, poi la soluzione cifra per cifra.
+                svgs = re.findall(r'<svg class="ksvg".*?</svg>', open(file, encoding='utf-8').read())
+                got = [re.findall(r'text-anchor="middle"[^>]*>(\d)<', s) for s in svgs]
+                if got != [[], [str(v) for v in pz['solution']]]:
+                    problems.append(f'{pz[f"path_{lang}"]}: griglia diversa da data/killer.json')
+                if not os.path.exists(os.path.join(ROOT, pz[f'pdf_{lang}'])):
+                    problems.append(f'{pz[f"path_{lang}"]}: manca il PDF')
+                continue
             tables = parsed[file].tables
             want = [[str(v or '') for v in pz['puzzle']], [str(v) for v in pz['solution']]]
             # la prima td è la casella vuota d'angolo delle intestazioni
