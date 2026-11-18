@@ -741,8 +741,8 @@ def home_page(puzzles, lang):
     cards = ''.join(f'<div class="card"><h3>{e(t)}</h3><p>{e(d)}</p></div>' for _, t, d in H['cards'])
     avatars = ''.join(f'<div class="avatar"><img src="{href(f"assets/{f}.webp")}" alt="{e(a)}" width="300" height="300" loading="lazy" decoding="async"><span>{e(n)}</span><small>{e(s)}</small></div>'
                       for f, n, s, a in H['avatars'])
-    shots = ''.join(f'<img src="{href(f"assets/{f}.webp")}" alt="{e(a)}" width="480" height="1077" loading="lazy" decoding="async">' for f, a in H['shots'])
-    shots += f'<img src="{href("assets/shot-traguardi.webp")}" alt="{e(H["trophy_alt"])}" width="440" height="987" loading="lazy" decoding="async">'
+    shots = ''.join(f'<img src="{href(f"assets/{f}.webp")}" alt="{e(a)}" width="480" height="1021" loading="lazy" decoding="async">' for f, a in H['shots'])
+    shots += f'<img src="{href("assets/shot-traguardi.webp")}" alt="{e(H["trophy_alt"])}" width="440" height="936" loading="lazy" decoding="async">'
     print_index = ''.join(f'<li><a href="{href(cat_path(lang, c))}">{e(C.CATEGORIES[lang][c]["h1"])}</a></li>' for c in C.CATEGORY_ORDER)
     killer = next(p for p in puzzles if p['category'] == 'killer')
     stamp = f'Killer n. {killer["number"]} · da stampare' if lang == 'it' else f'Killer #{killer["number"]} · print it'
