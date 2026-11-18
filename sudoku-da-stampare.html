@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sudoku da stampare gratis — Classico, X-Sudoku, Jigsaw, Sudoku 12, Killer | Grafite Sudoku</title>
 <meta name="description" content="Genera e stampa gratis un foglio A4 con sudoku Classico, X-Sudoku, Jigsaw, Sudoku 12 (griglia 12×12) o Killer, con le regole del gioco e le soluzioni incluse. Nessuna registrazione, nessun dato raccolto.">
-<meta name="theme-color" content="#14181F">
+<meta name="theme-color" content="#F2ECDD" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#14181F" media="(prefers-color-scheme: dark)">
 <link rel="canonical" href="https://marcopdev-ctrl-alt-canc.github.io/grafite-sudoku/sudoku-da-stampare.html">
 
 <meta property="og:type" content="website">
@@ -66,7 +66,7 @@
   }
 
   h1, h2, .brand {
-    font-family: 'Shippori Mincho', serif;
+    font-family: 'Grafite Display', sans-serif;
   }
 
   a { color: var(--gold); }
@@ -186,7 +186,7 @@
   }
 
   .sheet-band .title {
-    font-family: 'Shippori Mincho', serif;
+    font-family: 'Grafite Display', sans-serif;
     font-size: 15pt;
     font-weight: 700;
   }
@@ -296,7 +296,7 @@
     background: rgba(20,24,31,0.035);
   }
   .rules-box .rules-title {
-    font-family: 'Shippori Mincho', serif;
+    font-family: 'Grafite Display', sans-serif;
     font-weight: 700;
     font-size: 9pt;
     color: var(--ink);
@@ -385,7 +385,7 @@
   }
   .site-nav a{
     display:flex; align-items:center; gap:10px;
-    font-family:"Shippori Mincho", serif;
+    font-family:"Grafite Display", sans-serif;
     font-weight:700;
     font-size:1rem;
     color: var(--cream);
@@ -417,6 +417,35 @@
   .site-footer a{ color: var(--gold-soft); text-decoration:none; }
   .site-footer .links{ margin-bottom: 10px; }
   .site-footer .links a{ margin: 0 10px; }
+
+  /* Restyling 11/2026: stessi colori del resto del sito (carta e grafite in
+     chiaro, notte e oro in scuro). Solo a schermo: il foglio stampato non cambia. */
+  @media screen {
+    :root { --bg:#F2ECDD; --fg:#201A16; --soft:#4A4038; --line:#D8CFB8; --panel:#F8F4EA; --link:#2F4C82; --btn:#201A16; --btn-ink:#F8F4EA; }
+    body { background: var(--bg); color: var(--fg); font-family: 'Grafite Text', 'Noto Sans', Arial, sans-serif; }
+    a, .hub-links a { color: var(--link); }
+    .page-head { text-align: left; }
+    .page-head p { color: var(--soft); margin: 0; }
+    .page-head h1 { font-size: clamp(1.8rem, 4.6vw, 2.8rem); }
+    .controls { background: var(--panel); border: 1px solid var(--line); border-radius: 4px; justify-content: flex-start; }
+    .field label { text-transform: none; letter-spacing: 0; font-size: .9rem; color: var(--soft); }
+    select, .btn { border-radius: 6px; border: 1px solid var(--fg); background: var(--panel); color: var(--fg); font-family: inherit; }
+    .btn { background: var(--btn); color: var(--btn-ink); border: none; min-height: 44px; }
+    .btn.secondary { background: transparent; border: 1.5px solid var(--fg); color: var(--fg); }
+    .status { color: var(--soft); }
+    .sheet { box-shadow: 0 10px 30px rgba(20,24,31,.14); border: 1px solid var(--line); }
+    .site-nav { border-bottom: 3px solid var(--fg); padding-bottom: 10px; }
+    .site-nav a { color: var(--fg); }
+    .site-nav a:hover { color: var(--fg); text-decoration: underline; }
+    .site-footer { border-top: 3px solid var(--fg); color: var(--soft); }
+    .site-footer a { color: var(--fg); text-decoration: underline; }
+    #androidAppBanner { background: var(--panel); border-bottom: 1px solid var(--line); }
+    #androidAppBanner .msg { color: var(--fg); }
+    #androidAppBanner .cta { background: var(--btn); color: var(--btn-ink); }
+  }
+  @media screen and (prefers-color-scheme: dark) {
+    :root { --bg:#14181F; --fg:#ECE7DD; --soft:#C2BCB1; --line:#3D4147; --panel:#1D222B; --link:#D9B466; --btn:#C4A04E; --btn-ink:#221A0C; }
+  }
 </style>
 </head>
 <body>

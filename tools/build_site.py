@@ -36,7 +36,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PLAY_BASE = 'https://play.google.com/store/apps/details?id=com.grafitesoft.grafitesudoku'
 VERIFY_META = '<meta name="google-site-verification" content="WP-10qfUs4_3SNMS-6EU87PhdrAV6gjnLxrvXVHdN6A">'
 GENERATOR = 'sudoku-da-stampare.html'
-APP_LANGUAGES = ['it', 'en', 'es', 'pt', 'id', 'de', 'fr']
+APP_LANGUAGES = ['it', 'en', 'es', 'pt', 'id', 'de', 'fr', 'tr', 'pl']
 e = html.escape
 
 # Badge di PixelPicked (immagine live con like e follower): l'unica risorsa
@@ -306,102 +306,125 @@ def mini_svg(p, size=96):
 # ---------------------------------------------------------------- layout
 
 CSS = """
-:root{--ink:#14181F;--ink-soft:#2a3040;--paper:#F0EAD9;--paper-line:#dcd3ba;--gold:#C99A3E;--gold-soft:#e3c583;--cream:#f7f3e8;--muted:#b9bdc7;--max:1060px}
+:root{--bg:#F2ECDD;--panel:#F8F4EA;--ink:#201A16;--soft:#4A4038;--muted:#665C50;--line:#D8CFB8;--link:#2F4C82;
+--btn:#201A16;--btn-ink:#F8F4EA;--gold:#C4A04E;--paper:#FBF8EF;--paper-ink:#201A16;--paper-soft:#4A4038;--max:1080px;color-scheme:light}
+@media (prefers-color-scheme:dark){:root{--bg:#14181F;--panel:#1D222B;--ink:#ECE7DD;--soft:#C2BCB1;--muted:#9B968C;--line:#3D4147;--link:#D9B466;
+--btn:#C4A04E;--btn-ink:#221A0C;--paper:#F2ECDD;color-scheme:dark}}
 *{box-sizing:border-box}html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--ink);color:var(--cream);font-family:"Noto Sans",system-ui,-apple-system,sans-serif;line-height:1.6;font-size:1rem}
-h1,h2,h3{font-family:"Shippori Mincho","Noto Serif",serif;font-weight:700;line-height:1.25;margin:0 0 .5em;color:var(--cream)}
-h1{font-size:clamp(1.8rem,5vw,2.8rem)}h2{font-size:clamp(1.35rem,3.4vw,1.9rem);margin-top:1.6em}h3{font-size:1.1rem}
-a{color:var(--gold-soft)}a:hover{color:#fff}p,li{color:#dde0e6}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Grafite Text","Noto Sans",system-ui,-apple-system,sans-serif;line-height:1.6;font-size:1.0625rem}
+h1,h2,h3{font-family:"Grafite Display","Noto Sans",sans-serif;font-weight:800;line-height:1.15;margin:0 0 .5em;color:var(--ink);text-wrap:balance}
+h1{font-size:clamp(2rem,5.4vw,3.4rem);letter-spacing:-.01em}h2{font-size:clamp(1.45rem,3.4vw,2.1rem);margin-top:1.6em}h3{font-size:1.15rem}
+a{color:var(--link);text-underline-offset:.18em;text-decoration-thickness:1px}a:hover{color:var(--ink);text-decoration-thickness:2px}
+p,li{color:var(--soft)}
 .wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
-.rule{height:3px;background:linear-gradient(90deg,var(--gold),transparent)}
-.top{display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;padding:14px 16px;max-width:var(--max);margin:0 auto}
-.brand{display:flex;align-items:center;gap:10px;font-family:"Shippori Mincho",serif;font-weight:700;font-size:1.1rem;color:var(--cream);text-decoration:none;margin-right:auto}
+.rule{display:none}
+.top{display:flex;flex-wrap:wrap;align-items:center;gap:4px 22px;padding:10px 16px;max-width:var(--max);margin:0 auto}
+header.top{border-bottom:3px solid var(--ink)}
+.brand{display:flex;align-items:center;gap:10px;font-family:"Grafite Display",sans-serif;font-weight:800;font-size:1.2rem;color:var(--ink);text-decoration:none;margin-right:auto}
 .brand img{border-radius:8px}
-.top nav{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:.92rem}
-.top nav a{color:var(--cream);text-decoration:none;padding:6px 0;min-height:44px;display:inline-flex;align-items:center}
-.top nav a:hover,.top nav a[aria-current]{color:var(--gold-soft)}
-.lang{border:1px solid var(--paper-line);border-radius:999px;padding:4px 12px!important;min-height:32px!important}
-main{padding:8px 0 48px}
-.crumbs{font-size:.85rem;color:var(--muted);margin:10px 0 18px}.crumbs ol{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:6px}
-.crumbs li{color:var(--muted)}.crumbs li+li:before{content:"›";margin-right:6px}.crumbs a{color:var(--muted)}
-.lead{font-size:1.06rem;max-width:720px}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:13px 22px;border-radius:12px;font-weight:700;text-decoration:none;min-height:48px;border:0;font-size:1rem;cursor:pointer}
-.btn-primary{background:var(--gold);color:#1a1408}.btn-primary:hover{color:#000;background:#d8ab52}
-.btn-secondary{background:transparent;color:var(--cream);border:1.5px solid var(--paper-line)}.btn-secondary:hover{color:var(--gold-soft)}
+.top nav{display:flex;flex-wrap:wrap;gap:0 18px;font-size:.95rem}
+.top nav a{color:var(--ink);text-decoration:none;min-height:44px;display:inline-flex;align-items:center;border-bottom:2px solid transparent}
+.top nav a:hover,.top nav a[aria-current]{border-bottom-color:var(--ink)}
+.lang{border:1px solid var(--ink)!important;border-radius:4px;padding:0 10px;min-height:32px!important;align-self:center}
+main{padding:8px 0 56px}
+.crumbs{font-size:.88rem;color:var(--muted);margin:14px 0 20px}.crumbs ol{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:6px}
+.crumbs li{color:var(--muted)}.crumbs li+li:before{content:"/";margin-right:6px}.crumbs a{color:var(--muted)}
+.lead{font-size:1.12rem;max-width:68ch}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:12px 22px;border-radius:6px;font-family:"Grafite Display",sans-serif;font-weight:700;font-size:1.05rem;text-decoration:none;min-height:48px;border:0;cursor:pointer}
+.btn-primary{background:var(--btn);color:var(--btn-ink)}.btn-primary:hover{color:var(--btn-ink);opacity:.88}
+.btn-secondary{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}.btn-secondary:hover{color:var(--ink);background:var(--panel)}
 .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
-.card{background:#1c212c;border:1px solid #2a3040;border-radius:16px;padding:20px}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
-.card h3{margin-top:0}.card p{margin:.3em 0 0;color:#c4c8d1;font-size:.95rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));column-gap:32px}
+.card{border-top:1px solid var(--line);padding:16px 0 20px}
+.card h3{margin:0}.card h3 a{color:var(--ink);text-decoration:none}.card h3 a:hover{text-decoration:underline}
+.card p{margin:.35em 0 0;font-size:.98rem}
 .pz-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;list-style:none;padding:0;margin:0}
-.pz-list a{display:flex;flex-direction:column;align-items:center;gap:8px;background:#1c212c;border:1px solid #2a3040;border-radius:14px;padding:14px;text-decoration:none;color:var(--cream);text-align:center;font-size:.92rem}
-.pz-list a:hover{border-color:var(--gold)}.pz-list small{color:var(--muted)}
-.sheet{background:var(--paper);color:var(--ink);border-radius:16px;padding:10px 8px;max-width:560px;overflow-x:auto}
-table.sudoku{border-collapse:collapse;margin:0 auto;font-family:"Noto Sans",sans-serif;color:var(--ink)}
-table.sudoku caption{caption-side:bottom;font-size:.8rem;color:#5a5446;padding-top:8px}
-svg.ksvg{display:block;width:100%;max-width:520px;height:auto;margin:0 auto}.kcap{text-align:center;font-size:.8rem;color:#5a5446;margin:8px 0 0}
-.gen{margin:24px 0;background:var(--paper);color:var(--ink);border-radius:18px;padding:22px;display:flex;flex-wrap:wrap;gap:16px 24px;align-items:center;border:2px solid var(--gold)}
-.gen h2{color:var(--ink);margin:0 0 .3em;font-size:1.35rem}.gen p{color:var(--ink-soft);margin:0}.gen p a{color:#7a5a12}.gen>div{flex:1 1 280px}
-.gen .btn-secondary{color:var(--ink);border-color:var(--ink)}.gen .btn-secondary:hover{color:#7a5a12}
+.pz-list a{display:flex;flex-direction:column;align-items:center;gap:8px;background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:14px;text-decoration:none;color:var(--paper-ink);text-align:center;font-size:.95rem}
+.pz-list a:hover{border-color:var(--paper-ink);box-shadow:0 0 0 1px var(--paper-ink)}.pz-list small{color:var(--paper-soft)}
+.sheet{background:var(--paper);color:var(--paper-ink);border:1px solid var(--line);border-radius:4px;padding:12px 8px;max-width:560px;overflow-x:auto}
+table.sudoku{border-collapse:collapse;margin:0 auto;font-family:"Noto Sans",sans-serif;color:var(--paper-ink)}
+table.sudoku caption{caption-side:bottom;font-size:.82rem;color:var(--paper-soft);padding-top:8px}
+svg.ksvg{display:block;width:100%;max-width:520px;height:auto;margin:0 auto}.kcap{text-align:center;font-size:.82rem;color:var(--paper-soft);margin:8px 0 0}
+.gen{margin:24px 0;background:var(--paper);color:var(--paper-ink);border:1px solid var(--line);border-left:6px solid var(--paper-ink);border-radius:4px;padding:22px;display:flex;flex-wrap:wrap;gap:16px 24px;align-items:center}
+.gen h2{color:var(--paper-ink);margin:0 0 .3em;font-size:1.4rem}.gen p{color:var(--paper-soft);margin:0}.gen p a{color:#2F4C82}.gen>div{flex:1 1 280px}
+.gen .btn-primary,.cta .btn-primary{background:var(--paper-ink);color:var(--paper)}
+.gen .btn-secondary{color:var(--paper-ink);box-shadow:inset 0 0 0 1.5px var(--paper-ink)}.gen .btn-secondary:hover{background:#efe8d6}
 table.sudoku th{font-size:.62rem;font-weight:600;color:#7a7260;padding:0 3px 0 0;width:12px}
 table.sudoku thead th{height:14px}
-table.sudoku td{width:min(calc((100vw - 74px) / 9),52px);height:min(calc((100vw - 74px) / 9),52px);border:1px solid #b9ae92;text-align:center;font-size:min(5vw,1.55rem);color:#3d4a6b;background:#fbf8ef;padding:0}
+table.sudoku td{width:min(calc((100vw - 74px) / 9),52px);height:min(calc((100vw - 74px) / 9),52px);border:1px solid #b9ae92;text-align:center;font-size:min(5vw,1.55rem);color:#3C5A92;background:#fbf8ef;padding:0}
 table.sudoku.big td{font-size:min(6.4vw,1.9rem)}
-table.sudoku td.g{color:var(--ink);font-weight:700}
+table.sudoku td.g{color:#201A16;font-weight:700}
 table.sudoku td.dg{background:#efe2c2}
-table.sudoku td.br{border-right:3px solid var(--ink)}table.sudoku td.bb{border-bottom:3px solid var(--ink)}
-table.sudoku tbody tr:first-child td{border-top:3px solid var(--ink)}table.sudoku tbody tr:last-child td{border-bottom:3px solid var(--ink)}
-table.sudoku tbody td:nth-child(2){border-left:3px solid var(--ink)}table.sudoku tbody td:last-child{border-right:3px solid var(--ink)}
-.layout{display:grid;grid-template-columns:minmax(0,560px) minmax(0,1fr);gap:28px;align-items:start}
+table.sudoku td.br{border-right:3px solid #201A16}table.sudoku td.bb{border-bottom:3px solid #201A16}
+table.sudoku tbody tr:first-child td{border-top:3px solid #201A16}table.sudoku tbody tr:last-child td{border-bottom:3px solid #201A16}
+table.sudoku tbody td:nth-child(2){border-left:3px solid #201A16}table.sudoku tbody td:last-child{border-right:3px solid #201A16}
+.layout{display:grid;grid-template-columns:minmax(0,560px) minmax(0,1fr);gap:32px;align-items:start}
 @media (max-width:860px){.layout{grid-template-columns:1fr}}
-details{background:#1c212c;border:1px solid #2a3040;border-radius:14px;padding:12px 16px;margin-top:16px}
-summary{cursor:pointer;font-weight:700;color:var(--gold-soft);min-height:32px;display:flex;align-items:center}
-details .sheet{margin-top:12px}
-.note{font-size:.88rem;color:var(--muted)}
-.hint{border-left:3px solid var(--gold);padding:4px 0 4px 14px;margin:16px 0}
-.pager{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:28px}
+details{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:6px 0;margin-top:18px}
+summary{cursor:pointer;font-weight:700;color:var(--ink);min-height:44px;display:flex;align-items:center}
+details .sheet{margin:8px 0 10px}
+.note{font-size:.9rem;color:var(--muted)}
+.hint{border-left:3px solid var(--ink);padding:4px 0 4px 14px;margin:16px 0}
+.pager{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:32px;border-top:1px solid var(--line);padding-top:8px}
 .pager a{min-height:44px;display:inline-flex;align-items:center}
-.cta{margin-top:40px;background:var(--paper);color:var(--ink);border-radius:18px;padding:22px;display:flex;flex-wrap:wrap;gap:18px;align-items:center}
-.cta h2{color:var(--ink);margin:0 0 .3em;font-size:1.35rem}.cta p{color:var(--ink-soft);margin:0}.cta>div{flex:1 1 260px}
-figure{margin:20px 0;background:var(--paper);border-radius:16px;padding:14px;max-width:520px}
+.cta{margin-top:48px;background:var(--paper);color:var(--paper-ink);border:1px solid var(--line);border-top:6px solid var(--paper-ink);border-radius:4px;padding:22px;display:flex;flex-wrap:wrap;gap:18px;align-items:center}
+.cta h2{color:var(--paper-ink);margin:0 0 .3em;font-size:1.4rem}.cta p{color:var(--paper-soft);margin:0}.cta>div{flex:1 1 260px}
+figure{margin:20px 0;background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:14px;max-width:520px}
 figure svg{width:100%;height:auto;display:block}
-figcaption{color:var(--ink-soft);font-size:.88rem;margin-top:8px}
-.faq dt{font-weight:700;color:var(--cream);margin-top:12px}.faq dd{margin:4px 0 0;color:#c4c8d1}
-footer.site{border-top:1px solid #2a3040;padding:28px 0 40px;font-size:.88rem;color:#a3a8b4;text-align:center}
-footer.site .links{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 18px;margin-bottom:12px}
-footer.site .links a{min-height:44px;display:inline-flex;align-items:center}
-footer.site p{color:#a3a8b4;margin:.4em auto;max-width:720px}
+figcaption{color:var(--paper-soft);font-size:.9rem;margin-top:8px}
+.faq dt{font-weight:700;color:var(--ink);margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}.faq dd{margin:4px 0 0;color:var(--soft)}
+footer.site{border-top:3px solid var(--ink);padding:24px 0 40px;font-size:.9rem;color:var(--muted)}
+footer.site .links{display:flex;flex-wrap:wrap;gap:0 20px;margin-bottom:10px}
+footer.site .links a{min-height:44px;display:inline-flex;align-items:center;color:var(--ink)}
+footer.site p{color:var(--muted);margin:.4em 0;max-width:72ch}
 footer.site .badge{margin-top:16px}footer.site .badge img{display:inline-block;max-width:100%;height:auto}
-#androidAppBanner{display:none;position:sticky;top:0;z-index:100;align-items:center;gap:12px;background:#0d1016;border-bottom:1px solid var(--gold);padding:10px 16px;font-size:.88rem}
-#androidAppBanner .msg{flex:1;color:var(--cream)}
-#androidAppBanner .cta-b{background:var(--gold);color:#1a1408;font-weight:700;padding:8px 16px;border-radius:8px;text-decoration:none;white-space:nowrap}
-#androidAppBanner .close{background:none;border:none;color:#c4c8d1;font-size:1.1rem;cursor:pointer;min-width:44px;min-height:44px}
-.skip{position:absolute;left:-999px}.skip:focus{left:8px;top:8px;background:var(--gold);color:#000;padding:8px;z-index:200}
+#androidAppBanner{display:none;position:sticky;top:0;z-index:100;align-items:center;gap:12px;background:var(--panel);border-bottom:1px solid var(--line);padding:8px 16px;font-size:.9rem}
+#androidAppBanner .msg{flex:1;color:var(--ink)}
+#androidAppBanner .cta-b{background:var(--btn);color:var(--btn-ink);font-weight:700;padding:8px 16px;border-radius:6px;text-decoration:none;white-space:nowrap}
+#androidAppBanner .close{background:none;border:none;color:var(--soft);font-size:1.1rem;cursor:pointer;min-width:44px;min-height:44px}
+.skip{position:absolute;left:-999px}.skip:focus{left:8px;top:8px;background:var(--btn);color:var(--btn-ink);padding:8px;z-index:200}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 """
 
 HOME_CSS = """
-.hero{padding:40px 0 56px;text-align:center}.hero img{border-radius:26px;box-shadow:0 18px 40px rgba(0,0,0,.45);margin-bottom:24px}
-.hero .tagline{color:var(--gold-soft);font-family:"Shippori Mincho",serif;font-size:1.25rem;margin-bottom:10px}
-.hero p.sub{max-width:580px;margin:0 auto 28px;color:#d0d3db}.hero .row{justify-content:center}
-.quick{margin-top:18px;justify-content:center;font-size:.95rem}.quick a{min-height:44px;display:inline-flex;align-items:center}
-section{padding:48px 0}section.alt{background:#191e28}
-.head{text-align:center;max-width:660px;margin:0 auto 32px}.head h2{margin-top:0}.head p{color:#c4c8d1}
-.card .emoji{font-size:1.7rem;display:block;margin-bottom:8px}
-.avatars{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px}
-.avatar{background:var(--paper);border-radius:18px;padding:16px 12px;text-align:center}
-.avatar img{width:100%;max-width:150px;height:auto;margin-bottom:8px}
-.avatar span{display:block;color:var(--ink);font-weight:700;font-size:.9rem}.avatar small{color:var(--ink-soft);font-size:.8rem}
-.qr{display:flex;align-items:center;justify-content:center;gap:16px;max-width:420px;margin:24px auto 0;padding:16px 20px;background:var(--paper);border-radius:16px;text-align:left}
-.qr b{color:var(--ink);display:block}.qr small{color:var(--ink-soft)}
-.shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:18px}
-.shots img{width:100%;height:auto;border-radius:18px;border:1px solid #2a3040}
-.demo-note{background:#1c212c;border:1px solid #2a3040;border-radius:16px;padding:18px 22px;max-width:720px;margin:24px auto 0;color:#d0d3db}
+.hero{padding:44px 0 56px;border-bottom:1px solid var(--line)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:40px;align-items:center}
+@media (max-width:820px){.hero .wrap{grid-template-columns:1fr}.stack{max-width:420px;margin:8px auto 0}}
+.hero h1{margin:0 0 .25em}.hero .tagline{font-family:"Grafite Display",sans-serif;font-weight:700;font-size:clamp(1.25rem,2.6vw,1.6rem);line-height:1.25;color:var(--ink);margin-bottom:14px;text-wrap:balance}
+.hero p.sub{max-width:52ch;margin:0 0 26px}
+.quick{margin-top:14px;gap:0 20px;font-size:.98rem}.quick a{min-height:44px;display:inline-flex;align-items:center;color:var(--ink)}
+.stack{position:relative;display:block;padding:14px 10px 0;text-decoration:none}
+.stack:before,.stack:after{content:"";position:absolute;inset:14px 10px 0;background:var(--paper);border:1px solid var(--line);border-radius:2px}
+.stack:before{transform:rotate(-3deg)}.stack:after{transform:rotate(2deg);inset:8px 18px 6px}
+.stack .page{position:relative;z-index:1;background:var(--paper);border:1px solid var(--line);border-radius:2px;padding:16px;box-shadow:0 10px 30px rgba(20,24,31,.12)}
+.stack .page svg{max-width:none}
+.stamp{position:absolute;z-index:2;left:50%;top:52%;transform:translate(-50%,-50%) rotate(-4deg);background:var(--paper);color:var(--paper-ink);border:2px solid var(--paper-ink);padding:6px 16px;font-family:"Grafite Display",sans-serif;font-weight:700;font-size:1.15rem;white-space:nowrap}
+.stack:hover .stamp{background:var(--paper-ink);color:var(--paper)}
+section{padding:52px 0;border-bottom:1px solid var(--line)}
+.head{max-width:62ch;margin:0 0 26px}.head h2{margin-top:0}.head p{margin:0}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:start}
+@media (max-width:820px){.split{grid-template-columns:1fr}}
+.avatars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.avatar{background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:12px 10px;text-align:center}
+.avatar img{width:100%;max-width:150px;height:auto;margin-bottom:6px}
+.avatar span{display:block;color:var(--paper-ink);font-weight:700;font-size:.92rem}.avatar small{color:var(--paper-soft);font-size:.8rem}
+.qr{display:flex;align-items:center;gap:16px;max-width:440px;margin:22px 0 0;padding:14px 18px;background:var(--paper);border:1px solid var(--line);border-radius:4px}
+.qr b{color:var(--paper-ink);display:block}.qr small{color:var(--paper-soft)}
+.index{list-style:none;padding:0;margin:0;columns:2 260px;column-gap:32px}
+.index li{break-inside:avoid;border-top:1px solid var(--line)}
+.index a{display:flex;justify-content:space-between;align-items:center;min-height:52px;color:var(--ink);text-decoration:none;font-family:"Grafite Display",sans-serif;font-weight:700;font-size:1.08rem}
+.index a:after{content:"→";color:var(--muted);font-family:"Grafite Text",sans-serif}.index a:hover:after{color:var(--ink)}
+.shots{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px}
+.shots img{flex:0 0 auto;width:min(46vw,220px);height:auto;border-radius:12px;border:1px solid var(--line);scroll-snap-align:start}
+.demo{display:flex;flex-wrap:wrap;gap:20px 40px;align-items:flex-start}.demo>div{flex:1 1 380px}
+.demo-note{border-left:3px solid var(--ink);padding:2px 0 2px 16px;margin:20px 0 0;color:var(--soft);max-width:62ch}
 """
 
 
 def fonts_head():
     f = href('assets/fonts/')
-    return (f'<link rel="preload" href="{f}noto-sans-latin.woff2" as="font" type="font/woff2" crossorigin>'
-            f'<link rel="preload" href="{f}shippori-mincho-700-latin.woff2" as="font" type="font/woff2" crossorigin>'
+    return (f'<link rel="preload" href="{f}grafite-text-400.woff2" as="font" type="font/woff2" crossorigin>'
+            f'<link rel="preload" href="{f}grafite-display-800.woff2" as="font" type="font/woff2" crossorigin>'
             f'<link rel="stylesheet" href="{f}fonts.css">')
 
 
@@ -475,7 +498,7 @@ def page(*, lang, path, title, description, body, alternates, campaign, og_image
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{e(title)}</title>
 <meta name="description" content="{e(description)}">
-<meta name="theme-color" content="#14181F">
+<meta name="theme-color" content="#F2ECDD" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#14181F" media="(prefers-color-scheme: dark)">
 {extra_head}<link rel="canonical" href="{absolute(path)}">
 {alt_tags}
 <meta property="og:type" content="website">
@@ -499,7 +522,6 @@ def page(*, lang, path, title, description, body, alternates, campaign, og_image
 <body>
 <a class="skip" href="#main">{'Vai al contenuto' if lang == 'it' else 'Skip to content'}</a>
 <div id="androidAppBanner"><span class="msg">{U['android_banner']}</span><a class="cta-b play-store-link" data-utm-campaign="{campaign}-banner" href="{e(play_url(campaign + '-banner'))}" rel="noopener">{U['android_install']}</a><button type="button" class="close" onclick="dismissAndroidBanner()" aria-label="{U['close']}">✕</button></div>
-<div class="rule"></div>
 <header class="top"><a class="brand" href="{href(C.PATHS[lang]['home'])}"><img src="{href('assets/icon.webp')}" alt="" width="34" height="34">Grafite Sudoku</a>
 <nav aria-label="{U['menu']}">{''.join(nav)}</nav></header>
 <main id="main">
@@ -716,34 +738,39 @@ def home_page(puzzles, lang):
     campaign = 'home' if lang == 'it' else 'en-home'
     qr = href(f'assets/qr-play-{campaign}.svg')
     quick = ''.join(f'<a href="{generator_href(lang) if k == "generator" else href(C.PATHS[lang][k])}">{e(t)}</a>' for k, t in H['quick'])
-    cards = ''.join(f'<div class="card"><span class="emoji" aria-hidden="true">{em}</span><h3>{e(t)}</h3><p>{e(d)}</p></div>' for em, t, d in H['cards'])
+    cards = ''.join(f'<div class="card"><h3>{e(t)}</h3><p>{e(d)}</p></div>' for _, t, d in H['cards'])
     avatars = ''.join(f'<div class="avatar"><img src="{href(f"assets/{f}.webp")}" alt="{e(a)}" width="300" height="300" loading="lazy" decoding="async"><span>{e(n)}</span><small>{e(s)}</small></div>'
                       for f, n, s, a in H['avatars'])
     shots = ''.join(f'<img src="{href(f"assets/{f}.webp")}" alt="{e(a)}" width="480" height="1077" loading="lazy" decoding="async">' for f, a in H['shots'])
-    print_cards = ''.join(f'<div class="card"><h3><a href="{href(cat_path(lang, c))}">{e(C.CATEGORIES[lang][c]["h1"])}</a></h3></div>' for c in C.CATEGORY_ORDER)
+    shots += f'<img src="{href("assets/shot-traguardi.webp")}" alt="{e(H["trophy_alt"])}" width="440" height="987" loading="lazy" decoding="async">'
+    print_index = ''.join(f'<li><a href="{href(cat_path(lang, c))}">{e(C.CATEGORIES[lang][c]["h1"])}</a></li>' for c in C.CATEGORY_ORDER)
+    killer = next(p for p in puzzles if p['category'] == 'killer')
+    stamp = f'Killer n. {killer["number"]} · da stampare' if lang == 'it' else f'Killer #{killer["number"]} · print it'
     play_link = e(play_url(campaign))
     body = f"""<section class="hero"><div class="wrap">
-<img src="{href('assets/icon.webp')}" alt="{'Icona di Grafite Sudoku' if lang == 'it' else 'Grafite Sudoku icon'}" width="120" height="120" fetchpriority="high">
+<div>
 <h1>{e(H['h1'])}</h1>
-<div class="tagline">{e(H['tagline'])}</div>
+<p class="tagline">{e(H['tagline'])}</p>
 <p class="sub">{e(H['sub'])}</p>
 <div class="row"><a class="btn btn-primary" href="{href('play/')}">{H['play']}</a><a class="btn btn-secondary play-store-link" data-utm-campaign="{campaign}" href="{play_link}" rel="noopener">{C.UI[lang]['cta_button']}</a></div>
 <div class="row quick">{quick}</div>
+</div>
+<a class="stack" href="{href(killer[f'path_{lang}'])}"><div class="page">{killer_svg(killer, [0] * 81)}</div><span class="stamp">{e(stamp)}</span></a>
 </div></section>
 <section><div class="wrap"><div class="head"><h2>{e(H['why_title'])}</h2><p>{e(H['why_sub'])}</p></div><div class="cards">{cards}</div></div></section>
-<section class="alt"><div class="wrap"><div class="head"><h2>{e(H['app_title'])}</h2><p>{e(H['app_sub'])}</p>
+<section><div class="wrap split"><div><div class="head"><h2>{e(H['app_title'])}</h2><p>{e(H['app_sub'])}</p></div>
+<p>{e(H['app_list'])}</p>
+<div class="row" style="margin-top:20px"><a class="btn btn-primary play-store-link" data-utm-campaign="{campaign}" href="{play_link}" rel="noopener">{C.UI[lang]['cta_button']}</a></div>
 <div class="qr"><img src="{qr}" alt="QR code Google Play" width="84" height="84" loading="lazy"><div><b>{e(H['qr_headline'])}</b><small>{e(H['qr_caption'])}</small></div></div></div>
 <div class="avatars">{avatars}</div>
-<div class="avatar" style="max-width:240px;margin:28px auto 0"><img src="{href('assets/shot-traguardi.webp')}" alt="{e(H['trophy_alt'])}" width="440" height="987" loading="lazy" decoding="async" style="max-width:100%;border-radius:12px"><small>{e(H['trophy_caption'])}</small></div>
-<p style="text-align:center;margin-top:22px">{e(H['app_list'])}</p>
-<div class="row" style="justify-content:center;margin-top:20px"><a class="btn btn-primary play-store-link" data-utm-campaign="{campaign}" href="{play_link}" rel="noopener">{C.UI[lang]['cta_button']}</a></div>
 </div></section>
-<section><div class="wrap"><div class="head"><h2>{e(H['print_title'])}</h2><p>{e(H['print_sub'])}</p></div>{generator_block(lang)}<div class="cards">{print_cards}</div>
-<p style="text-align:center;margin-top:20px"><a href="{href(C.PATHS[lang]['printable'])}">{e(H['print_all'])}</a> · <a href="{href(C.PATHS[lang]['guides'])}">{e(C.GUIDES_HUB[lang]['h1'])}</a></p></div></section>
-<section class="alt"><div class="wrap"><div class="head"><h2>{e(H['shots_title'])}</h2><p>{e(H['shots_sub'])}</p></div><div class="shots">{shots}</div></div></section>
-<section><div class="wrap" style="text-align:center"><div class="head"><h2>{e(H['demo_title'])}</h2><p>{e(H['demo_sub'])}</p></div>
-<a class="btn btn-primary" href="{href('play/')}">{H['play']}</a>
-<div class="demo-note">{H['demo_note']}</div></div></section>"""
+<section><div class="wrap"><div class="head"><h2>{e(H['print_title'])}</h2><p>{e(H['print_sub'])}</p></div>{generator_block(lang)}<ul class="index">{print_index}</ul>
+<p style="margin-top:20px"><a href="{href(C.PATHS[lang]['printable'])}">{e(H['print_all'])}</a> · <a href="{href(C.PATHS[lang]['guides'])}">{e(C.GUIDES_HUB[lang]['h1'])}</a></p></div></section>
+<section><div class="wrap"><div class="head"><h2>{e(H['shots_title'])}</h2><p>{e(H['shots_sub'])}</p></div><div class="shots">{shots}</div></div></section>
+<section style="border-bottom:0"><div class="wrap demo"><div><h2 style="margin-top:0">{e(H['demo_title'])}</h2><p>{e(H['demo_sub'])}</p>
+<div class="demo-note">{H['demo_note']}</div></div>
+<a class="btn btn-primary" href="{href('play/')}">{H['play']}</a></div></section>"""
+
     org = {'@type': 'Organization', 'name': 'GrafiteSoft', 'email': 'grafitesoft@gmail.com', 'url': SITE_URL}
     app = {'@context': 'https://schema.org', '@type': 'MobileApplication', 'name': 'Grafite Sudoku',
            'operatingSystem': 'ANDROID', 'applicationCategory': 'GameApplication', 'url': absolute(path),
